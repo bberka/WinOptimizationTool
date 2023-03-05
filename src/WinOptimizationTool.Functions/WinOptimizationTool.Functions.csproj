@@ -45,4 +45,8 @@
     <Folder Include="Registery\UWPPrivacy\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WinOptimizationTool.Core\WinOptimizationTool.Core.csproj" />
+  </ItemGroup>
+
 </Project>

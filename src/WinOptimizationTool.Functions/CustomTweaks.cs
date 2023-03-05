@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
-using WinOptimizationTool.Functions.Helpers;
+﻿
 
 namespace WinOptimizationTool.Functions;
 

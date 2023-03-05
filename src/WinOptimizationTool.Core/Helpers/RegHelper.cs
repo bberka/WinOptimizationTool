@@ -1,65 +1,66 @@
-﻿using System.Diagnostics;
-using EasMe.Extensions;
-using EasMe.Logging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using EasMe.Logging;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using EasMe.Extensions;
+using EasMe.Result;
 
-namespace WinOptimizationTool.Functions.Helpers;
+namespace WinOptimizationTool.Core.Helpers;
 
 public class RegHelper
 {
     private readonly string _registryPath;
     private readonly RegistryHive _type;
     private static readonly IEasLog logger = EasLogFactory.CreateLogger();
-    public RegHelper(string registryPath, RegistryHive type,bool createIfPathNotExists = false)
+    public RegHelper(string registryPath, RegistryHive type, bool createIfPathNotExists = false)
     {
         _registryPath = registryPath;
         _type = type;
-        
+
         if (IsRegPathExist()) return;
         if (!createIfPathNotExists) throw new Exception("Path: " + registryPath + " not exists");
         _ = CreatePath();
     }
 
-    public static bool SetDword(RegistryHive type, string path, string key, int value)
+    public static Result SetDword(RegistryHive type, string path, string key, int value)
     {
         return SetValue(type, path, key, value, RegistryValueKind.DWord);
     }
 
-    public static bool SetString(RegistryHive type, string path, string key, string value)
+    public static Result SetString(RegistryHive type, string path, string key, string value)
     {
         return SetValue(type, path, key, value, RegistryValueKind.String);
     }
-    public static bool SetValue(RegistryHive type, string path, string key, object value, RegistryValueKind valueKind)
+    public static Result SetValue(RegistryHive type, string path, string key, object value, RegistryValueKind valueKind)
     {
         try
         {
             using var regKey = RegistryKey.OpenBaseKey(type, RegistryView.Default);
-            using var subKey = regKey.CreateSubKey(path);
+            using var subKey = regKey.OpenSubKey(path,true) ?? regKey.CreateSubKey(path, true);
             subKey.SetValue(key, value, valueKind);
-            return true;
+            logger.Info($"Successfully updated => Type:{type}|Path:{path}|Key:{key}");
+            return Result.Success($"Successfully updated => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
         }
         catch (Exception ex)
         {
-            logger.Exception(ex,$"Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
-            return false;
+            logger.Exception(ex, $"Failed to update => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
+            return Result.Error($"Failed to update => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
         }
     }
 
-    public static bool DeleteValue(RegistryHive type, string path, string key)
+    public static Result DeleteValue(RegistryHive type, string path, string key)
     {
         try
         {
             using var regKey = RegistryKey.OpenBaseKey(type, RegistryView.Default);
-            using var subKey = regKey.CreateSubKey(path);
+            var subKey = regKey.OpenSubKey(path, true) ?? regKey.CreateSubKey(path, true);
             subKey.DeleteValue(key);
-            return true;
+            logger.Info($"Successfully deleted => Type:{type}|Path:{path}|Key:{key}");
+            return Result.Success($"Successfully deleted => Type:{type}|Path:{path}|Key:{key}");
         }
         catch (Exception ex)
         {
-            logger.Exception(ex,$"Type:{type}|Path:{path}|Key:{key}");
-            return false;
+            logger.Exception(ex, $"Failed to delete => Type:{type}|Path:{path}|Key:{key}");
+            return Result.Error($"Failed to delete => Type:{type}|Path:{path}|Key:{key}");
         }
     }
     public static RegHelper CreateLocalMachine(string registryPath, bool createIfPathNotExists = false)
@@ -136,7 +137,7 @@ public class RegHelper
         return true;
     }
 
-    
+
     public bool SetValue(string regKey, object regValue)
     {
         using var reg = OpenPath();
@@ -166,15 +167,15 @@ public class RegHelper
     {
         if (exportPath.IsNullOrEmpty())
         {
-            exportPath = Path.Combine(Directory.GetCurrentDirectory(),"RegBackups");
+            exportPath = Path.Combine(Directory.GetCurrentDirectory(), "RegBackups");
             if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
         }
 
         var fileName = $"RegistryBackup_{DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss")}_{Guid.NewGuid()}.reg";
-        var cmd1 =  $"reg export HKLM \"{Path.Combine(exportPath,$"HKLM_{fileName}")}\"";
-        var cmd2 =  $"reg export HKCR \"{Path.Combine(exportPath,$"HKCR_{fileName}")}\"";
-        var cmd3 =  $"reg export HKCU \"{Path.Combine(exportPath,$"HKCU_{fileName}")}\"";
-        var cmd4 =  $"reg export HKCC \"{Path.Combine(exportPath,$"HKCC_{fileName}")}\"";
+        var cmd1 = $"reg export HKLM \"{Path.Combine(exportPath, $"HKLM_{fileName}")}\"";
+        var cmd2 = $"reg export HKCR \"{Path.Combine(exportPath, $"HKCR_{fileName}")}\"";
+        var cmd3 = $"reg export HKCU \"{Path.Combine(exportPath, $"HKCU_{fileName}")}\"";
+        var cmd4 = $"reg export HKCC \"{Path.Combine(exportPath, $"HKCC_{fileName}")}\"";
         //var cmd5 =  $"reg export HKUS \"{Path.Combine(exportPath,$"HKUS_{fileName}")}\"";
 
         Process cmd = new Process();
@@ -196,5 +197,5 @@ public class RegHelper
         //Trace.WriteLine(cmd.StandardOutput.ReadToEnd());
     }
 
-   
+
 }

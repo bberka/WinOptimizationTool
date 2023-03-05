@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinOptimizationTool.Functio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinOptimizationTool", "src\WinOptimizationTool\WinOptimizationTool.csproj", "{3795A00C-18DD-4BF3-9933-FA7D39A2E26B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinOptimizationTool.Core", "src\WinOptimizationTool.Core\WinOptimizationTool.Core.csproj", "{3B52FA40-7F49-434C-AE0D-954FA1605307}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3795A00C-18DD-4BF3-9933-FA7D39A2E26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3795A00C-18DD-4BF3-9933-FA7D39A2E26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3795A00C-18DD-4BF3-9933-FA7D39A2E26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B52FA40-7F49-434C-AE0D-954FA1605307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B52FA40-7F49-434C-AE0D-954FA1605307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B52FA40-7F49-434C-AE0D-954FA1605307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B52FA40-7F49-434C-AE0D-954FA1605307}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

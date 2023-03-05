@@ -3,7 +3,7 @@ using System.Management.Automation;
 using EasMe.Extensions;
 using EasMe.Logging;
 
-namespace WinOptimizationTool.Functions.Helpers;
+namespace WinOptimizationTool.Core.Helpers;
 
 public class ShellHelper
 {

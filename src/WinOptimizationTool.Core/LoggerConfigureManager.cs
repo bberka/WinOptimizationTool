@@ -1,6 +1,6 @@
 ﻿using EasMe.Logging;
 
-namespace WinOptimizationTool.Functions;
+namespace WinOptimizationTool.Core;
 
 public static class LoggerConfigureManager
 {

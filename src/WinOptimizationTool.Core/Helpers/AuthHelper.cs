@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 
-namespace WinOptimizationTool.Functions.Helpers;
+namespace WinOptimizationTool.Core.Helpers;
 
 public class AuthHelper
 {

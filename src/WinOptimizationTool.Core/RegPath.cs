@@ -1,6 +1,4 @@
-﻿using System.Drawing.Printing;
-
-namespace WinOptimizationTool.Functions;
+﻿namespace WinOptimizationTool.Core;
 
 public static class RegPath
 {

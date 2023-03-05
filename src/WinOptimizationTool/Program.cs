@@ -1,5 +1,5 @@
-using WinOptimizationTool.Functions;
-using WinOptimizationTool.Functions.Helpers;
+using WinOptimizationTool.Core;
+using WinOptimizationTool.Core.Helpers;
 
 namespace WinOptimizationTool
 {
