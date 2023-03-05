@@ -15,7 +15,7 @@ public static class AssemblyHelper
     }
     public static List<string> GetAllMethodsFromAssembly()
     {
-        var assembly = PresetHelper.GetAssemblyInstance();
+        var assembly = GetAssemblyInstance();
         var names = (from type in assembly.GetTypes()
                 from method in type.GetMethods(
                     BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
@@ -31,6 +31,17 @@ public static class AssemblyHelper
             .ToList();
         return names;
     }
+    public static ResultData<IReadOnlyCollection<Result>> InvokeMethod(string fullName, string methodName)
+    {
+        var assembly = GetAssemblyInstance();
+        var type = assembly.GetType(fullName);
+        if (type is null) return Result.Error("Type does not exists: " + fullName);
+        var methodInfo = type.GetMethod(methodName);
+        if (methodInfo is null) return Result.Error("Method does not exists: " + methodName);
+        var instance = Activator.CreateInstance(type);
+        var result = methodInfo.Invoke(instance, null) as IReadOnlyCollection<Result>;
+        return ResultData<IReadOnlyCollection<Result>>.Success(result);
+    }
 
-    
+   
 }

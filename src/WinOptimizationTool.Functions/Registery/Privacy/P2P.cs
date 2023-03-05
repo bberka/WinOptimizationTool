@@ -1,19 +1,23 @@
 ﻿namespace WinOptimizationTool.Functions.Registery.Privacy;
 
-public class P2P
+public class P2P : BaseFunction
 {
-    public static void SetP2PUpdateLocal()
+    public static IReadOnlyCollection<Result> SetP2PUpdateLocal()
     {
+        throw new NotImplementedException();
 
     }
 
-    public static void SetP2PUpdateInternet()
+    public static IReadOnlyCollection<Result> SetP2PUpdateInternet()
     {
+        throw new NotImplementedException();
 
     }
-    public static void SetP2PUpdateDisable()
+    public static IReadOnlyCollection<Result> SetP2PUpdateDisable()
     {
+        throw new NotImplementedException();
 
     }
+  
 
 }

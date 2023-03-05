@@ -10,35 +10,7 @@ public static class PresetHelper
 {
     private static readonly IEasLog logger = EasLogFactory.CreateLogger();
 
-
-
-    //private static void ValidateFunctionList(List<string> functions)
-    //{
-    //    var temp = functions.ToList();
-    //    foreach (var function in temp)
-    //    {
-    //        var parseLastDot = function.LastIndexOf('.');
-    //        var className = function[..parseLastDot];
-    //        var methodName = function[(parseLastDot + 1)..];
-    //        switch (methodName)
-    //        {
-    //            case "Enable":
-    //            {
-    //                var disableName = className + ".Disable";
-    //                if (functions.Contains(disableName)) throw new Exception("Preset contains both Enable and Disable for " + className);
-    //                break;
-    //            }
-    //            case "Disable":
-    //            {
-    //                var enableName = className + ".Enable";
-    //                if (functions.Contains(enableName)) throw new Exception("Preset contains both Enable and Disable for " + className);
-    //                break;
-    //            }
-    //        }
-    //    }
-    //}
-
-
+    
     private static List<string> FixFunctionList(List<string> functions, out List<string> removed)
     {
         var temp = functions.ToList();
@@ -60,7 +32,6 @@ public static class PresetHelper
     }
     public static Result SavePreset(Preset preset, bool ignoreErrors = false)
     {
-        //ValidateFunctionList(preset.Functions);
         preset.Functions = FixFunctionList(preset.Functions, out var removed);
         if (removed.Count > 0 && !ignoreErrors)
         {
@@ -91,24 +62,8 @@ public static class PresetHelper
     {
 
     }
-    private static Assembly _assembly;
-    public static Assembly GetAssemblyInstance()
-    {
-        if (_assembly is null) _assembly = Assembly.GetExecutingAssembly();
-        return _assembly;
-    }
 
-    private static ResultData<IReadOnlyCollection<Result>> RunMethod(string fullName, string methodName)
-    {
-        var assembly = GetAssemblyInstance();
-        var type = assembly.GetType(fullName);
-        if (type is null) return Result.Error("Type does not exists: " + fullName);
-        var methodInfo = type.GetMethod(methodName);
-        if (methodInfo is null) return Result.Error("Method does not exists: " + methodName);
-        var instance = Activator.CreateInstance(type);
-        var result = methodInfo.Invoke(instance, null) as IReadOnlyCollection<Result>;
-        return ResultData<IReadOnlyCollection<Result>>.Success(result);
-    }
+    
     public static ResultData<List<FunctionResult>> RunLoadedPresetFunctions()
     {
         if (_preset is null) return Result.Warn("Preset is not loaded");
@@ -125,7 +80,7 @@ public static class PresetHelper
             var split = function.Split(':');
             var className = split[0];
             var methodName = split[1];
-            var res = RunMethod(className, methodName);
+            var res = AssemblyHelper.InvokeMethod(className, methodName);
             var fRes = new FunctionResult
             {
                 Name = function,

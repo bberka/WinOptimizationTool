@@ -1,14 +1,14 @@
 ﻿namespace WinOptimizationTool.Functions.Registery.Privacy;
 
-public class ErrorReporting
+public class ErrorReporting : BaseFunction
 {
-    public static void Enable()
+    public static IReadOnlyCollection<Result> Enable()
     {
-
+        throw new NotImplementedException();
     }
 
-    public static void Disable()
+    public static IReadOnlyCollection<Result> Disable()
     {
-
+        throw new NotImplementedException();
     }
 }
