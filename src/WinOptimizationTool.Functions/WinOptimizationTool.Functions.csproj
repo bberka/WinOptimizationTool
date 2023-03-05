@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.CoreCLR.Eventing" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.10" />
+    <PackageReference Include="Microsoft.PowerShell.Security" Version="7.2.10" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.10" />
+    <PackageReference Include="TaskScheduler" Version="2.10.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EasMe">
+      <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.dll</HintPath>
+    </Reference>
+    <Reference Include="EasMe.Logging">
+      <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="EasMe.Result">
+      <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.Result.dll</HintPath>
+    </Reference>
+    <Reference Include="EasMe.System">
+      <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.System.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Registery\Network\" />
+    <Folder Include="Registery\ExplorerUI\" />
+    <Folder Include="Registery\Application\" />
+    <Folder Include="Registery\Unpinning\" />
+    <Folder Include="Registery\ServerSpecific\" />
+    <Folder Include="Registery\UI\" />
+    <Folder Include="Registery\Service\" />
+    <Folder Include="Registery\Security\" />
+    <Folder Include="Registery\UWPPrivacy\" />
+  </ItemGroup>
+
+</Project>
