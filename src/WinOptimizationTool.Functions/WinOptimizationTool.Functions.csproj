@@ -34,14 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Registery\Network\" />
     <Folder Include="Registery\ExplorerUI\" />
     <Folder Include="Registery\Application\" />
     <Folder Include="Registery\Unpinning\" />
-    <Folder Include="Registery\ServerSpecific\" />
     <Folder Include="Registery\UI\" />
-    <Folder Include="Registery\Service\" />
-    <Folder Include="Registery\Security\" />
     <Folder Include="Registery\UWPPrivacy\" />
   </ItemGroup>
 

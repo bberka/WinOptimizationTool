@@ -8,7 +8,7 @@ public class MMCSS : BaseFunction
         return new List<Result>()
         {
             RegHelper.SetDword(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile","SystemResponsiveness", 00000000),
-            RegHelper.SetDword(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile","NetworkThrottlingIndex", Convert.ToInt32("0xffffffff", 16)),
+            RegHelper.SetDword(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile","NetworkThrottlingIndex", Convert.ToUInt32("0xffffffff", 16)),
             RegHelper.SetDword(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "Affinity", 00000000),
             RegHelper.SetString(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "Background Only", "False"),
             RegHelper.SetDword(RegistryHive.LocalMachine,"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games", "Clock Rate", 00002710),

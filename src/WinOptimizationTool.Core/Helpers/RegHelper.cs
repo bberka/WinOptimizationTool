@@ -21,7 +21,7 @@ public class RegHelper
         _ = CreatePath();
     }
 
-    public static Result SetDword(RegistryHive type, string path, string key, int value)
+    public static Result SetDword(RegistryHive type, string path, string key, uint value)
     {
         return SetValue(type, path, key, value, RegistryValueKind.DWord);
     }

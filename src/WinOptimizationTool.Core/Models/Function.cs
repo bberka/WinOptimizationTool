@@ -34,8 +34,11 @@ public class Function
         {
 	        "Disable" => Color.Red,
 	        "Revert" => Color.Red,
+	        "Hide" => Color.Red,
 	        "Enable" => Color.Green,
 	        "Apply" => Color.Green,
+	        "Show" => Color.Green,
+
 	        _ => Color.Black
         };
         IsDefault = defaultAttribute is not null;

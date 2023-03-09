@@ -17,12 +17,31 @@
 		<PackageReference Include="System.Management.Automation" Version="7.2.10" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Reference Include="EasMe">
+	    <HintPath>..\..\..\..\..\build\easme\Release\net6.0\EasMe.dll</HintPath>
+	  </Reference>
 	  <Reference Include="EasMe.Logging">
 	    <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.Logging.dll</HintPath>
 	  </Reference>
 	  <Reference Include="EasMe.Result">
 	    <HintPath>C:\Users\kkass\source\build\easme\Release\net6.0\EasMe.Result.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Properties\Resource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resource.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resource.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Helper\" />
 	</ItemGroup>
 
 </Project>

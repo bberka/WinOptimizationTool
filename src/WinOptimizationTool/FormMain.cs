@@ -1,10 +1,13 @@
 using EasMe.Result;
 using System.Diagnostics;
 using System.Reflection;
+using EasMe.Extensions;
 using EasMe.Logging;
 using WinOptimizationTool.Core.Helpers;
 using WinOptimizationTool.Core.Models;
 using WinOptimizationTool.Functions;
+using WinOptimizationTool.Helper;
+using WinOptimizationTool.Properties;
 
 namespace WinOptimizationTool
 {
@@ -23,70 +26,12 @@ namespace WinOptimizationTool
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //RegHelper.Export();
-            //var preset = new Preset()
-            //{
-            //    Name = "Test",
-            //    Author = "Kassius",
-            //    Functions = methods,
-            //};
-            //PresetHelper.SavePreset(preset);
-            RenderButtons2();
+            Render();
         }
 
         private static readonly IEasLog logger = EasLogFactory.CreateLogger();
-        //private void RenderButtons()
-        //{
-        //    var methods = AssemblyHelper.GetAllMethodsFromAssembly().ToList();
-
-        //    foreach (var item in methods.GroupBy(x => x.FolderName).ToList())
-        //    {
-        //        var tabPage = new TabPage();
-        //        tabPage.Text = item.Key;
-        //        tabPage.Name = Guid.NewGuid().ToString().Replace("-", "");
-        //        var col = 0;
-        //        foreach (var method in item)
-        //        {
-        //            var button = new Button();
-        //            button.Name = method.FullName;
-        //            button.Text = method.DisplayName;
-        //            button.Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT);
-        //            button.ForeColor = method.Color;
-        //            col = tabPage.Controls.Count / COL_ROWS;
-        //            var count = tabPage.Controls.Count - col * COL_ROWS;
-        //            var x = 10 + (BUTTON_WIDTH * col);
-        //            var y = 10 + (BUTTON_HEIGHT * count);
-        //            button.Location = new Point(x, y);
-        //            button.Click += (sender, args) =>
-        //                {
-        //                    try
-        //                    {
-        //                        var result = AssemblyHelper.InvokeMethod(method.ClassNameWithNameSpace, method.MethodName);
-        //                        if (result.IsFailure)
-        //                        {
-        //                            MessageBox.Show($"An error occured while executing function\n\nError: {result.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                            return;
-        //                        }
-        //                        MessageBox.Show($"Function executed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                    }
-        //                    catch (Exception e)
-        //                    {
-        //                        logger.Exception(e, "An exception occured while running function : " + ((Button)sender).Name);
-        //                        MessageBox.Show($"An exception occured while executing function\n\nError: {e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                    }
-
-        //                };
-        //            tabPage.Controls.Add(button);
-        //        }
-        //        tabControlMain.TabPages.Add(tabPage);
-
-        //    }
-
-
-
-        //}
-
-		private void RenderButtons2()
+ 
+		private void Render()
 		{
 			var methods = AssemblyHelper.GetAllMethodsFromAssembly().ToList();
 			//methods = methods.Where(x => x.ClassName == "P2P" || x.ClassName == "Telemetry").OrderByDescending(x => x.ClassName).ToList();
@@ -124,15 +69,15 @@ namespace WinOptimizationTool
 								var result = AssemblyHelper.InvokeMethod(function.ClassNameWithNameSpace, function.MethodName);
 								if (result.IsFailure)
 								{
-									MessageBox.Show($"An error occured while executing function\n\nError: {result.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, result.ErrorCode);
 									return;
 								}
-								MessageBox.Show($"Function executed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MBoxHelper.ShowInfo(Resource.FuncExecSuccess);
 							}
 							catch (Exception e)
 							{
-								logger.Exception(e, "An exception occured while running function : " + ((Button)sender).Name);
-								MessageBox.Show($"An exception occured while executing function\n\nError: {e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								var msg = MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, e.Message);
+								logger.Exception(e, msg);
 							}
 
 						};
@@ -141,18 +86,13 @@ namespace WinOptimizationTool
 						tabPage.Controls.Add(button);
 					}
 					row++;
-					if (row +1 == COL_ROW_LIMIT)
-					{
-						row = 0;
-						col++;
-					}
+					if (row + 1 != COL_ROW_LIMIT) continue;
+					row = 0;
+					col++;
 				}
 				tabControlMain.TabPages.Add(tabPage);
-
 			}
-
-
-
+            
 		}
 		private void buttonLoadPreset_Click(object sender, EventArgs e)
         {
@@ -166,12 +106,12 @@ namespace WinOptimizationTool
             var presetResult = PresetHelper.LoadPreset(fileDialog.FileName);
             if (presetResult.IsFailure)
             {
-                MessageBox.Show($"An error occured while loading preset\n\nError: {presetResult.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MBoxHelper.ShowError(Resource.PresetLoadError,presetResult.ErrorCode);
                 return;
             }
 
             var preset = PresetHelper.GetLoadedPreset();
-            MessageBox.Show($"Preset loaded!\n\nName: {preset.Name}\nAuthor: {preset.Author}\nDescription: {preset.Description}\nFunction Count: {preset.Functions.Count}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MBoxHelper.ShowInfo(Resource.PresetLoadedSuccess,preset.Name, preset.Author,preset.Description, preset.Functions.Count);
         }
 
   
@@ -181,7 +121,7 @@ namespace WinOptimizationTool
             var preset = PresetHelper.GetLoadedPreset();
             if (preset is null)
             {
-                MessageBox.Show($"Preset is not loaded", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MBoxHelper.ShowWarn(Resource.PresetNotLoaded);
                 return;
             }
             var result = PresetHelper.RunLoadedPresetFunctions();
@@ -189,20 +129,19 @@ namespace WinOptimizationTool
             {
                 PrintToConsole($"Function Name: {item.Name} => {item.Result.ErrorCode}");
                 PrintToConsole((item.Result.IsSuccess ? "[SUCCESS]" : "[FAIL]") + $" {item.Result.ErrorCode}");
-
             }
             if (result.IsFailure)
             {
-                MessageBox.Show($"An error occured while running preset functions\n\nCheck console and logs for details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MBoxHelper.ShowError(Resource.PresetFuncRunError);
                 return;
             }
             var anyErrors = result.Data.Any(x => x.Result.IsSuccess == false);
             if (anyErrors)
             {
-                MessageBox.Show($"Preset functions ran with errors!\n\nCheck console and logs for details", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+	            MBoxHelper.ShowError(Resource.PresetFuncRanWithErrors);
                 return;
             }
-            MessageBox.Show($"Preset functions ran successfully!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MBoxHelper.ShowInfo(Resource.PresetFuncRanSuccessfully);
         }
 
         private void PrintToConsole(string lineMessage)
@@ -228,10 +167,10 @@ namespace WinOptimizationTool
             var preset = PresetHelper.GetLoadedPreset();
             if (preset is null)
             {
-                MessageBox.Show($"Preset is not loaded", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MBoxHelper.ShowWarn(Resource.PresetNotLoaded);
                 return;
             }
-            MessageBox.Show($"Loaded preset details\n\nName: {preset.Name}\nAuthor: {preset.Author}\nDescription: {preset.Description}\nFunction Count: {preset.Functions.Count}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MBoxHelper.ShowInfo(Resource.PresetDetails, preset.Name, preset.Author, preset.Description, preset.Functions.Count);
 
         }
 

@@ -16,7 +16,12 @@ public class ShellHelper
     //    _commandStrings = commandStrings;
     //    _outputItems = Array.Empty<string>();
     //}
-
+    public static string[] RunAndGetOutputCommand(string[] commandStrings)
+    {
+        var shell = new ShellHelper(commandStrings);
+        shell.RunCommand();
+        return shell.GetOutputItems();
+    }
     public ShellHelper(params string[] commands)
     {
         _commandStrings = commands;
