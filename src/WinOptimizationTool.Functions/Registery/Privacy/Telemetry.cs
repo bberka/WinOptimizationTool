@@ -1,10 +1,13 @@
-﻿namespace WinOptimizationTool.Functions.Registery.Privacy;
+﻿using WinOptimizationTool.Core.Attributes;
+
+namespace WinOptimizationTool.Functions.Registery.Privacy;
 
 public class Telemetry : BaseFunction
 {
-    public IReadOnlyCollection<Result> Enable()
+    [Default]
+    public Result Enable()
     {
-        return new List<Result>()
+        var list =  new List<Result>()
         {
             RegHelper.SetDword(RegistryHive.LocalMachine,
                 "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection", "AllowTelemetry", 3),
@@ -39,11 +42,12 @@ public class Telemetry : BaseFunction
             TaskHelper.EnableTask("Microsoft\\Office\\OfficeTelemetryAgentFallBack2016"),
             TaskHelper.EnableTask("Microsoft\\Office\\OfficeTelemetryAgentLogOn2016"),
         };
+        return list.ToSingleResult(nameof(Telemetry) + "." + nameof(Enable));
     }
 
-    public IReadOnlyCollection<Result> Disable()
+    public Result Disable()
     {
-        return new List<Result>()
+        var list =  new List<Result>()
         {
             RegHelper.SetDword(RegistryHive.LocalMachine, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection", "AllowTelemetry", 0),
             RegHelper.SetDword(RegistryHive.LocalMachine, "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection", "AllowTelemetry", 0),
@@ -66,6 +70,6 @@ public class Telemetry : BaseFunction
             TaskHelper.DisableTask("Microsoft\\Office\\OfficeTelemetryAgentFallBack2016"),
             TaskHelper.DisableTask("Microsoft\\Office\\OfficeTelemetryAgentLogOn2016"),
         };
-
+        return list.ToSingleResult(nameof(Telemetry) + "." + nameof(Disable));
     }
 }

@@ -1,4 +1,6 @@
-﻿using EasMe.Logging;
+﻿using System.Management.Automation;
+using EasMe.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace WinOptimizationTool.Core;
 
@@ -23,7 +25,7 @@ public static class LoggerConfigureManager
             x.ConsoleAppender = false;
             x.WebInfoLogging = false;
             x.ExceptionHideSensitiveInfo = false;
-            x.MinimumLogLevel = LogSeverity.TRACE;
+            x.MinimumLogLevel = LogLevel.Debug;
             x.LogFileName = "WinOptimizationTool_";
         });
     }
@@ -35,7 +37,7 @@ public static class LoggerConfigureManager
             x.ConsoleAppender = false;
             x.WebInfoLogging = false;
             x.ExceptionHideSensitiveInfo = false;
-            x.MinimumLogLevel = LogSeverity.DEBUG;//TODO: Change to INFO
+            x.MinimumLogLevel = LogLevel.Information;//TODO: Change to INFO
             x.LogFileName = "WinOptimizationTool_";
         });
     }

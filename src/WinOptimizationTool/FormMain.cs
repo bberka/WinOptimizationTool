@@ -14,9 +14,13 @@ namespace WinOptimizationTool
         {
             InitializeComponent();
         }
-        private const int BUTTON_WIDTH = 200;
+        private const int BUTTON_WIDTH = 300;
+        private const int TOTAL_WIDTH = BUTTON_WIDTH * 2;
+
         private const int BUTTON_HEIGHT = 35;
         private const int COL_ROWS = 15;
+        private const int COL_ROW_LIMIT= 15;
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             //RegHelper.Export();
@@ -27,61 +31,130 @@ namespace WinOptimizationTool
             //    Functions = methods,
             //};
             //PresetHelper.SavePreset(preset);
-            RenderButtons();
+            RenderButtons2();
         }
 
         private static readonly IEasLog logger = EasLogFactory.CreateLogger();
-        private void RenderButtons()
-        {
-            var methods = AssemblyHelper.GetAllMethodsFromAssembly().Select(x => new Function(x)).ToList();
+        //private void RenderButtons()
+        //{
+        //    var methods = AssemblyHelper.GetAllMethodsFromAssembly().ToList();
 
-            foreach (var item in methods.GroupBy(x => x.FolderName).ToList())
-            {
-                var tabPage = new TabPage();
-                tabPage.Text = item.Key;
-                tabPage.Name = Guid.NewGuid().ToString().Replace("-", "");
-                var col = 0;
-                foreach (var method in item)
-                {
-                    var button = new Button();
-                    button.Name = method.FullName;
-                    button.Text = method.MethodName + " " + method.ClassName;
-                    button.Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT);
+        //    foreach (var item in methods.GroupBy(x => x.FolderName).ToList())
+        //    {
+        //        var tabPage = new TabPage();
+        //        tabPage.Text = item.Key;
+        //        tabPage.Name = Guid.NewGuid().ToString().Replace("-", "");
+        //        var col = 0;
+        //        foreach (var method in item)
+        //        {
+        //            var button = new Button();
+        //            button.Name = method.FullName;
+        //            button.Text = method.DisplayName;
+        //            button.Size = new Size(BUTTON_WIDTH, BUTTON_HEIGHT);
+        //            button.ForeColor = method.Color;
+        //            col = tabPage.Controls.Count / COL_ROWS;
+        //            var count = tabPage.Controls.Count - col * COL_ROWS;
+        //            var x = 10 + (BUTTON_WIDTH * col);
+        //            var y = 10 + (BUTTON_HEIGHT * count);
+        //            button.Location = new Point(x, y);
+        //            button.Click += (sender, args) =>
+        //                {
+        //                    try
+        //                    {
+        //                        var result = AssemblyHelper.InvokeMethod(method.ClassNameWithNameSpace, method.MethodName);
+        //                        if (result.IsFailure)
+        //                        {
+        //                            MessageBox.Show($"An error occured while executing function\n\nError: {result.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                            return;
+        //                        }
+        //                        MessageBox.Show($"Function executed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                    }
+        //                    catch (Exception e)
+        //                    {
+        //                        logger.Exception(e, "An exception occured while running function : " + ((Button)sender).Name);
+        //                        MessageBox.Show($"An exception occured while executing function\n\nError: {e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                    }
 
-                    col = tabPage.Controls.Count / COL_ROWS;
-                    var count = tabPage.Controls.Count - col * COL_ROWS;
-                    var x = 10 + (BUTTON_WIDTH * col);
-                    var y = 10 + (BUTTON_HEIGHT * count);
-                    button.Location = new Point(x, y);
-                    button.Click += (sender, args) =>
-                        {
-                            try
-                            {
-                                var result = AssemblyHelper.InvokeMethod(method.ClassNameWithNameSpace, method.MethodName);
-                                if (result.IsFailure)
-                                {
-                                    MessageBox.Show($"An error occured while executing function\n\nError: {result.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    return;
-                                }
-                                MessageBox.Show($"Function executed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch (Exception e)
-                            {
-                                logger.Exception(e, "An exception occured while running function : " + ((Button)sender).Name);
-                                MessageBox.Show($"An exception occured while executing function\n\nError: {e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+        //                };
+        //            tabPage.Controls.Add(button);
+        //        }
+        //        tabControlMain.TabPages.Add(tabPage);
 
-                        };
-                    tabPage.Controls.Add(button);
-                }
-                tabControlMain.TabPages.Add(tabPage);
-
-            }
+        //    }
 
 
 
-        }
-        private void buttonLoadPreset_Click(object sender, EventArgs e)
+        //}
+
+		private void RenderButtons2()
+		{
+			var methods = AssemblyHelper.GetAllMethodsFromAssembly().ToList();
+			//methods = methods.Where(x => x.ClassName == "P2P" || x.ClassName == "Telemetry").OrderByDescending(x => x.ClassName).ToList();
+			foreach (var item in methods.GroupBy(x => x.FolderName).ToList())
+			{
+				var tabPage = new TabPage();
+				tabPage.Text = item.Key;
+				tabPage.Name = Guid.NewGuid().ToString().Replace("-", "");
+				var col = 0;
+				var row = 0;
+                var groupByClass = item.GroupBy(x => x.ClassName).ToList();
+				foreach (var method in groupByClass)
+				{
+					var elCount = 0;
+					var groupFunctionCount = method.Count();
+                    var buttonWidth = TOTAL_WIDTH / groupFunctionCount;
+
+					foreach (var function in method)
+					{
+						var button = new Button();
+						button.Name = function.FullName;
+						button.Text = function.DisplayName;
+                        if(function.IsDefault) button.Text += " (D)";
+						button.Size = new Size(buttonWidth, BUTTON_HEIGHT);
+						button.ForeColor = function.Color;
+						//col = tabPage.Controls.Count / COL_ROWS;
+						var count = tabPage.Controls.Count - col * COL_ROWS;
+						var x = 10 + (buttonWidth * elCount) + (TOTAL_WIDTH * col);
+						var y = 10 + (BUTTON_HEIGHT * row);
+						button.Location = new Point(x, y);
+						button.Click += (sender, args) =>
+						{
+							try
+							{
+								var result = AssemblyHelper.InvokeMethod(function.ClassNameWithNameSpace, function.MethodName);
+								if (result.IsFailure)
+								{
+									MessageBox.Show($"An error occured while executing function\n\nError: {result.ErrorCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+									return;
+								}
+								MessageBox.Show($"Function executed successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+							}
+							catch (Exception e)
+							{
+								logger.Exception(e, "An exception occured while running function : " + ((Button)sender).Name);
+								MessageBox.Show($"An exception occured while executing function\n\nError: {e.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
+
+						};
+
+						elCount++;
+						tabPage.Controls.Add(button);
+					}
+					row++;
+					if (row +1 == COL_ROW_LIMIT)
+					{
+						row = 0;
+						col++;
+					}
+				}
+				tabControlMain.TabPages.Add(tabPage);
+
+			}
+
+
+
+		}
+		private void buttonLoadPreset_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog()
             {
@@ -114,18 +187,16 @@ namespace WinOptimizationTool
             var result = PresetHelper.RunLoadedPresetFunctions();
             foreach (var item in result.Data ?? new())
             {
-                PrintToConsole($"Function Name: {item.Name} => {item.Message}");
-                foreach (var item2 in item.Results)
-                {
-                    PrintToConsole((item2.IsSuccess ? "[SUCCESS]" : "[FAIL]") + $" {item2.ErrorCode}");
-                }
+                PrintToConsole($"Function Name: {item.Name} => {item.Result.ErrorCode}");
+                PrintToConsole((item.Result.IsSuccess ? "[SUCCESS]" : "[FAIL]") + $" {item.Result.ErrorCode}");
+
             }
             if (result.IsFailure)
             {
                 MessageBox.Show($"An error occured while running preset functions\n\nCheck console and logs for details", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            var anyErrors = result.Data.Any(x => x.IsSuccess == false);
+            var anyErrors = result.Data.Any(x => x.Result.IsSuccess == false);
             if (anyErrors)
             {
                 MessageBox.Show($"Preset functions ran with errors!\n\nCheck console and logs for details", "Warn", MessageBoxButtons.OK, MessageBoxIcon.Warning);

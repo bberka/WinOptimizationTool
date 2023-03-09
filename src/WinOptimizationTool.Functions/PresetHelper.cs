@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Reflection;
-using EasMe.Extensions;
+﻿using EasMe.Extensions;
 using EasMe.Logging;
 using WinOptimizationTool.Core.Models;
 
@@ -84,9 +82,7 @@ public static class PresetHelper
             var fRes = new FunctionResult
             {
                 Name = function,
-                Results = res.Data,
-                IsSuccess = res.IsSuccess,
-                Message = res.ErrorCode
+                Result = res,
             };
             results.Add(fRes);
         }
