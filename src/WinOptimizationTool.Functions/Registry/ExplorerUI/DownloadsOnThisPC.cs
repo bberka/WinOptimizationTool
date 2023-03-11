@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class DownloadsFromThisPC : BaseFunction
+public class DownloadsOnThisPC : BaseFunction
 {
 	public static Result Hide()
 	{
@@ -11,4 +11,9 @@ public class DownloadsFromThisPC : BaseFunction
 		};
 		return list.ToSingleResult("HideDownloadsFromThisPC");
 	}
+    [NotImplemented]
+    public static Result Show()
+    {
+        throw new NotImplementedException();
+    }
 }

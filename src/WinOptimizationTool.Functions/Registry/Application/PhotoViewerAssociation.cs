@@ -13,7 +13,8 @@ public class PhotoViewerAssociation : BaseFunction
 		};
 		return list.ToSingleResult("SetPhotoViewerAssociation");
 	}
-	public static Result Unset()
+    [NotImplemented]
+    public static Result Unset()
 	{
 		var list = new List<Result>()
 		{

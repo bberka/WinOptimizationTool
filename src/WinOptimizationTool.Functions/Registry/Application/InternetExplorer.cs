@@ -1,8 +1,9 @@
 namespace WinOptimizationTool.Functions.Registry.Application;
 
-public class ternetExplorer : BaseFunction
+public class InternetExplorer : BaseFunction
 {
-	public static Result UninstallIn()
+    [NotImplemented]
+    public static Result UninstallIn()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +12,8 @@ public class ternetExplorer : BaseFunction
 		};
 		return list.ToSingleResult("UninstallInternetExplorer");
 	}
-	public static Result InstallIn()
+    [NotImplemented]
+    public static Result InstallIn()
 	{
 		var list = new List<Result>()
 		{

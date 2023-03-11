@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class SSHServer : BaseFunction
 {
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{
@@ -10,7 +11,8 @@ public class SSHServer : BaseFunction
 		};
 		return list.ToSingleResult("InstallSSHServer");
 	}
-	public static Result Uninstall()
+    [NotImplemented]
+    public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{

@@ -28,65 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabPageConsole = new System.Windows.Forms.TabPage();
-            this.richTextBoxConsole = new System.Windows.Forms.RichTextBox();
             this.tabPagePreset = new System.Windows.Forms.TabPage();
             this.buttonLoadPreset = new System.Windows.Forms.Button();
             this.buttonRunPreset = new System.Windows.Forms.Button();
-            this.buttonClearConsole = new System.Windows.Forms.Button();
             this.buttonLoadRecommendedPreset = new System.Windows.Forms.Button();
             this.buttonViewPresetDetails = new System.Windows.Forms.Button();
             this.buttonSavePreset = new System.Windows.Forms.Button();
-            this.tabControlMain.SuspendLayout();
-            this.tabPageConsole.SuspendLayout();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPagePreset.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControlMain
-            // 
-            this.tabControlMain.Controls.Add(this.tabPageConsole);
-            this.tabControlMain.Controls.Add(this.tabPagePreset);
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(1902, 831);
-            this.tabControlMain.TabIndex = 0;
-            // 
-            // tabPageConsole
-            // 
-            this.tabPageConsole.Controls.Add(this.richTextBoxConsole);
-            this.tabPageConsole.Location = new System.Drawing.Point(4, 26);
-            this.tabPageConsole.Name = "tabPageConsole";
-            this.tabPageConsole.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConsole.Size = new System.Drawing.Size(1894, 801);
-            this.tabPageConsole.TabIndex = 0;
-            this.tabPageConsole.Text = "Console";
-            this.tabPageConsole.UseVisualStyleBackColor = true;
-            // 
-            // richTextBoxConsole
-            // 
-            this.richTextBoxConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxConsole.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxConsole.Name = "richTextBoxConsole";
-            this.richTextBoxConsole.ReadOnly = true;
-            this.richTextBoxConsole.Size = new System.Drawing.Size(1888, 795);
-            this.richTextBoxConsole.TabIndex = 0;
-            this.richTextBoxConsole.Text = "";
             // 
             // tabPagePreset
             // 
             this.tabPagePreset.Controls.Add(this.buttonLoadPreset);
             this.tabPagePreset.Controls.Add(this.buttonRunPreset);
-            this.tabPagePreset.Controls.Add(this.buttonClearConsole);
             this.tabPagePreset.Controls.Add(this.buttonLoadRecommendedPreset);
             this.tabPagePreset.Controls.Add(this.buttonViewPresetDetails);
             this.tabPagePreset.Controls.Add(this.buttonSavePreset);
             this.tabPagePreset.Location = new System.Drawing.Point(4, 26);
             this.tabPagePreset.Name = "tabPagePreset";
             this.tabPagePreset.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePreset.Size = new System.Drawing.Size(1592, 665);
+            this.tabPagePreset.Size = new System.Drawing.Size(1894, 801);
             this.tabPagePreset.TabIndex = 1;
             this.tabPagePreset.Text = "Preset";
             this.tabPagePreset.UseVisualStyleBackColor = true;
@@ -110,16 +73,6 @@
             this.buttonRunPreset.Text = "Run Preset";
             this.buttonRunPreset.UseVisualStyleBackColor = true;
             this.buttonRunPreset.Click += new System.EventHandler(this.buttonRunPreset_Click);
-            // 
-            // buttonClearConsole
-            // 
-            this.buttonClearConsole.Location = new System.Drawing.Point(8, 570);
-            this.buttonClearConsole.Name = "buttonClearConsole";
-            this.buttonClearConsole.Size = new System.Drawing.Size(230, 50);
-            this.buttonClearConsole.TabIndex = 0;
-            this.buttonClearConsole.Text = "Clear Console";
-            this.buttonClearConsole.UseVisualStyleBackColor = true;
-            this.buttonClearConsole.Click += new System.EventHandler(this.buttonClearConsole_Click);
             // 
             // buttonLoadRecommendedPreset
             // 
@@ -150,6 +103,16 @@
             this.buttonSavePreset.UseVisualStyleBackColor = true;
             this.buttonSavePreset.Click += new System.EventHandler(this.buttonSavePreset_Click);
             // 
+            // tabControlMain
+            // 
+            this.tabControlMain.Controls.Add(this.tabPagePreset);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(1902, 831);
+            this.tabControlMain.TabIndex = 0;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -162,24 +125,20 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WinOptimizationTool";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.tabControlMain.ResumeLayout(false);
-            this.tabPageConsole.ResumeLayout(false);
             this.tabPagePreset.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private TabControl tabControlMain;
-        private TabPage tabPageConsole;
-        private RichTextBox richTextBoxConsole;
         private TabPage tabPagePreset;
         private Button buttonLoadPreset;
         private Button buttonRunPreset;
         private Button buttonLoadRecommendedPreset;
         private Button buttonViewPresetDetails;
         private Button buttonSavePreset;
-        private Button buttonClearConsole;
+        private TabControl tabControlMain;
     }
 }

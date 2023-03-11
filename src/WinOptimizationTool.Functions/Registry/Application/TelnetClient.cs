@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class TelnetClient : BaseFunction
 {
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +12,8 @@ public class TelnetClient : BaseFunction
 		};
 		return list.ToSingleResult("InstallTelnetClient");
 	}
-	public static Result Uninstall()
+    [NotImplemented]
+    public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{

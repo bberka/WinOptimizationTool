@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class ThirdPartyBloat : BaseFunction
 {
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{

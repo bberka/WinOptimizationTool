@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class WindowsStore : BaseFunction
 {
-	public static Result Uninstall()
+    [NotImplemented]
+    public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{
@@ -13,7 +14,8 @@ public class WindowsStore : BaseFunction
 		};
 		return list.ToSingleResult("UninstallWindowsStore");
 	}
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{

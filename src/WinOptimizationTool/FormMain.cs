@@ -3,10 +3,12 @@ using System.Diagnostics;
 using System.Reflection;
 using EasMe.Extensions;
 using EasMe.Logging;
+using WinOptimizationTool.Core;
 using WinOptimizationTool.Core.Helpers;
 using WinOptimizationTool.Core.Models;
 using WinOptimizationTool.Functions;
 using WinOptimizationTool.Helper;
+using WinOptimizationTool.Models;
 using WinOptimizationTool.Properties;
 
 namespace WinOptimizationTool
@@ -16,6 +18,7 @@ namespace WinOptimizationTool
         public FormMain()
         {
             InitializeComponent();
+            _mode = Mode.RunMode;
         }
         private const int BUTTON_WIDTH = 300;
         private const int TOTAL_WIDTH = BUTTON_WIDTH * 2;
@@ -23,7 +26,9 @@ namespace WinOptimizationTool
         private const int BUTTON_HEIGHT = 35;
         private const int COL_ROWS = 20;
         private const int COL_ROW_LIMIT= 20;
+        private static Mode _mode;
 
+        private static List<FuncButton> Buttons = new List<FuncButton>();
         private void FormMain_Load(object sender, EventArgs e)
         {
             Render();
@@ -49,41 +54,36 @@ namespace WinOptimizationTool
 					var groupFunctionCount = method.Count();
                     var buttonWidth = TOTAL_WIDTH / groupFunctionCount;
 
-					foreach (var function in method)
+					foreach (var function in method.OrderByDescending(x => x.DisplayName))
 					{
 						var button = new Button();
 						button.Name = function.FullName;
 						button.Text = function.DisplayName;
                         if(function.IsDefault) button.Text += " (D)";
+                        button.Enabled = function.IsImplemented;
 						button.Size = new Size(buttonWidth, BUTTON_HEIGHT);
 						button.ForeColor = function.Color;
 						//col = tabPage.Controls.Count / COL_ROWS;
-						var count = tabPage.Controls.Count - col * COL_ROWS;
-						var x = 10 + (buttonWidth * elCount) + (TOTAL_WIDTH * col);
+						//var count = tabPage.Controls.Count - col * COL_ROWS;
+						var x = 30 + (buttonWidth * elCount) + (TOTAL_WIDTH * col) + (col - 1 * 30);
+                        x += (col == 0) ? 0 : col * 30;
 						var y = 10 + (BUTTON_HEIGHT * row);
 						button.Location = new Point(x, y);
 						button.Click += (sender, args) =>
-						{
-							try
-							{
-								var result = AssemblyHelper.InvokeMethod(function.ClassNameWithNameSpace, function.MethodName);
-								if (result.IsFailure)
-								{
-                                    MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, result.ErrorCode);
-									return;
-								}
-                                MBoxHelper.ShowInfo(Resource.FuncExecSuccess);
-							}
-							catch (Exception e)
-							{
-								var msg = MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, e.Message);
-								logger.Exception(e, msg);
-							}
-
-						};
+                        {
+                            funcButton_Click(sender, args, function);
+                        };
 
 						elCount++;
 						tabPage.Controls.Add(button);
+                        Buttons.Add(new FuncButton()
+                        {
+                            Button = button,
+                            Row = row,
+                            Column = col,
+                            TabId = tabPage.Name,
+                            TabName = tabPage.Text
+                        });
 					}
 					row++;
 					if (row + 1 != COL_ROW_LIMIT) continue;
@@ -94,7 +94,53 @@ namespace WinOptimizationTool
 			}
             
 		}
-		private void buttonLoadPreset_Click(object sender, EventArgs e)
+
+        private void funcButton_Click(object sender, EventArgs e, Function function)
+        {
+            switch (_mode)
+            {
+                case Mode.RunMode:
+                    Run();
+                    break;
+                case Mode.CreatePresetMode:
+                    CreatePreset();
+                    break;
+                case Mode.EditPresetMode:
+                    EditPreset();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            void EditPreset()
+            {
+
+            }
+
+            void CreatePreset()
+            {
+
+            }
+            void Run()
+            {
+                try
+                {
+                    var result = AssemblyHelper.InvokeMethod(function.ClassNameWithNameSpace, function.MethodName);
+                    if (result.IsFailure)
+                    {
+                        MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, result.ErrorCode);
+                        return;
+                    }
+                    MBoxHelper.ShowInfo(Resource.FuncExecSuccess, function.DisplayName);
+                }
+                catch (Exception ex)
+                {
+                    var msg = MBoxHelper.ShowError(Resource.FuncExecError, function.MethodName, ex.Message);
+                    logger.Exception(ex, msg);
+                }
+            }
+        }
+
+        private void buttonLoadPreset_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog()
             {
@@ -127,8 +173,8 @@ namespace WinOptimizationTool
             var result = PresetHelper.RunLoadedPresetFunctions();
             foreach (var item in result.Data ?? new())
             {
-                PrintToConsole($"Function Name: {item.Name} => {item.Result.ErrorCode}");
-                PrintToConsole((item.Result.IsSuccess ? "[SUCCESS]" : "[FAIL]") + $" {item.Result.ErrorCode}");
+                //PrintToConsole($"Function Name: {item.Name} => {item.Result.ErrorCode}");
+                //PrintToConsole((item.Result.IsSuccess ? "[SUCCESS]" : "[FAIL]") + $" {item.Result.ErrorCode}");
             }
             if (result.IsFailure)
             {
@@ -144,18 +190,7 @@ namespace WinOptimizationTool
             MBoxHelper.ShowInfo(Resource.PresetFuncRanSuccessfully);
         }
 
-        private void PrintToConsole(string lineMessage)
-        {
-            if (!string.IsNullOrWhiteSpace(richTextBoxConsole.Text))
-            {
-                richTextBoxConsole.AppendText(Environment.NewLine + lineMessage);
-            }
-            else
-            {
-                richTextBoxConsole.AppendText(lineMessage);
-            }
-            richTextBoxConsole.ScrollToCaret();
-        }
+   
 
         private void buttonSavePreset_Click(object sender, EventArgs e)
         {
@@ -174,10 +209,7 @@ namespace WinOptimizationTool
 
         }
 
-        private void buttonClearConsole_Click(object sender, EventArgs e)
-        {
-            richTextBoxConsole.Clear();
-        }
+       
     }
 }
 

@@ -37,7 +37,8 @@ public static class AssemblyHelper
 	                method.GetCustomAttributes(true).OfType<ForeColorAttribute>().FirstOrDefault(),
 	                method.GetCustomAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault(),
 	                method.GetCustomAttributes(true).OfType<TranslateKeyAttribute>().FirstOrDefault(),
-	                method.GetCustomAttributes(true).OfType<DefaultAttribute>().FirstOrDefault())
+	                method.GetCustomAttributes(true).OfType<DefaultAttribute>().FirstOrDefault(),
+	                method.GetCustomAttributes(true).OfType<NotImplementedAttribute>().FirstOrDefault())
                 )
             .Distinct()
             .ToList();
@@ -50,10 +51,12 @@ public static class AssemblyHelper
         if (type is null) return Result.Error("Type does not exists: " + fullName);
         var methodInfo = type.GetMethod(methodName);
         if (methodInfo is null) return Result.Error("Method does not exists: " + methodName);
+        var notImplementedAttr = methodInfo.GetCustomAttributes(true).OfType<NotImplementedAttribute>().FirstOrDefault();
+        if (notImplementedAttr is not null) return Result.Error("Method is not implemented: " + methodName);
         var instance = Activator.CreateInstance(type);
-        var result = methodInfo.Invoke(instance, null) as Result?;
-        if (result is null) return Result.Error("Method did not return a result");
-        return result.Value;
+        if (methodInfo.Invoke(instance, null) is not Result result) 
+            return Result.Error("Method did not return a result");
+        return result;
     }
 
    

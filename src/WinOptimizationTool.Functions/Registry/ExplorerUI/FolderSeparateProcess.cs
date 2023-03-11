@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class FldrSeparateProcess : BaseFunction
+public class FolderSeparateProcess : BaseFunction
 {
 	public static Result Enable()
 	{
@@ -8,7 +8,7 @@ public class FldrSeparateProcess : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","SeparateProcess",1),
 		};
-		return list.ToSingleResult("EnableFldrSeparateProcess");
+		return list.ToSingleResult("EnableFolderSeparateProcess");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class FldrSeparateProcess : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","SeparateProcess",0),
 		};
-		return list.ToSingleResult("DisableFldrSeparateProcess");
+		return list.ToSingleResult("DisableFolderSeparateProcess");
 	}
 }

@@ -70,6 +70,17 @@ public class FileParser
 				if(function.Key.IsNullOrEmpty()) continue;
                 var b = new StringBuilder();
                 string line1 = "namespace WinOptimizationTool.Functions.Registry." + folderName + ";";
+                var className = function.Key;
+                if (className.Contains(" "))
+                {
+                    className = className.Replace(" ", "");
+                }
+                var firstChar = className[0].ToString().ToUpper();
+                var isNum = int.TryParse(firstChar, out _);
+                if (isNum)
+                {
+                    className = "_" + className;
+                }
                 string line2 = "public class " + function.Key + " : BaseFunction";
                 const string line3 = "{";
                 b.AppendLine(line1);
@@ -79,7 +90,8 @@ public class FileParser
                 foreach (var item in function)
                 {
                     if (item.Lines.Count == 0) continue;
-                    b.AppendLine("	public static Result " + item.FuncName.Replace(function.Key,"") + "()");
+                    var methodName = item.FuncName.Replace(function.Key, "");
+                    b.AppendLine("	public static Result " + methodName + "()");
                     b.AppendLine("	{");
                     b.AppendLine("		var list = new List<Result>()");
                     b.AppendLine("		{");
@@ -99,7 +111,7 @@ public class FileParser
                 var result = b.ToString();
                 var dir = Path.Combine(outPath, folderName);
                 if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                var path = Path.Combine(dir, function.Key + ".cs");
+                var path = Path.Combine(dir, className + ".cs");
                 File.WriteAllText(path, result);
             }
             
@@ -129,6 +141,7 @@ public class FileParser
 						continue;
 					}
 					isFuncBody = false;
+					if(currentFunc.Lines.Count == 0) continue;
 					functions.Add(currentFunc);
 					currentFunc = new Function();
 				}
@@ -136,24 +149,21 @@ public class FileParser
 				{
 					if (line.StartsWith("Set-ItemProperty"))
 					{
-						var setParse = UpdateParse.Create(line);
-						if(setParse.IsFailure) continue;
-						currentFunc.Lines.Add(setParse.Data.Code);
+						var setParse = new UpdateParse(line);
+						currentFunc.Lines.Add(setParse.Code);
 						continue;
 
 					}
 					if (line.StartsWith("Remove-ItemProperty"))
 					{
-						var removeParse = RemovePropParse.Create(line);
-						if (removeParse.IsFailure) continue;
-						currentFunc.Lines.Add(removeParse.Data.Code);
+						var removeParse = new RemovePropParse(line);
+						currentFunc.Lines.Add(removeParse.Code);
 						continue;
 					}
                     if (line.StartsWith("Remove-Item"))
                     {
-                        var removeParse = RemoveParse.Create(line);
-                        if (removeParse.IsFailure) continue;
-                        currentFunc.Lines.Add(removeParse.Data.Code);
+                        var removeParse = new RemoveParse(line);
+                        currentFunc.Lines.Add(removeParse.Code);
                         continue;
                     }
                     if (line.StartsWith("Enable-ScheduledTask"))
@@ -253,12 +263,18 @@ public class FileParser
                     .RemoveText("Low")
                     .RemoveText("Show")
                     .RemoveText("Hide")
-                    .RemoveText("Out")
-                    .RemoveText("In")
                     .RemoveText("Public")
                     .RemoveText("Private")
                     .RemoveText("Local")
                     .RemoveText("Unpin")
+                    .Replace("InExplorer","OnExplorer")
+                    .Replace("FromExplorer","OnExplorer")
+                    .Replace("FromThisPC","OnThisPC")
+                    .Replace("FromDesktop", "OnDesktop")
+                    //.RemoveText("From")
+                    //.RemoveText("On")
+                    //.RemoveText("In")
+                    //.RemoveText("Out")
                 ;
         }
 
@@ -310,21 +326,7 @@ public class FileParser
     }
     public class RemoveParse
     {
-        public static ResultData<RemoveParse> Create(string line)
-        {
-            var removeParse = new RemoveParse(line);
-            return removeParse;
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-                logger.Exception(ex, line);
-                return Result.Warn(ex.Message);
-            }
-        }
-        private RemoveParse(string line)
+        public RemoveParse(string line)
         {
             try
             {
@@ -347,75 +349,67 @@ public class FileParser
     }
     public class RemovePropParse
 	{
-		public static ResultData<RemovePropParse> Create(string line)
+		
+        public RemovePropParse(string line)
 		{
-			try
-			{
-				var removeParse = new RemovePropParse(line);
-				return removeParse;
-			}
-			catch (Exception ex)
-			{
-				logger.Exception(ex,line);
-				return Result.Warn(ex.Message);
-			}
-		}
-		private RemovePropParse(string line)
-		{
-			var split = line.Split("\"");
-			var pathSplit = split[1].Split(@":\");
-			var mainPath = GetPathEnumValue(pathSplit[0]);
-			MainPath = mainPath;
-			Path = pathSplit[1];
-			Key = split[3];
-		}
+            try
+            {
+                var split = line.Split("\"");
+                var pathSplit = split[1].Split(@":\");
+                var mainPath = GetPathEnumValue(pathSplit[0]);
+                MainPath = mainPath;
+                Path = pathSplit[1];
+                Key = split[3];
+				Code = $"RegHelper.DeleteValue({MainPath}, @\"{Path}\", \"{Key}\"),";
+                
+            }
+            catch (Exception ex)
+            {
+                Code = $"Result.MultipleErrors(\"Not Implemented\",\"{line.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"),";
+                logger.Exception(ex, line);
+            }
+
+        }
 		public string MainPath { get; set; }
 		public string Path { get; set; }
 		public string Key { get; set; }
-		public string Code => $"RegHelper.DeleteValue({MainPath}, @\"{Path}\", \"{Key}\"),";
+		public string Code { get; set; } 
 	}
 	public class UpdateParse
 	{
-		public static ResultData<UpdateParse> Create(string line)
+        public UpdateParse(string line)
 		{
-			try
-			{
-				var updateParse = new UpdateParse(line);
-				return updateParse;
-			}
-			catch (Exception ex)
-			{
-				logger.Exception(ex, line);
-				return Result.Warn(ex.Message);
-			}
-		}
-
-		private UpdateParse(string line)
-		{
-			var split = line.Split("\"");
-			var pathSplit = split[1].Split(@":\");
-			var mainPath = GetPathEnumValue(pathSplit[0]);
-			MainPath = mainPath;
-			Path = pathSplit[1];
-			Key = split[3];
-			var rest = split[4];
-			ValueType = line.GetBetween(" -Type ", " -Value").Trim();
-			Value = line.GetAfter("-Value ").Trim().Replace("\"","");
-			//var restSplit = rest.Split(" ");
-			//ValueType = restSplit[2].Trim();
-			//Value = restSplit[4].Trim().Replace("\"", "");
-		}
+			
+            try
+            {
+                var split = line.Split("\"");
+                var pathSplit = split[1].Split(@":\");
+                var mainPath = GetPathEnumValue(pathSplit[0]);
+                MainPath = mainPath;
+                Path = pathSplit[1];
+                Key = split[3];
+                var rest = split[4];
+                ValueType = line.GetBetween(" -Type ", " -Value").Trim();
+                Value = line.GetAfter("-Value ").Trim().Replace("\"", "");
+				Code = ValueType switch
+                {
+                    "String" => $"RegHelper.SetString({MainPath},@\"{Path}\",\"{Key}\",@\"{Value}\"),",
+                    "DWord" => $"RegHelper.SetDword({MainPath},@\"{Path}\",\"{Key}\",{Value}),",
+                    _ => "",
+                };
+            }
+            catch (Exception ex)
+            {
+                Code = $"Result.MultipleErrors(\"Not Implemented\",\"{line.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"),";
+                logger.Exception(ex, line);
+            }
+        }
 		public string MainPath { get; set; }
 		public string Path { get; set; }
 		public string Key { get; set; }
 		public string ValueType { get; set; }
 		public string Value { get; set; }
 
-		public string Code => ValueType switch
-		{
-			"String" => $"RegHelper.SetString({MainPath},@\"{Path}\",\"{Key}\",@\"{Value}\"),",
-			"DWord" => $"RegHelper.SetDword({MainPath},@\"{Path}\",\"{Key}\",{Value}),",
-			_ => "",
-		};
-	}
+		public string Code { get; set; }
+}
 }

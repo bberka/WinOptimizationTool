@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class DocumentsFromThisPC : BaseFunction
+public class DocumentsOnThisPC : BaseFunction
 {
 	public static Result Hide()
 	{
@@ -11,4 +11,9 @@ public class DocumentsFromThisPC : BaseFunction
 		};
 		return list.ToSingleResult("HideDocumentsFromThisPC");
 	}
+    [NotImplemented]
+    public static Result Show()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -8,6 +8,7 @@ EasLogFactory.Configure(x =>
 {
     x.ExceptionHideSensitiveInfo = false;
 	x.MinimumLogLevel = LogLevel.Debug;
+    x.ConsoleAppender = true;
 });
 _ = new FileParser(
 	@"C:\Users\kkass\OneDrive\Masaüstü\script\Explorer UI.psm1",
@@ -60,3 +61,4 @@ _ = new FileParser(
     "UWPPrivacy");
 
 Console.WriteLine("Hello, World!");
+Console.Read();

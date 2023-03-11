@@ -13,7 +13,8 @@ public class Function
 	    ForeColorAttribute? foreColorAttribute, 
 	    DisplayNameAttribute? displayNameAttribute, 
 	    TranslateKeyAttribute? translateKeyAttribute,
-        DefaultAttribute? defaultAttribute
+        DefaultAttribute? defaultAttribute,
+        NotImplementedAttribute? notImplementedAttribute
 	    )
     {
         FullName = fullname;
@@ -44,6 +45,7 @@ public class Function
 	        _ => Color.Black
         };
         IsDefault = defaultAttribute is not null;
+        IsImplemented = notImplementedAttribute is null;
     }
 
     public string FullName { get; init; }
@@ -56,4 +58,5 @@ public class Function
     public string DisplayName { get; init; }
     public string LanguageKey { get; init; }
     public bool IsDefault { get; init; }
+    public bool IsImplemented { get; init; }
 }

@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Network;
 
 public class CurrentNetwork : BaseFunction
 {
-	public static Result SetPrivate()
+    [NotImplemented]
+    public static Result SetPrivate()
 	{
 		var list = new List<Result>()
 		{
@@ -10,7 +11,8 @@ public class CurrentNetwork : BaseFunction
 		};
 		return list.ToSingleResult("SetCurrentNetworkPrivate");
 	}
-	public static Result SetPublic()
+    [NotImplemented]
+    public static Result SetPublic()
 	{
 		var list = new List<Result>()
 		{

@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class RestoreFldrWindows : BaseFunction
+public class RestoreFolderWindows : BaseFunction
 {
 	public static Result Enable()
 	{

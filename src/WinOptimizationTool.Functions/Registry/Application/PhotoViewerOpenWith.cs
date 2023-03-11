@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class PhotoViewerOpenWith : BaseFunction
 {
-	public static Result Add()
+    [NotImplemented]
+    public static Result Add()
 	{
 		var list = new List<Result>()
 		{
@@ -13,7 +14,8 @@ public class PhotoViewerOpenWith : BaseFunction
 		};
 		return list.ToSingleResult("AddPhotoViewerOpenWith");
 	}
-	public static Result Remove()
+    [NotImplemented]
+    public static Result Remove()
 	{
 		var list = new List<Result>()
 		{

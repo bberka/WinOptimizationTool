@@ -2,7 +2,9 @@ namespace WinOptimizationTool.Functions.Registry.Network;
 
 public class MSNetClient : BaseFunction
 {
-	public static Result Disable()
+    [NotImplemented]
+
+    public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
@@ -10,7 +12,9 @@ public class MSNetClient : BaseFunction
 		};
 		return list.ToSingleResult("DisableMSNetClient");
 	}
-	public static Result Enable()
+    [NotImplemented]
+
+    public static Result Enable()
 	{
 		var list = new List<Result>()
 		{

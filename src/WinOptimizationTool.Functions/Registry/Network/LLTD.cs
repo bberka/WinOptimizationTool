@@ -2,7 +2,9 @@ namespace WinOptimizationTool.Functions.Registry.Network;
 
 public class LLTD : BaseFunction
 {
-	public static Result Disable()
+    [NotImplemented]
+
+    public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +13,9 @@ public class LLTD : BaseFunction
 		};
 		return list.ToSingleResult("DisableLLTD");
 	}
-	public static Result Enable()
+    [NotImplemented]
+
+    public static Result Enable()
 	{
 		var list = new List<Result>()
 		{

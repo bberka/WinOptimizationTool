@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class FaxPrinter : BaseFunction
 {
-	public static Result Remove()
+    [NotImplemented]
+    public static Result Remove()
 	{
 		var list = new List<Result>()
 		{
@@ -10,7 +11,8 @@ public class FaxPrinter : BaseFunction
 		};
 		return list.ToSingleResult("RemoveFaxPrinter");
 	}
-	public static Result Add()
+    [NotImplemented]
+    public static Result Add()
 	{
 		var list = new List<Result>()
 		{

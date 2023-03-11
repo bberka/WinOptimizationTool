@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Network;
 
 public class SMBServer : BaseFunction
 {
-	public static Result Disable()
+    [NotImplemented]
+    public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
@@ -12,7 +13,8 @@ public class SMBServer : BaseFunction
 		};
 		return list.ToSingleResult("DisableSMBServer");
 	}
-	public static Result Enable()
+    [NotImplemented]
+    public static Result Enable()
 	{
 		var list = new List<Result>()
 		{

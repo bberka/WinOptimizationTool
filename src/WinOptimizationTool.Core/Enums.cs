@@ -6,3 +6,10 @@ public enum MethodForeColor
 	Orange,
 	Green,
 }
+
+public enum Mode
+{
+	RunMode,
+	CreatePresetMode,
+	EditPresetMode,
+}

@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class DesktopFromThisPC : BaseFunction
+public class DesktopOnThisPC : BaseFunction
 {
 	public static Result Hide()
 	{
@@ -10,4 +10,9 @@ public class DesktopFromThisPC : BaseFunction
 		};
 		return list.ToSingleResult("HideDesktopFromThisPC");
 	}
+    [NotImplemented]
+    public static Result Show()
+    {
+        throw new NotImplementedException();
+    }
 }

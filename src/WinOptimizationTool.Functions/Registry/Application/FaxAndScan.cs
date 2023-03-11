@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class FaxAndScan : BaseFunction
 {
-	public static Result Uninstall()
+    [NotImplemented]
+    public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +12,8 @@ public class FaxAndScan : BaseFunction
 		};
 		return list.ToSingleResult("UninstallFaxAndScan");
 	}
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{

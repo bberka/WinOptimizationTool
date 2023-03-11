@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class NavPaneLibraries : BaseFunction
+public class NavPanelLibraries : BaseFunction
 {
 	public static Result Show()
 	{

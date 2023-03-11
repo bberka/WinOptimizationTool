@@ -1,8 +1,8 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class cludeLibraryMenu : BaseFunction
+public class IncludeInLibraryMenu : BaseFunction
 {
-	public static Result HideIncludeInLibraryMenu()
+	public static Result Hide()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +11,7 @@ public class cludeLibraryMenu : BaseFunction
 		};
 		return list.ToSingleResult("HideIncludeInLibraryMenu");
 	}
-	public static Result ShowIncludeInLibraryMenu()
+	public static Result Show()
 	{
 		var list = new List<Result>()
 		{

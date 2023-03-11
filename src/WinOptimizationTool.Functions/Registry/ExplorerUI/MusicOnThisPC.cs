@@ -1,6 +1,6 @@
 namespace WinOptimizationTool.Functions.Registry.ExplorerUI;
 
-public class MusicFromThisPC : BaseFunction
+public class MusicOnThisPC : BaseFunction
 {
 	public static Result Hide()
 	{
@@ -11,4 +11,9 @@ public class MusicFromThisPC : BaseFunction
 		};
 		return list.ToSingleResult("HideMusicFromThisPC");
 	}
+    [NotImplemented]
+    public static Result Show()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class HyperV : BaseFunction
 {
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{
@@ -11,7 +12,8 @@ public class HyperV : BaseFunction
 		};
 		return list.ToSingleResult("InstallHyperV");
 	}
-	public static Result Uninstall()
+    [NotImplemented]
+    public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{

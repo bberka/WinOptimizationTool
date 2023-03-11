@@ -18,6 +18,8 @@ public class OneDrive : BaseFunction
 		};
 		return list.ToSingleResult("EnableOneDrive");
 	}
+	[NotImplemented]
+
 	public static Result Uninstall()
 	{
 		var list = new List<Result>()
@@ -40,7 +42,8 @@ public class OneDrive : BaseFunction
 		};
 		return list.ToSingleResult("UninstallOneDrive");
 	}
-	public static Result Install()
+    [NotImplemented]
+    public static Result Install()
 	{
 		var list = new List<Result>()
 		{

@@ -2,7 +2,8 @@ namespace WinOptimizationTool.Functions.Registry.Application;
 
 public class XboxFeatures : BaseFunction
 {
-	public static Result Disable()
+    [NotImplemented]
+    public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
@@ -18,7 +19,8 @@ public class XboxFeatures : BaseFunction
 		};
 		return list.ToSingleResult("DisableXboxFeatures");
 	}
-	public static Result Enable()
+    [NotImplemented]
+    public static Result Enable()
 	{
 		var list = new List<Result>()
 		{

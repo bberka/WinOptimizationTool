@@ -10,6 +10,7 @@ public class NCSIProbe : BaseFunction
 		};
 		return list.ToSingleResult("DisableNCSIProbe");
 	}
+
 	public static Result Enable()
 	{
 		var list = new List<Result>()
