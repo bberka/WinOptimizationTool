@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
+using EasMe;
 using EasMe.Extensions;
 using EasMe.Logging;
 using EasMe.Result;
@@ -11,10 +12,10 @@ namespace WinOptimizationTool.Reader;
 public class FileParser
 {
 	private static readonly IEasLog logger = EasLogFactory.CreateLogger();
-	public FileParser(string path, string outPath)
+	public FileParser(string path, string outPath,string folderName)
 	{
 		AllLines = File.ReadAllLines(path);
-		Parser = new FunctionParser(AllLines, outPath);
+		Parser = new FunctionParser(AllLines, outPath, folderName);
 		OutPath = outPath;
 	}
 
@@ -23,45 +24,88 @@ public class FileParser
 	public FunctionParser Parser { get; set; }
 	public class FunctionParser
 	{
-		public FunctionParser(string[] allLines, string outPath)
+		public FunctionParser(string[] allLines, string outPath, string folderName)
 		{
 			var list = ReadAndParse(allLines);
-			WriteFile(list, outPath);
+			WriteFile(list, outPath, folderName);
 		}
 
-		private static void WriteFile(List<Function> functions, string outPath)
-		{
-			var b = new StringBuilder();
-			const string line1 = "namespace WinOptimizationTool.Functions;";
-			const string line2 = "public class ParsedFunctions";
-			const string line3 = "{";
-			b.AppendLine(line1);
-			b.AppendLine(line2);
-			b.AppendLine(line3);
-			foreach (var item in functions)
-			{
-				if(item.Lines.Count == 0) continue;
-				b.AppendLine("	public static Result " + item.FuncName +"()");
-				b.AppendLine("	{");
-				b.AppendLine("		var list = new List<Result>()");
-				b.AppendLine("		{");
+		//private static void WriteFile(List<Function> functions, string outPath)
+		//{
+		//	var b = new StringBuilder();
+		//	const string line1 = "namespace WinOptimizationTool.Functions;";
+		//	const string line2 = "public class ParsedFunctions";
+		//	const string line3 = "{";
+		//	b.AppendLine(line1);
+		//	b.AppendLine(line2);
+		//	b.AppendLine(line3);
+		//	foreach (var item in functions)
+		//	{
+		//		if(item.Lines.Count == 0) continue;
+		//		b.AppendLine("	public static Result " + item.FuncName +"()");
+		//		b.AppendLine("	{");
+		//		b.AppendLine("		var list = new List<Result>()");
+		//		b.AppendLine("		{");
 
 
-				foreach (var code in item.Lines)
-				{
-					b.AppendLine("			"+ code);
-				}
+		//		foreach (var code in item.Lines)
+		//		{
+		//			b.AppendLine("			"+ code);
+		//		}
 
-				b.AppendLine("		};");
-				b.AppendLine($"		return list.ToSingleResult(\"{item.FuncName}\");");
-				b.AppendLine("	}");
-			}
-			const string line4 = "}";
-			b.AppendLine(line4);
-			var result = b.ToString();
-			File.WriteAllText(outPath, result);
-		}
-		private static List<Function> ReadAndParse(string[] allLines)
+		//		b.AppendLine("		};");
+		//		b.AppendLine($"		return list.ToSingleResult(\"{item.FuncName}\");");
+		//		b.AppendLine("	}");
+		//	}
+		//	const string line4 = "}";
+		//	b.AppendLine(line4);
+		//	var result = b.ToString();
+		//	File.WriteAllText(outPath, result);
+		//}
+        private static void WriteFile(List<Function> functions, string outPath, string folderName)
+        {
+            var grouped = functions.GroupBy(x => x.ClassName).ToList();
+            foreach (var function in grouped)
+            {
+				if(function.Key.IsNullOrEmpty()) continue;
+                var b = new StringBuilder();
+                string line1 = "namespace WinOptimizationTool.Functions.Registry." + folderName + ";";
+                string line2 = "public class " + function.Key + " : BaseFunction";
+                const string line3 = "{";
+                b.AppendLine(line1);
+                b.AppendLine();
+                b.AppendLine(line2);
+                b.AppendLine(line3);
+                foreach (var item in function)
+                {
+                    if (item.Lines.Count == 0) continue;
+                    b.AppendLine("	public static Result " + item.FuncName.Replace(function.Key,"") + "()");
+                    b.AppendLine("	{");
+                    b.AppendLine("		var list = new List<Result>()");
+                    b.AppendLine("		{");
+
+
+                    foreach (var code in item.Lines)
+                    {
+                        b.AppendLine("			" + code);
+                    }
+
+                    b.AppendLine("		};");
+                    b.AppendLine($"		return list.ToSingleResult(\"{item.FuncName}\");");
+                    b.AppendLine("	}");
+                }
+                const string line5 = "}";
+                b.AppendLine(line5);
+                var result = b.ToString();
+                var dir = Path.Combine(outPath, folderName);
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                var path = Path.Combine(dir, function.Key + ".cs");
+                File.WriteAllText(path, result);
+            }
+            
+
+        }
+        private static List<Function> ReadAndParse(string[] allLines)
 		{
 			var functions = new List<Function>();
 			bool isFuncBody = false;
@@ -100,13 +144,19 @@ public class FileParser
 					}
 					if (line.StartsWith("Remove-ItemProperty"))
 					{
-						var removeParse = RemoveParse.Create(line);
+						var removeParse = RemovePropParse.Create(line);
 						if (removeParse.IsFailure) continue;
 						currentFunc.Lines.Add(removeParse.Data.Code);
 						continue;
-
 					}
-					if (line.StartsWith("Enable-ScheduledTask"))
+                    if (line.StartsWith("Remove-Item"))
+                    {
+                        var removeParse = RemoveParse.Create(line);
+                        if (removeParse.IsFailure) continue;
+                        currentFunc.Lines.Add(removeParse.Data.Code);
+                        continue;
+                    }
+                    if (line.StartsWith("Enable-ScheduledTask"))
 					{
 						var taskName = line.GetBetween("Enable-ScheduledTask -TaskName \"", "\"");
 						var code = $"TaskHelper.EnableTask(@\"{taskName}\"),";
@@ -180,19 +230,128 @@ public class FileParser
 			_ => ""
 		};
 	}
-
-	public class Function
+    
+    public class Function
 	{
 		public string FuncName { get; set; } = "";
-		public List<string> Lines { get; set; } = new List<string>();
-	}
-	public class RemoveParse
+
+        public string ClassName => GetClassName(FuncName);
+       
+        public List<string> Lines { get; set; } = new List<string>();
+        private string GetClassName( string a)
+        {
+            return a
+                    .RemoveText("Enable")
+                    .RemoveText("Disable")
+                    .RemoveText("Install")
+                    .RemoveText("Uninstall")
+                    .RemoveText("Set")
+                    .RemoveText("Unset")
+                    .RemoveText("Add")
+                    .RemoveText("Remove")
+                    .RemoveText("High")
+                    .RemoveText("Low")
+                    .RemoveText("Show")
+                    .RemoveText("Hide")
+                    .RemoveText("Out")
+                    .RemoveText("In")
+                    .RemoveText("Public")
+                    .RemoveText("Private")
+                    .RemoveText("Local")
+                    .RemoveText("Unpin")
+                ;
+        }
+
+        private string GetClassName(string a, string b)
+        {
+            var textA = a
+                    .RemoveText("Enable")
+                    .RemoveText("Disable")
+                    .RemoveText("Install")
+                    .RemoveText("Uninstall")
+                    .RemoveText("Set")
+                    .RemoveText("Unset")
+                    .RemoveText("Add")
+                    .RemoveText("Remove")
+                    .RemoveText("High")
+                    .RemoveText("Low")
+                    .RemoveText("Show")
+                    .RemoveText("Hide")
+                    .RemoveText("Out")
+                    .RemoveText("In")
+                    .RemoveText("Public")
+                    .RemoveText("Private")
+                    .RemoveText("Local")
+                    .RemoveText("Unpin")
+                ;
+            var textB = b
+                    .RemoveText("Enable")
+                    .RemoveText("Disable")
+                    .RemoveText("Install")
+                    .RemoveText("Uninstall")
+                    .RemoveText("Set")
+                    .RemoveText("Unset")
+                    .RemoveText("Add")
+                    .RemoveText("Remove")
+                    .RemoveText("High")
+                    .RemoveText("Low")
+                    .RemoveText("Show")
+                    .RemoveText("Hide")
+                    .RemoveText("Out")
+                    .RemoveText("In")
+                    .RemoveText("Public")
+                    .RemoveText("Private")
+                    .RemoveText("Local")
+                    .RemoveText("Unpin")
+                ;
+            if (textA == textB) return textA;
+            return string.Empty;
+        }
+    }
+    public class RemoveParse
+    {
+        public static ResultData<RemoveParse> Create(string line)
+        {
+            var removeParse = new RemoveParse(line);
+            return removeParse;
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                logger.Exception(ex, line);
+                return Result.Warn(ex.Message);
+            }
+        }
+        private RemoveParse(string line)
+        {
+            try
+            {
+                var split = line.Split("\"");
+                var pathSplit = split[1].Split(@":\");
+                var mainPath = GetPathEnumValue(pathSplit[0]);
+                MainPath = mainPath;
+                Path = pathSplit[1];
+                Code = $"RegHelper.DeletePath({MainPath}, @\"{Path}\"),";
+            }
+            catch (Exception ex)
+            {
+                Code = $"Result.MultipleErrors(\"Not Implemented\",\"{line.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"),";
+                logger.Exception(ex, line);
+            }
+        }
+        public string MainPath { get; set; }
+        public string Path { get; set; }
+        public string Code { get; set; }
+    }
+    public class RemovePropParse
 	{
-		public static ResultData<RemoveParse> Create(string line)
+		public static ResultData<RemovePropParse> Create(string line)
 		{
 			try
 			{
-				var removeParse = new RemoveParse(line);
+				var removeParse = new RemovePropParse(line);
 				return removeParse;
 			}
 			catch (Exception ex)
@@ -201,7 +360,7 @@ public class FileParser
 				return Result.Warn(ex.Message);
 			}
 		}
-		private RemoveParse(string line)
+		private RemovePropParse(string line)
 		{
 			var split = line.Split("\"");
 			var pathSplit = split[1].Split(@":\");

@@ -38,15 +38,29 @@ public class RegHelper
             using var subKey = regKey.OpenSubKey(path,true) ?? regKey.CreateSubKey(path, true);
             subKey.SetValue(key, value, valueKind);
             logger.Info($"Successfully updated => Type:{type}|Path:{path}|Key:{key}");
-            return Result.Success($"Successfully updated => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
+            return Result.Success($"Successfully updated key => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
         }
         catch (Exception ex)
         {
-            logger.Exception(ex, $"Failed to update => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
-            return Result.Error($"Failed to update => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
+            logger.Exception(ex, $"Failed to update  key=> Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
+            return Result.Error($"Failed to update key => Type:{type}|Path:{path}|Key:{key}|NewValue:{valueKind}|ValueKind:{valueKind}");
         }
     }
-
+    public static Result DeletePath(RegistryHive type, string path)
+    {
+        try
+        {
+            using var regKey = RegistryKey.OpenBaseKey(type, RegistryView.Default);
+            regKey.DeleteSubKey(path, true);
+            logger.Info($"Successfully deleted path => Type:{type}|Path:{path}");
+            return Result.Success($"Successfully deleted path => Type:{type}|Path:{path}");
+        }
+        catch (Exception ex)
+        {
+            logger.Exception(ex, $"Failed to delete path => Type:{type}|Path:{path}");
+            return Result.Error($"Failed to delete path => Type:{type}|Path:{path}");
+        }
+    }
     public static Result DeleteValue(RegistryHive type, string path, string key)
     {
         try
@@ -54,13 +68,13 @@ public class RegHelper
             using var regKey = RegistryKey.OpenBaseKey(type, RegistryView.Default);
             var subKey = regKey.OpenSubKey(path, true) ?? regKey.CreateSubKey(path, true);
             subKey.DeleteValue(key);
-            logger.Info($"Successfully deleted => Type:{type}|Path:{path}|Key:{key}");
+            logger.Info($"Successfully deleted key => Type:{type}|Path:{path}|Key:{key}");
             return Result.Success($"Successfully deleted => Type:{type}|Path:{path}|Key:{key}");
         }
         catch (Exception ex)
         {
-            logger.Exception(ex, $"Failed to delete => Type:{type}|Path:{path}|Key:{key}");
-            return Result.Error($"Failed to delete => Type:{type}|Path:{path}|Key:{key}");
+            logger.Exception(ex, $"Failed to delete key => Type:{type}|Path:{path}|Key:{key}");
+            return Result.Error($"Failed to delete key => Type:{type}|Path:{path}|Key:{key}");
         }
     }
     public static RegHelper CreateLocalMachine(string registryPath, bool createIfPathNotExists = false)

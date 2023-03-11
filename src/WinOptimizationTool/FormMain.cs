@@ -21,8 +21,8 @@ namespace WinOptimizationTool
         private const int TOTAL_WIDTH = BUTTON_WIDTH * 2;
 
         private const int BUTTON_HEIGHT = 35;
-        private const int COL_ROWS = 15;
-        private const int COL_ROW_LIMIT= 15;
+        private const int COL_ROWS = 20;
+        private const int COL_ROW_LIMIT= 20;
 
         private void FormMain_Load(object sender, EventArgs e)
         {

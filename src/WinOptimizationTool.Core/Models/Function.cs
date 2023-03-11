@@ -35,9 +35,11 @@ public class Function
 	        "Disable" => Color.Red,
 	        "Revert" => Color.Red,
 	        "Hide" => Color.Red,
+	        "Remove" => Color.Red,
 	        "Enable" => Color.Green,
 	        "Apply" => Color.Green,
 	        "Show" => Color.Green,
+	        "Add" => Color.Green,
 
 	        _ => Color.Black
         };
