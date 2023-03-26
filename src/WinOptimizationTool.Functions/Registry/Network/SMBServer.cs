@@ -11,7 +11,7 @@ public class SMBServer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force"),
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_server\""),
 		};
-		return list.ToSingleResult("DisableSMBServer");
+		return list.Combine(true,"DisableSMBServer");
 	}
     [NotImplemented]
     public static Result Enable()
@@ -21,6 +21,6 @@ public class SMBServer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Set-SmbServerConfiguration -EnableSMB2Protocol $true -Force"),
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_server\""),
 		};
-		return list.ToSingleResult("EnableSMBServer");
+		return list.Combine(true,"EnableSMBServer");
 	}
 }

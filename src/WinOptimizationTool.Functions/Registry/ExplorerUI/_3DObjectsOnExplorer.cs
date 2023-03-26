@@ -9,7 +9,7 @@ public class _3DObjectsOnExplorer : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag","ThisPCPolicy",@"Hide"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag","ThisPCPolicy",@"Hide"),
 		};
-		return list.ToSingleResult("Hide3DObjectsFromExplorer");
+		return list.Combine(true,"Hide3DObjectsFromExplorer");
 	}
 	public static Result Show()
 	{
@@ -18,6 +18,6 @@ public class _3DObjectsOnExplorer : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag", "ThisPCPolicy"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag", "ThisPCPolicy"),
 		};
-		return list.ToSingleResult("Show3DObjectsInExplorer");
+		return list.Combine(true,"Show3DObjectsInExplorer");
 	}
 }

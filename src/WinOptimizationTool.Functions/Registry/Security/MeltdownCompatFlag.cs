@@ -8,7 +8,7 @@ public class MeltdownCompatFlag : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat","cadca5fe-87d3-4b96-b7fb-a231484277cc",0),
 		};
-		return list.ToSingleResult("EnableMeltdownCompatFlag");
+		return list.Combine(true,"EnableMeltdownCompatFlag");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class MeltdownCompatFlag : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat", "cadca5fe-87d3-4b96-b7fb-a231484277cc"),
 		};
-		return list.ToSingleResult("DisableMeltdownCompatFlag");
+		return list.Combine(true,"DisableMeltdownCompatFlag");
 	}
 }

@@ -8,7 +8,7 @@ public class RestoreFolderWindows : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","PersistBrowsers",1),
 		};
-		return list.ToSingleResult("EnableRestoreFldrWindows");
+		return list.Combine(true,"EnableRestoreFldrWindows");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class RestoreFolderWindows : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers"),
 		};
-		return list.ToSingleResult("DisableRestoreFldrWindows");
+		return list.Combine(true,"DisableRestoreFldrWindows");
 	}
 }

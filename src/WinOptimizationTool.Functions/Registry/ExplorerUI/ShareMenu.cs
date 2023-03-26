@@ -9,7 +9,7 @@ public class ShareMenu : BaseFunction
 			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernSharing"),
 		};
-		return list.ToSingleResult("HideShareMenu");
+		return list.Combine(true,"HideShareMenu");
 	}
 	public static Result Show()
 	{
@@ -18,6 +18,6 @@ public class ShareMenu : BaseFunction
 			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
 			RegHelper.SetString(RegistryHive.ClassesRoot,@"*\shellex\ContextMenuHandlers\ModernSharing","(Default)",@"{e2bf9676-5f8f-435c-97eb-11607a5bedf7}"),
 		};
-		return list.ToSingleResult("ShowShareMenu");
+		return list.Combine(true,"ShowShareMenu");
 	}
 }

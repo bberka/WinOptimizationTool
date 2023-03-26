@@ -8,7 +8,7 @@ public class UWPMessaging : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessMessaging",2),
 		};
-		return list.ToSingleResult("DisableUWPMessaging");
+		return list.Combine(true,"DisableUWPMessaging");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPMessaging : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessMessaging"),
 		};
-		return list.ToSingleResult("EnableUWPMessaging");
+		return list.Combine(true,"EnableUWPMessaging");
 	}
 }

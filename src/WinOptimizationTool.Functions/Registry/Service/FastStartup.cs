@@ -8,7 +8,7 @@ public class FastStartup : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Session Manager\Power","HiberbootEnabled",0),
 		};
-		return list.ToSingleResult("DisableFastStartup");
+		return list.Combine(true,"DisableFastStartup");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class FastStartup : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Session Manager\Power","HiberbootEnabled",1),
 		};
-		return list.ToSingleResult("EnableFastStartup");
+		return list.Combine(true,"EnableFastStartup");
 	}
 }

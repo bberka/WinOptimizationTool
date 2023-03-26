@@ -8,7 +8,7 @@ public class RecoveryAndReset : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","reagentc /disable 2>&1 | Out-Null"),
 		};
-		return list.ToSingleResult("DisableRecoveryAndReset");
+		return list.Combine(true,"DisableRecoveryAndReset");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class RecoveryAndReset : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","reagentc /enable 2>&1 | Out-Null"),
 		};
-		return list.ToSingleResult("EnableRecoveryAndReset");
+		return list.Combine(true,"EnableRecoveryAndReset");
 	}
 }

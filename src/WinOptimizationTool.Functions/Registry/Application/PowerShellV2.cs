@@ -10,7 +10,7 @@ public class PowerShellV2 : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"MicrosoftWindowsPowerShellV2Root\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Uninstall-WindowsFeature -Name \"PowerShell-V2\" -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallPowerShellV2");
+		return list.Combine(true,"UninstallPowerShellV2");
 	}
     [NotImplemented]
     public static Result Install()
@@ -20,6 +20,6 @@ public class PowerShellV2 : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"MicrosoftWindowsPowerShellV2Root\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Install-WindowsFeature -Name \"PowerShell-V2\" -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("InstallPowerShellV2");
+		return list.Combine(true,"InstallPowerShellV2");
 	}
 }

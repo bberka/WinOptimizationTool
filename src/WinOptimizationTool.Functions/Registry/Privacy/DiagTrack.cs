@@ -9,7 +9,7 @@ public class DiagTrack : BaseFunction
 			ServiceHelper.StopService("DiagTrack"),
 			ServiceHelper.SetService("DiagTrack","Disabled"),
 		};
-		return list.ToSingleResult("DisableDiagTrack");
+		return list.Combine(true,"DisableDiagTrack");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class DiagTrack : BaseFunction
 			ServiceHelper.SetService("DiagTrack","Automatic"),
 			ServiceHelper.StartService("DiagTrack"),
 		};
-		return list.ToSingleResult("EnableDiagTrack");
+		return list.Combine(true,"EnableDiagTrack");
 	}
 }

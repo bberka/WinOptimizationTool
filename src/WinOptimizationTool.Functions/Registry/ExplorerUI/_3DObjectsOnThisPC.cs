@@ -8,7 +8,7 @@ public class _3DObjectsOnThisPC : BaseFunction
 		{
 			RegHelper.DeletePath(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"),
 		};
-		return list.ToSingleResult("Hide3DObjectsFromThisPC");
+		return list.Combine(true,"Hide3DObjectsFromThisPC");
 	}
 	[NotImplemented]
     public static Result Show()

@@ -11,7 +11,7 @@ public class SleepTimeout : BaseFunction
 			Result.MultipleErrors("Not Implemented","powercfg /X standby-timeout-ac 0"),
 			Result.MultipleErrors("Not Implemented","powercfg /X standby-timeout-dc 0"),
 		};
-		return list.ToSingleResult("DisableSleepTimeout");
+		return list.Combine(true,"DisableSleepTimeout");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class SleepTimeout : BaseFunction
 			Result.MultipleErrors("Not Implemented","powercfg /X standby-timeout-ac 30"),
 			Result.MultipleErrors("Not Implemented","powercfg /X standby-timeout-dc 15"),
 		};
-		return list.ToSingleResult("EnableSleepTimeout");
+		return list.Combine(true,"EnableSleepTimeout");
 	}
 }

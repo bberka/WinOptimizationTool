@@ -14,7 +14,7 @@ public class SoundScheme : BaseFunction
 			Result.MultipleErrors("Not Implemented","# Replace any kind of value with a regular string (similar behavior to Sound control panel)."),
 			Result.MultipleErrors("Not Implemented","# Copy data from source scheme to current."),
 		};
-		return list.ToSingleResult("SetSoundSchemeDefault");
+		return list.Combine(true,"SetSoundSchemeDefault");
 	}
     public static Result None()
     {
@@ -28,6 +28,6 @@ public class SoundScheme : BaseFunction
             Result.MultipleErrors("Not Implemented","# Replace any kind of value with a regular string (similar behavior to Sound control panel)."),
             Result.MultipleErrors("Not Implemented","# Copy data from source scheme to current."),
         };
-        return list.ToSingleResult("SetSoundSchemeNone");
+        return list.Combine(true,"SetSoundSchemeNone");
     }
 }

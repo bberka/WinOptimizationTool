@@ -8,7 +8,7 @@ public class ShutdownInLockScreen : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","ShutdownWithoutLogon",0),
 		};
-		return list.ToSingleResult("HideShutdownFromLockScreen");
+		return list.Combine(true,"HideShutdownFromLockScreen");
 	}
     public static Result Show()
     {
@@ -16,6 +16,6 @@ public class ShutdownInLockScreen : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","ShutdownWithoutLogon",1),
         };
-        return list.ToSingleResult("ShowShutdownOnLockScreen");
+        return list.Combine(true,"ShowShutdownOnLockScreen");
     }
 }

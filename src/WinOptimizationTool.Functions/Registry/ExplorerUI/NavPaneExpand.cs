@@ -8,7 +8,7 @@ public class NavPaneExpand : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","NavPaneExpandToCurrentFolder",1),
 		};
-		return list.ToSingleResult("EnableNavPaneExpand");
+		return list.Combine(true,"EnableNavPaneExpand");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class NavPaneExpand : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "NavPaneExpandToCurrentFolder"),
 		};
-		return list.ToSingleResult("DisableNavPaneExpand");
+		return list.Combine(true,"DisableNavPaneExpand");
 	}
 }

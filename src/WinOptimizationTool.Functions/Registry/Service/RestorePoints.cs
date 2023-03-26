@@ -8,7 +8,7 @@ public class RestorePoints : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Disable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
 		};
-		return list.ToSingleResult("DisableRestorePoints");
+		return list.Combine(true,"DisableRestorePoints");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class RestorePoints : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Enable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
 		};
-		return list.ToSingleResult("EnableRestorePoints");
+		return list.Combine(true,"EnableRestorePoints");
 	}
 }

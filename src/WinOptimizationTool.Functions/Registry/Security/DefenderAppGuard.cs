@@ -8,7 +8,7 @@ public class DefenderAppGuard : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Enable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("EnableDefenderAppGuard");
+		return list.Combine(true,"EnableDefenderAppGuard");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class DefenderAppGuard : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Disable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("DisableDefenderAppGuard");
+		return list.Combine(true,"DisableDefenderAppGuard");
 	}
 }

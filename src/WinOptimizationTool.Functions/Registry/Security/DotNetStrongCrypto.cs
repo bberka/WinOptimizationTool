@@ -10,7 +10,7 @@ public class DotNetStrongCrypto : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\.NETFramework\v4.0.30319","SchUseStrongCrypto",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319","SchUseStrongCrypto",1),
 		};
-		return list.ToSingleResult("EnableDotNetStrongCrypto");
+		return list.Combine(true,"EnableDotNetStrongCrypto");
 	}
 	public static Result Disable()
 	{
@@ -20,6 +20,6 @@ public class DotNetStrongCrypto : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\.NETFramework\v4.0.30319", "SchUseStrongCrypto"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319", "SchUseStrongCrypto"),
 		};
-		return list.ToSingleResult("DisableDotNetStrongCrypto");
+		return list.Combine(true,"DisableDotNetStrongCrypto");
 	}
 }

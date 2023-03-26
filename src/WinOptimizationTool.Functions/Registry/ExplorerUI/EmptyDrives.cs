@@ -8,7 +8,7 @@ public class EmptyDrives : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","HideDrivesWithNoMedia",0),
 		};
-		return list.ToSingleResult("ShowEmptyDrives");
+		return list.Combine(true,"ShowEmptyDrives");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class EmptyDrives : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideDrivesWithNoMedia"),
 		};
-		return list.ToSingleResult("HideEmptyDrives");
+		return list.Combine(true,"HideEmptyDrives");
 	}
 }

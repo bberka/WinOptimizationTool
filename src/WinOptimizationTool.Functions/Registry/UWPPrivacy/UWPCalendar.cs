@@ -8,7 +8,7 @@ public class UWPCalendar : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessCalendar",2),
 		};
-		return list.ToSingleResult("DisableUWPCalendar");
+		return list.Combine(true,"DisableUWPCalendar");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPCalendar : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCalendar"),
 		};
-		return list.ToSingleResult("EnableUWPCalendar");
+		return list.Combine(true,"EnableUWPCalendar");
 	}
 }

@@ -10,7 +10,7 @@ public class Defender : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "WindowsDefender"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth"),
 		};
-		return list.ToSingleResult("DisableDefender");
+		return list.Combine(true,"DisableDefender");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class Defender : BaseFunction
 			
 			
 		};
-		return list.ToSingleResult("EnableDefender");
+		return list.Combine(true,"EnableDefender");
 	}
 }

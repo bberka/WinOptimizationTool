@@ -10,7 +10,7 @@ public class MediaPlayer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallMediaPlayer");
+		return list.Combine(true,"UninstallMediaPlayer");
 	}
     [NotImplemented]
     public static Result Install()
@@ -20,6 +20,6 @@ public class MediaPlayer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallMediaPlayer");
+		return list.Combine(true,"InstallMediaPlayer");
 	}
 }

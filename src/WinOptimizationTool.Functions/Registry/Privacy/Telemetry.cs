@@ -28,7 +28,7 @@ public class Telemetry : BaseFunction
 			TaskHelper.DisableTask(@"Microsoft\Office\OfficeTelemetryAgentFallBack2016"),
 			TaskHelper.DisableTask(@"Microsoft\Office\OfficeTelemetryAgentLogOn2016"),
 		};
-		return list.ToSingleResult("DisableTelemetry");
+		return list.Combine(true,"DisableTelemetry");
 	}
 	public static Result Enable()
 	{
@@ -56,6 +56,6 @@ public class Telemetry : BaseFunction
 			TaskHelper.EnableTask(@"Microsoft\Office\OfficeTelemetryAgentFallBack2016"),
 			TaskHelper.EnableTask(@"Microsoft\Office\OfficeTelemetryAgentLogOn2016"),
 		};
-		return list.ToSingleResult("EnableTelemetry");
+		return list.Combine(true,"EnableTelemetry");
 	}
 }

@@ -8,7 +8,7 @@ public class ScriptHost : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows Script Host\Settings","Enabled",0),
 		};
-		return list.ToSingleResult("DisableScriptHost");
+		return list.Combine(true,"DisableScriptHost");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ScriptHost : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows Script Host\Settings", "Enabled"),
 		};
-		return list.ToSingleResult("EnableScriptHost");
+		return list.Combine(true,"EnableScriptHost");
 	}
 }

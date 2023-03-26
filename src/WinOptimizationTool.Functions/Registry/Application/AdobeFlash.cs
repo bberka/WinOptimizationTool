@@ -9,7 +9,7 @@ public class AdobeFlash : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Internet Explorer","DisableFlashInIE",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons","FlashPlayerEnabled",0),
 		};
-		return list.ToSingleResult("DisableAdobeFlash");
+		return list.Combine(true,"DisableAdobeFlash");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class AdobeFlash : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Internet Explorer", "DisableFlashInIE"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons", "FlashPlayerEnabled"),
 		};
-		return list.ToSingleResult("EnableAdobeFlash");
+		return list.Combine(true,"EnableAdobeFlash");
 	}
 }

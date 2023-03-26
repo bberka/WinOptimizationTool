@@ -8,7 +8,7 @@ public class RecentlyAddedApps : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Explorer","HideRecentlyAddedApps",1),
 		};
-		return list.ToSingleResult("HideRecentlyAddedApps");
+		return list.Combine(true,"HideRecentlyAddedApps");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class RecentlyAddedApps : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "HideRecentlyAddedApps"),
 		};
-		return list.ToSingleResult("ShowRecentlyAddedApps");
+		return list.Combine(true,"ShowRecentlyAddedApps");
 	}
 }

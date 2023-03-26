@@ -8,7 +8,7 @@ public class QuickAccess : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer","HubMode",1),
 		};
-		return list.ToSingleResult("HideQuickAccess");
+		return list.Combine(true,"HideQuickAccess");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class QuickAccess : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode"),
 		};
-		return list.ToSingleResult("ShowQuickAccess");
+		return list.Combine(true,"ShowQuickAccess");
 	}
 }

@@ -8,7 +8,7 @@ public class ChangingSoundScheme : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Personalization","NoChangingSoundScheme",1),
 		};
-		return list.ToSingleResult("DisableChangingSoundScheme");
+		return list.Combine(true,"DisableChangingSoundScheme");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ChangingSoundScheme : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoChangingSoundScheme"),
 		};
-		return list.ToSingleResult("EnableChangingSoundScheme");
+		return list.Combine(true,"EnableChangingSoundScheme");
 	}
 }

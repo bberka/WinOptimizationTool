@@ -14,7 +14,7 @@ public class TaskManagerDetails : BaseFunction
 			Result.MultipleErrors("Not Implemented","$timeout -= $sleep"),
 			Result.MultipleErrors("Not Implemented","$preferences = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\TaskManager\" -Name \"Preferences\" -ErrorAction SilentlyContinue"),
 		};
-		return list.ToSingleResult("ShowTaskManagerDetails");
+		return list.Combine(true,"ShowTaskManagerDetails");
 	}
 	public static Result Hide()
 	{
@@ -24,6 +24,6 @@ public class TaskManagerDetails : BaseFunction
 			Result.MultipleErrors("Not Implemented","$preferences.Preferences[28] = 1"),
 			
 		};
-		return list.ToSingleResult("HideTaskManagerDetails");
+		return list.Combine(true,"HideTaskManagerDetails");
 	}
 }

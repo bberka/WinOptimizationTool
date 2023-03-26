@@ -8,7 +8,7 @@ public class CtrldFolderAccess : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Enabled -ErrorAction SilentlyContinue"),
 		};
-		return list.ToSingleResult("EnableCtrldFolderAccess");
+		return list.Combine(true,"EnableCtrldFolderAccess");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class CtrldFolderAccess : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue"),
 		};
-		return list.ToSingleResult("DisableCtrldFolderAccess");
+		return list.Combine(true,"DisableCtrldFolderAccess");
 	}
 }

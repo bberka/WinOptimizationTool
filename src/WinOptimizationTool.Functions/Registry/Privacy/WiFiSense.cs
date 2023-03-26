@@ -11,7 +11,7 @@ public class WiFiSense : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config","AutoConnectAllowedOEM",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config","WiFISenseAllowed",0),
 		};
-		return list.ToSingleResult("DisableWiFiSense");
+		return list.Combine(true,"DisableWiFiSense");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class WiFiSense : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", "AutoConnectAllowedOEM"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config", "WiFISenseAllowed"),
 		};
-		return list.ToSingleResult("EnableWiFiSense");
+		return list.Combine(true,"EnableWiFiSense");
 	}
 }

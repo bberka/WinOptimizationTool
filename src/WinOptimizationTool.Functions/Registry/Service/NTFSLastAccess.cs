@@ -9,7 +9,7 @@ public class NTFSLastAccess : BaseFunction
 			Result.MultipleErrors("Not Implemented","# User Managed, Last Access Updates Disabled"),
 			Result.MultipleErrors("Not Implemented","fsutil behavior set DisableLastAccess 1 | Out-Null"),
 		};
-		return list.ToSingleResult("DisableNTFSLastAccess");
+		return list.Combine(true,"DisableNTFSLastAccess");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class NTFSLastAccess : BaseFunction
 			Result.MultipleErrors("Not Implemented","# Last Access Updates Enabled"),
 			Result.MultipleErrors("Not Implemented","fsutil behavior set DisableLastAccess 0 | Out-Null"),
 		};
-		return list.ToSingleResult("EnableNTFSLastAccess");
+		return list.Combine(true,"EnableNTFSLastAccess");
 	}
 }

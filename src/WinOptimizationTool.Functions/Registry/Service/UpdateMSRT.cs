@@ -8,7 +8,7 @@ public class UpdateMSRT : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\MRT","DontOfferThroughWUAU",1),
 		};
-		return list.ToSingleResult("DisableUpdateMSRT");
+		return list.Combine(true,"DisableUpdateMSRT");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UpdateMSRT : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\MRT", "DontOfferThroughWUAU"),
 		};
-		return list.ToSingleResult("EnableUpdateMSRT");
+		return list.Combine(true,"EnableUpdateMSRT");
 	}
 }

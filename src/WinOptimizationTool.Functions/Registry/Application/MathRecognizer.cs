@@ -9,7 +9,7 @@ public class MathRecognizer : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"MathRecognizer*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallMathRecognizer");
+		return list.Combine(true,"UninstallMathRecognizer");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class MathRecognizer : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"MathRecognizer*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallMathRecognizer");
+		return list.Combine(true,"InstallMathRecognizer");
 	}
 }

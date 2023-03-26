@@ -8,7 +8,7 @@ public class NetDevicesAutoInst : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\NcdAutoSetup\Private","AutoSetup",0),
 		};
-		return list.ToSingleResult("DisableNetDevicesAutoInst");
+		return list.Combine(true,"DisableNetDevicesAutoInst");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class NetDevicesAutoInst : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\NcdAutoSetup\Private", "AutoSetup"),
 		};
-		return list.ToSingleResult("EnableNetDevicesAutoInst");
+		return list.Combine(true,"EnableNetDevicesAutoInst");
 	}
 }

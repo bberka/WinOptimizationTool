@@ -8,7 +8,7 @@ public class SecondsInTaskbar : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","ShowSecondsInSystemClock",1),
 		};
-		return list.ToSingleResult("ShowSecondsInTaskbar");
+		return list.Combine(true,"ShowSecondsInTaskbar");
 	}
     public static Result Hide()
     {
@@ -16,6 +16,6 @@ public class SecondsInTaskbar : BaseFunction
         {
             RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSecondsInSystemClock"),
         };
-        return list.ToSingleResult("HideSecondsFromTaskbar");
+        return list.Combine(true,"HideSecondsFromTaskbar");
     }
 }

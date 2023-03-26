@@ -17,7 +17,7 @@ public class XboxFeatures : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_Enabled",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\GameDVR","AllowGameDVR",0),
 		};
-		return list.ToSingleResult("DisableXboxFeatures");
+		return list.Combine(true,"DisableXboxFeatures");
 	}
     [NotImplemented]
     public static Result Enable()
@@ -34,6 +34,6 @@ public class XboxFeatures : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_Enabled",1),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\GameDVR", "AllowGameDVR"),
 		};
-		return list.ToSingleResult("EnableXboxFeatures");
+		return list.Combine(true,"EnableXboxFeatures");
 	}
 }

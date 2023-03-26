@@ -8,7 +8,7 @@ public class ClearRecentFiles : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","ClearRecentDocsOnExit",1),
 		};
-		return list.ToSingleResult("EnableClearRecentFiles");
+		return list.Combine(true,"EnableClearRecentFiles");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class ClearRecentFiles : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", "ClearRecentDocsOnExit"),
 		};
-		return list.ToSingleResult("DisableClearRecentFiles");
+		return list.Combine(true,"DisableClearRecentFiles");
 	}
 }

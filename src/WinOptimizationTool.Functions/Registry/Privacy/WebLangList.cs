@@ -8,7 +8,7 @@ public class WebLangList : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Control Panel\International\User Profile","HttpAcceptLanguageOptOut",1),
 		};
-		return list.ToSingleResult("DisableWebLangList");
+		return list.Combine(true,"DisableWebLangList");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class WebLangList : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Control Panel\International\User Profile", "HttpAcceptLanguageOptOut"),
 		};
-		return list.ToSingleResult("EnableWebLangList");
+		return list.Combine(true,"EnableWebLangList");
 	}
 }

@@ -8,7 +8,7 @@ public class ShortcutArrow : BaseFunction
 		{
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons","29",@"%SystemRoot%\System32\imageres.dll,-1015"),
 		};
-		return list.ToSingleResult("HideShortcutArrow");
+		return list.Combine(true,"HideShortcutArrow");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class ShortcutArrow : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29"),
 		};
-		return list.ToSingleResult("ShowShortcutArrow");
+		return list.Combine(true,"ShowShortcutArrow");
 	}
 }

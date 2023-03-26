@@ -9,7 +9,7 @@ public class SSHServer : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallSSHServer");
+		return list.Combine(true,"InstallSSHServer");
 	}
     [NotImplemented]
     public static Result Uninstall()
@@ -18,6 +18,6 @@ public class SSHServer : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallSSHServer");
+		return list.Combine(true,"UninstallSSHServer");
 	}
 }

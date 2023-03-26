@@ -9,7 +9,7 @@ public class DeveloperMode : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowDevelopmentWithoutDevLicense",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock","AllowAllTrustedApps",1),
 		};
-		return list.ToSingleResult("EnableDeveloperMode");
+		return list.Combine(true,"EnableDeveloperMode");
 	}
 	public static Result Disable()
 	{
@@ -18,6 +18,6 @@ public class DeveloperMode : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowAllTrustedApps"),
 		};
-		return list.ToSingleResult("DisableDeveloperMode");
+		return list.Combine(true,"DisableDeveloperMode");
 	}
 }

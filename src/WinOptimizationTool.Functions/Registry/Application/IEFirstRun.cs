@@ -8,7 +8,7 @@ public class IEFirstRun : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Internet Explorer\Main","DisableFirstRunCustomize",1),
 		};
-		return list.ToSingleResult("DisableIEFirstRun");
+		return list.Combine(true,"DisableIEFirstRun");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class IEFirstRun : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Internet Explorer\Main", "DisableFirstRunCustomize"),
 		};
-		return list.ToSingleResult("EnableIEFirstRun");
+		return list.Combine(true,"EnableIEFirstRun");
 	}
 }

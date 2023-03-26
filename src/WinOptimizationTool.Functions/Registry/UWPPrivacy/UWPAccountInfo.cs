@@ -8,7 +8,7 @@ public class UWPAccountInfo : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessAccountInfo",2),
 		};
-		return list.ToSingleResult("DisableUWPAccountInfo");
+		return list.Combine(true,"DisableUWPAccountInfo");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPAccountInfo : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessAccountInfo"),
 		};
-		return list.ToSingleResult("EnableUWPAccountInfo");
+		return list.Combine(true,"EnableUWPAccountInfo");
 	}
 }

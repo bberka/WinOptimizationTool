@@ -12,7 +12,7 @@ public class WindowsStore : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage \"Microsoft.StorePurchaseApp\" | Remove-AppxPackage"),
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage \"Microsoft.WindowsStore\" | Remove-AppxPackage"),
 		};
-		return list.ToSingleResult("UninstallWindowsStore");
+		return list.Combine(true,"UninstallWindowsStore");
 	}
     [NotImplemented]
     public static Result Install()
@@ -24,6 +24,6 @@ public class WindowsStore : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.StorePurchaseApp\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.WindowsStore\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 		};
-		return list.ToSingleResult("InstallWindowsStore");
+		return list.Combine(true,"InstallWindowsStore");
 	}
 }

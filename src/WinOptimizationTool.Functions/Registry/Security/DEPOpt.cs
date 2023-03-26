@@ -8,7 +8,7 @@ public class DEPOpt : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} nx OptOut | Out-Null"),
 		};
-		return list.ToSingleResult("SetDEPOptOut");
+		return list.Combine(true,"SetDEPOptOut");
 	}
 	public static Result SetIn()
 	{
@@ -16,6 +16,6 @@ public class DEPOpt : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} nx OptIn | Out-Null"),
 		};
-		return list.ToSingleResult("SetDEPOptIn");
+		return list.Combine(true,"SetDEPOptIn");
 	}
 }

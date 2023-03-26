@@ -8,7 +8,7 @@ public class Autorun : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoDriveTypeAutoRun",255),
 		};
-		return list.ToSingleResult("DisableAutorun");
+		return list.Combine(true,"DisableAutorun");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Autorun : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoDriveTypeAutoRun"),
 		};
-		return list.ToSingleResult("EnableAutorun");
+		return list.Combine(true,"EnableAutorun");
 	}
 }

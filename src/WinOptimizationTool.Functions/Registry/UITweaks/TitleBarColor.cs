@@ -8,7 +8,7 @@ public class TitleBarColor : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\DWM","ColorPrevalence",1),
 		};
-		return list.ToSingleResult("EnableTitleBarColor");
+		return list.Combine(true,"EnableTitleBarColor");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class TitleBarColor : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\DWM","ColorPrevalence",0),
 		};
-		return list.ToSingleResult("DisableTitleBarColor");
+		return list.Combine(true,"DisableTitleBarColor");
 	}
 }

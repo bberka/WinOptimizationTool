@@ -8,7 +8,7 @@ public class MostUsedApps : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoStartMenuMFUprogramsList",1),
 		};
-		return list.ToSingleResult("HideMostUsedApps");
+		return list.Combine(true,"HideMostUsedApps");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class MostUsedApps : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoStartMenuMFUprogramsList"),
 		};
-		return list.ToSingleResult("ShowMostUsedApps");
+		return list.Combine(true,"ShowMostUsedApps");
 	}
 }

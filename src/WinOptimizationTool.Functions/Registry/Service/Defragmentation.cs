@@ -8,7 +8,7 @@ public class Defragmentation : BaseFunction
 		{
 			TaskHelper.DisableTask(@"Microsoft\Windows\Defrag\ScheduledDefrag"),
 		};
-		return list.ToSingleResult("DisableDefragmentation");
+		return list.Combine(true,"DisableDefragmentation");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Defragmentation : BaseFunction
 		{
 			TaskHelper.EnableTask(@"Microsoft\Windows\Defrag\ScheduledDefrag"),
 		};
-		return list.ToSingleResult("EnableDefragmentation");
+		return list.Combine(true,"EnableDefragmentation");
 	}
 }

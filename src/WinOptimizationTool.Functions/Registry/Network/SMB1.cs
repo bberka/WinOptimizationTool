@@ -9,7 +9,7 @@ public class SMB1 : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force"),
 		};
-		return list.ToSingleResult("DisableSMB1");
+		return list.Combine(true,"DisableSMB1");
 	}
     [NotImplemented]
     public static Result Enable()
@@ -18,6 +18,6 @@ public class SMB1 : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-SmbServerConfiguration -EnableSMB1Protocol $true -Force"),
 		};
-		return list.ToSingleResult("EnableSMB1");
+		return list.Combine(true,"EnableSMB1");
 	}
 }

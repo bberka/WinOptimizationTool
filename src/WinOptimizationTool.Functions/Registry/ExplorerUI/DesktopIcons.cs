@@ -9,7 +9,7 @@ public class DesktopIcons : BaseFunction
 		{
 			
 		};
-		return list.ToSingleResult("HideDesktopIcons");
+		return list.Combine(true,"HideDesktopIcons");
 	}
     [NotImplemented]
     public static Result Show()
@@ -18,7 +18,7 @@ public class DesktopIcons : BaseFunction
 		{
 			
 		};
-		return list.ToSingleResult("ShowDesktopIcons");
+		return list.Combine(true,"ShowDesktopIcons");
 	}
     
 }

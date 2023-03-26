@@ -9,7 +9,7 @@ public class EdgePreload : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main","AllowPrelaunch",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader","AllowTabPreloading",0),
 		};
-		return list.ToSingleResult("DisableEdgePreload");
+		return list.Combine(true,"DisableEdgePreload");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class EdgePreload : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main", "AllowPrelaunch"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader", "AllowTabPreloading"),
 		};
-		return list.ToSingleResult("EnableEdgePreload");
+		return list.Combine(true,"EnableEdgePreload");
 	}
 }

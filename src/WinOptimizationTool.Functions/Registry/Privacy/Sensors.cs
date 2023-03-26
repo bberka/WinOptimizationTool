@@ -8,7 +8,7 @@ public class Sensors : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors","DisableSensors",1),
 		};
-		return list.ToSingleResult("DisableSensors");
+		return list.Combine(true,"DisableSensors");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Sensors : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableSensors"),
 		};
-		return list.ToSingleResult("EnableSensors");
+		return list.Combine(true,"EnableSensors");
 	}
 }

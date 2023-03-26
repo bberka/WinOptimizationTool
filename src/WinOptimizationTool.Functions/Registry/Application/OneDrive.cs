@@ -8,7 +8,7 @@ public class OneDrive : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\OneDrive","DisableFileSyncNGSC",1),
 		};
-		return list.ToSingleResult("DisableOneDrive");
+		return list.Combine(true,"DisableOneDrive");
 	}
 	public static Result Enable()
 	{
@@ -16,7 +16,7 @@ public class OneDrive : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\OneDrive", "DisableFileSyncNGSC"),
 		};
-		return list.ToSingleResult("EnableOneDrive");
+		return list.Combine(true,"EnableOneDrive");
 	}
 	[NotImplemented]
 
@@ -40,7 +40,7 @@ public class OneDrive : BaseFunction
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"),
 		};
-		return list.ToSingleResult("UninstallOneDrive");
+		return list.Combine(true,"UninstallOneDrive");
 	}
     [NotImplemented]
     public static Result Install()
@@ -51,6 +51,6 @@ public class OneDrive : BaseFunction
 			Result.MultipleErrors("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\System32\\OneDriveSetup.exe\""),
 			Result.MultipleErrors("Not Implemented","Start-Process $onedrive -NoNewWindow"),
 		};
-		return list.ToSingleResult("InstallOneDrive");
+		return list.Combine(true,"InstallOneDrive");
 	}
 }

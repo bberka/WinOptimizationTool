@@ -66,7 +66,7 @@ public class MsftBloat : BaseFunction
 			Result.MultipleErrors("Not Implemented","# Get-AppxPackage \"Microsoft.ZuneVideo\" | Remove-AppxPackage"),
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage \"Microsoft.Advertising.Xaml\" | Remove-AppxPackage # Dependency for microsoft.windowscommunicationsapps, Microsoft.BingWeather"),
 		};
-		return list.ToSingleResult("UninstallMsftBloat");
+		return list.Combine(true,"UninstallMsftBloat");
 	}
     [NotImplemented]
     public static Result Install()
@@ -132,6 +132,6 @@ public class MsftBloat : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.ZuneMusic\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.ZuneVideo\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 		};
-		return list.ToSingleResult("InstallMsftBloat");
+		return list.Combine(true,"InstallMsftBloat");
 	}
 }

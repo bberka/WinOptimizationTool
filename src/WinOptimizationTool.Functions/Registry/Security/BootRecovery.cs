@@ -8,7 +8,7 @@ public class BootRecovery : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} BootStatusPolicy IgnoreAllFailures | Out-Null"),
 		};
-		return list.ToSingleResult("DisableBootRecovery");
+		return list.Combine(true,"DisableBootRecovery");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class BootRecovery : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /deletevalue `{current`} BootStatusPolicy | Out-Null"),
 		};
-		return list.ToSingleResult("EnableBootRecovery");
+		return list.Combine(true,"EnableBootRecovery");
 	}
 }

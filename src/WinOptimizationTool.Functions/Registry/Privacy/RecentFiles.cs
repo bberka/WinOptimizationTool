@@ -8,7 +8,7 @@ public class RecentFiles : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoRecentDocsHistory",1),
 		};
-		return list.ToSingleResult("DisableRecentFiles");
+		return list.Combine(true,"DisableRecentFiles");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class RecentFiles : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoRecentDocsHistory"),
 		};
-		return list.ToSingleResult("EnableRecentFiles");
+		return list.Combine(true,"EnableRecentFiles");
 	}
 }

@@ -9,7 +9,7 @@ public class Superfetch : BaseFunction
 			ServiceHelper.StopService("SysMain"),
 			ServiceHelper.SetService("SysMain","Disabled"),
 		};
-		return list.ToSingleResult("DisableSuperfetch");
+		return list.Combine(true,"DisableSuperfetch");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class Superfetch : BaseFunction
 			ServiceHelper.SetService("SysMain","Automatic"),
 			ServiceHelper.StartService("SysMain"),
 		};
-		return list.ToSingleResult("EnableSuperfetch");
+		return list.Combine(true,"EnableSuperfetch");
 	}
 }

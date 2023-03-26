@@ -10,7 +10,7 @@ public class LLDP : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
 		};
-		return list.ToSingleResult("DisableLLDP");
+		return list.Combine(true,"DisableLLDP");
 	}
     [NotImplemented]
 
@@ -20,6 +20,6 @@ public class LLDP : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
 		};
-		return list.ToSingleResult("EnableLLDP");
+		return list.Combine(true,"EnableLLDP");
 	}
 }

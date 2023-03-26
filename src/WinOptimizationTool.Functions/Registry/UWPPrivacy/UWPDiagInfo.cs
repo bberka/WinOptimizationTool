@@ -8,7 +8,7 @@ public class UWPDiagInfo : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsGetDiagnosticInfo",2),
 		};
-		return list.ToSingleResult("DisableUWPDiagInfo");
+		return list.Combine(true,"DisableUWPDiagInfo");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPDiagInfo : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsGetDiagnosticInfo"),
 		};
-		return list.ToSingleResult("EnableUWPDiagInfo");
+		return list.Combine(true,"EnableUWPDiagInfo");
 	}
 }

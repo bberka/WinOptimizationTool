@@ -8,7 +8,7 @@ public class Biometrics : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Biometrics","Enabled",0),
 		};
-		return list.ToSingleResult("DisableBiometrics");
+		return list.Combine(true,"DisableBiometrics");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Biometrics : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Biometrics", "Enabled"),
 		};
-		return list.ToSingleResult("EnableBiometrics");
+		return list.Combine(true,"EnableBiometrics");
 	}
 }

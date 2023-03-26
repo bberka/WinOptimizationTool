@@ -8,7 +8,7 @@ public class F8BootMenu : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} BootMenuPolicy Legacy | Out-Null"),
 		};
-		return list.ToSingleResult("EnableF8BootMenu");
+		return list.Combine(true,"EnableF8BootMenu");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class F8BootMenu : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} BootMenuPolicy Standard | Out-Null"),
 		};
-		return list.ToSingleResult("DisableF8BootMenu");
+		return list.Combine(true,"DisableF8BootMenu");
 	}
 }

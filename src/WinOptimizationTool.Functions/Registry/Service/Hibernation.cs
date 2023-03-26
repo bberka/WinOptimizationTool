@@ -10,7 +10,7 @@ public class Hibernation : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings","ShowHibernateOption",1),
 			Result.MultipleErrors("Not Implemented","powercfg /HIBERNATE ON 2>&1 | Out-Null"),
 		};
-		return list.ToSingleResult("EnableHibernation");
+		return list.Combine(true,"EnableHibernation");
 	}
 	public static Result Disable()
 	{
@@ -20,6 +20,6 @@ public class Hibernation : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings","ShowHibernateOption",0),
 			Result.MultipleErrors("Not Implemented","powercfg /HIBERNATE OFF 2>&1 | Out-Null"),
 		};
-		return list.ToSingleResult("DisableHibernation");
+		return list.Combine(true,"DisableHibernation");
 	}
 }

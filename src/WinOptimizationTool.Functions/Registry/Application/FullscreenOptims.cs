@@ -11,7 +11,7 @@ public class FullscreenOptims : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_FSEBehaviorMode",2),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_HonorUserFSEBehaviorMode",1),
 		};
-		return list.ToSingleResult("DisableFullscreenOptims");
+		return list.Combine(true,"DisableFullscreenOptims");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class FullscreenOptims : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_FSEBehaviorMode",0),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"System\GameConfigStore","GameDVR_HonorUserFSEBehaviorMode",0),
 		};
-		return list.ToSingleResult("EnableFullscreenOptims");
+		return list.Combine(true,"EnableFullscreenOptims");
 	}
 }

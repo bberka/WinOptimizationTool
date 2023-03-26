@@ -11,7 +11,7 @@ public class Feedback : BaseFunction
 			TaskHelper.DisableTask(@"Microsoft\Windows\Feedback\Siuf\DmClient"),
 			TaskHelper.DisableTask(@"Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload"),
 		};
-		return list.ToSingleResult("DisableFeedback");
+		return list.Combine(true,"DisableFeedback");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class Feedback : BaseFunction
 			TaskHelper.EnableTask(@"Microsoft\Windows\Feedback\Siuf\DmClient"),
 			TaskHelper.EnableTask(@"Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload"),
 		};
-		return list.ToSingleResult("EnableFeedback");
+		return list.Combine(true,"EnableFeedback");
 	}
 }

@@ -27,7 +27,7 @@ public class AppSuggestions : BaseFunction
 			Result.MultipleErrors("Not Implemented","$key = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\CloudStore\\Store\\Cache\\DefaultAccount\\*windows.data.placeholdertilecollection\\Current\""),
 			Result.MultipleErrors("Not Implemented","Stop-Process -Name \"ShellExperienceHost\" -Force -ErrorAction SilentlyContinue"),
 		};
-		return list.ToSingleResult("DisableAppSuggestions");
+		return list.Combine(true,"DisableAppSuggestions");
 	}
 	public static Result Enable()
 	{
@@ -51,6 +51,6 @@ public class AppSuggestions : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsInkWorkspace", "AllowSuggestedAppsInWindowsInkWorkspace"),
 		};
-		return list.ToSingleResult("EnableAppSuggestions");
+		return list.Combine(true,"EnableAppSuggestions");
 	}
 }

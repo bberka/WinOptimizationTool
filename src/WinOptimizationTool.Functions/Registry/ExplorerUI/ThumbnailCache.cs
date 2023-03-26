@@ -8,7 +8,7 @@ public class ThumbnailCache : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","DisableThumbnailCache",1),
 		};
-		return list.ToSingleResult("DisableThumbnailCache");
+		return list.Combine(true,"DisableThumbnailCache");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ThumbnailCache : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisableThumbnailCache"),
 		};
-		return list.ToSingleResult("EnableThumbnailCache");
+		return list.Combine(true,"EnableThumbnailCache");
 	}
 }

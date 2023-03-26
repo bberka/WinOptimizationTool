@@ -8,7 +8,7 @@ public class UWPBackgroundApps : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsRunInBackground",2),
 		};
-		return list.ToSingleResult("DisableUWPBackgroundApps");
+		return list.Combine(true,"DisableUWPBackgroundApps");
 	}
 	public static Result Enable()
 	{
@@ -17,6 +17,6 @@ public class UWPBackgroundApps : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsRunInBackground"),
 			Result.MultipleErrors("Not Implemented","Get-ChildItem -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" | ForEach-Object {"),
 		};
-		return list.ToSingleResult("EnableUWPBackgroundApps");
+		return list.Combine(true,"EnableUWPBackgroundApps");
 	}
 }

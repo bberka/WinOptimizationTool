@@ -8,7 +8,7 @@ public class RecycleBin : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoRecycleFiles",1),
 		};
-		return list.ToSingleResult("DisableRecycleBin");
+		return list.Combine(true,"DisableRecycleBin");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class RecycleBin : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoRecycleFiles"),
 		};
-		return list.ToSingleResult("EnableRecycleBin");
+		return list.Combine(true,"EnableRecycleBin");
 	}
 }

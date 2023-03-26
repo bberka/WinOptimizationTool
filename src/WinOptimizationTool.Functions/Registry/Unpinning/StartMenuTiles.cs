@@ -10,6 +10,6 @@ public class StartMenuTiles : BaseFunction
 			Result.MultipleErrors("Not Implemented","$data = (Get-ItemProperty -Path \"$($_.PsPath)\\Current\" -Name \"Data\").Data -Join \",\""),
 			Result.MultipleErrors("Not Implemented","$data = $data.Substring(0, $data.IndexOf(\",0,202,30\") + 9) + \",0,202,80,0,0\""),
 		};
-		return list.ToSingleResult("UnpinStartMenuTiles");
+		return list.Combine(true,"UnpinStartMenuTiles");
 	}
 }

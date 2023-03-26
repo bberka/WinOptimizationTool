@@ -10,7 +10,7 @@ public class InternetExplorer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -like \"Internet-Explorer-Optional*\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Browser.InternetExplorer*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallInternetExplorer");
+		return list.Combine(true,"UninstallInternetExplorer");
 	}
     [NotImplemented]
     public static Result InstallIn()
@@ -20,6 +20,6 @@ public class InternetExplorer : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -like \"Internet-Explorer-Optional*\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Browser.InternetExplorer*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallInternetExplorer");
+		return list.Combine(true,"InstallInternetExplorer");
 	}
 }

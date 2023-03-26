@@ -12,7 +12,7 @@ public class PhotoViewerOpenWith : BaseFunction
 			
 			RegHelper.SetString(RegistryHive.ClassesRoot,@"Applications\photoviewer.dll\shell\open\DropTarget","Clsid",@"{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}"),
 		};
-		return list.ToSingleResult("AddPhotoViewerOpenWith");
+		return list.Combine(true,"AddPhotoViewerOpenWith");
 	}
     [NotImplemented]
     public static Result Remove()
@@ -22,6 +22,6 @@ public class PhotoViewerOpenWith : BaseFunction
 			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Applications\photoviewer.dll\shell\open"),
 		};
-		return list.ToSingleResult("RemovePhotoViewerOpenWith");
+		return list.Combine(true,"RemovePhotoViewerOpenWith");
 	}
 }

@@ -9,6 +9,6 @@ public class TaskbarIcons : BaseFunction
 			
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband", "FavoritesResolve"),
 		};
-		return list.ToSingleResult("UnpinTaskbarIcons");
+		return list.Combine(true,"UnpinTaskbarIcons");
 	}
 }

@@ -10,7 +10,7 @@ public class FaxAndScan : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallFaxAndScan");
+		return list.Combine(true,"UninstallFaxAndScan");
 	}
     [NotImplemented]
     public static Result Install()
@@ -20,6 +20,6 @@ public class FaxAndScan : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallFaxAndScan");
+		return list.Combine(true,"InstallFaxAndScan");
 	}
 }

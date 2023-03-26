@@ -10,7 +10,7 @@ public class MSNetClient : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
 		};
-		return list.ToSingleResult("DisableMSNetClient");
+		return list.Combine(true,"DisableMSNetClient");
 	}
     [NotImplemented]
 
@@ -20,6 +20,6 @@ public class MSNetClient : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
 		};
-		return list.ToSingleResult("EnableMSNetClient");
+		return list.Combine(true,"EnableMSNetClient");
 	}
 }

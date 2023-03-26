@@ -8,7 +8,7 @@ public class UWPTasks : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessTasks",2),
 		};
-		return list.ToSingleResult("DisableUWPTasks");
+		return list.Combine(true,"DisableUWPTasks");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPTasks : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessTasks"),
 		};
-		return list.ToSingleResult("EnableUWPTasks");
+		return list.Combine(true,"EnableUWPTasks");
 	}
 }

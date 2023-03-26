@@ -11,7 +11,7 @@ public class HomeGroups : BaseFunction
 			ServiceHelper.StopService("HomeGroupProvider"),
 			ServiceHelper.SetService("HomeGroupProvider","Disabled"),
 		};
-		return list.ToSingleResult("DisableHomeGroups");
+		return list.Combine(true,"DisableHomeGroups");
 	}
 	public static Result Enable()
 	{
@@ -21,6 +21,6 @@ public class HomeGroups : BaseFunction
 			ServiceHelper.SetService("HomeGroupProvider","Manual"),
 			ServiceHelper.StartService("HomeGroupProvider"),
 		};
-		return list.ToSingleResult("EnableHomeGroups");
+		return list.Combine(true,"EnableHomeGroups");
 	}
 }

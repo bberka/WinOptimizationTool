@@ -12,7 +12,7 @@ public class GiveAccessToMenu : BaseFunction
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\Sharing"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Drive\shellex\ContextMenuHandlers\Sharing"),
 		};
-		return list.ToSingleResult("HideGiveAccessToMenu");
+		return list.Combine(true,"HideGiveAccessToMenu");
 	}
 	public static Result Show()
 	{
@@ -24,6 +24,6 @@ public class GiveAccessToMenu : BaseFunction
 			RegHelper.SetString(RegistryHive.ClassesRoot,@"Directory\shellex\ContextMenuHandlers\Sharing","(Default)",@"{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}"),
 			RegHelper.SetString(RegistryHive.ClassesRoot,@"Drive\shellex\ContextMenuHandlers\Sharing","(Default)",@"{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}"),
 		};
-		return list.ToSingleResult("ShowGiveAccessToMenu");
+		return list.Combine(true,"ShowGiveAccessToMenu");
 	}
 }

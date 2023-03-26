@@ -8,7 +8,7 @@ public class DownloadBlocking : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Policies\Attachments","SaveZoneInformation",1),
 		};
-		return list.ToSingleResult("DisableDownloadBlocking");
+		return list.Combine(true,"DisableDownloadBlocking");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class DownloadBlocking : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation"),
 		};
-		return list.ToSingleResult("EnableDownloadBlocking");
+		return list.Combine(true,"EnableDownloadBlocking");
 	}
 }

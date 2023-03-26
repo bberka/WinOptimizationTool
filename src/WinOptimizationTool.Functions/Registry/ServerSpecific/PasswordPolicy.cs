@@ -12,7 +12,7 @@ public class PasswordPolicy : BaseFunction
 			Result.MultipleErrors("Not Implemented","secedit /configure /db \"$env:SYSTEMROOT\\security\\database\\local.sdb\" /cfg $tmpfile /areas SECURITYPOLICY | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Remove-Item -Path $tmpfile"),
 		};
-		return list.ToSingleResult("DisablePasswordPolicy");
+		return list.Combine(true,"DisablePasswordPolicy");
 	}
 	public static Result Enable()
 	{
@@ -24,6 +24,6 @@ public class PasswordPolicy : BaseFunction
 			Result.MultipleErrors("Not Implemented","secedit /configure /db \"$env:SYSTEMROOT\\security\\database\\local.sdb\" /cfg $tmpfile /areas SECURITYPOLICY | Out-Null"),
 			Result.MultipleErrors("Not Implemented","Remove-Item -Path $tmpfile"),
 		};
-		return list.ToSingleResult("EnablePasswordPolicy");
+		return list.Combine(true,"EnablePasswordPolicy");
 	}
 }

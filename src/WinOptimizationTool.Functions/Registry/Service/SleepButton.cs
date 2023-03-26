@@ -10,7 +10,7 @@ public class SleepButton : BaseFunction
 			Result.MultipleErrors("Not Implemented","powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 0"),
 			Result.MultipleErrors("Not Implemented","powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 0"),
 		};
-		return list.ToSingleResult("DisableSleepButton");
+		return list.Combine(true,"DisableSleepButton");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class SleepButton : BaseFunction
 			Result.MultipleErrors("Not Implemented","powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 1"),
 			Result.MultipleErrors("Not Implemented","powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 1"),
 		};
-		return list.ToSingleResult("EnableSleepButton");
+		return list.Combine(true,"EnableSleepButton");
 	}
 }

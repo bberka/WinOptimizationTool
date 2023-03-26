@@ -8,7 +8,7 @@ public class UWPCallHistory : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessCallHistory",2),
 		};
-		return list.ToSingleResult("DisableUWPCallHistory");
+		return list.Combine(true,"DisableUWPCallHistory");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPCallHistory : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCallHistory"),
 		};
-		return list.ToSingleResult("EnableUWPCallHistory");
+		return list.Combine(true,"EnableUWPCallHistory");
 	}
 }

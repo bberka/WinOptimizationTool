@@ -8,7 +8,7 @@ public class ThumbsDBOnNetwork : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","DisableThumbsDBOnNetworkFolders",1),
 		};
-		return list.ToSingleResult("DisableThumbsDBOnNetwork");
+		return list.Combine(true,"DisableThumbsDBOnNetwork");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ThumbsDBOnNetwork : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisableThumbsDBOnNetworkFolders"),
 		};
-		return list.ToSingleResult("EnableThumbsDBOnNetwork");
+		return list.Combine(true,"EnableThumbsDBOnNetwork");
 	}
 }

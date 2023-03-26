@@ -9,7 +9,7 @@ public class Audio : BaseFunction
 			ServiceHelper.SetService("Audiosrv","Automatic"),
 			ServiceHelper.StartService("Audiosrv"),
 		};
-		return list.ToSingleResult("EnableAudio");
+		return list.Combine(true,"EnableAudio");
 	}
 	public static Result Disable()
 	{
@@ -18,6 +18,6 @@ public class Audio : BaseFunction
 			ServiceHelper.StopService("Audiosrv"),
 			ServiceHelper.SetService("Audiosrv","Manual"),
 		};
-		return list.ToSingleResult("DisableAudio");
+		return list.Combine(true,"DisableAudio");
 	}
 }

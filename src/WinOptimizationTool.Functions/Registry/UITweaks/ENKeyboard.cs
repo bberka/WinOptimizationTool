@@ -12,7 +12,7 @@ public class ENKeyboard : BaseFunction
 			Result.MultipleErrors("Not Implemented","$langs.Add(\"en-US\")"),
 			Result.MultipleErrors("Not Implemented","Set-WinUserLanguageList $langs -Force"),
 		};
-		return list.ToSingleResult("AddENKeyboard");
+		return list.Combine(true,"AddENKeyboard");
 	}
 	[DisplayName("Remove EN Keyboard")]
 	public static Result Remove()
@@ -22,6 +22,6 @@ public class ENKeyboard : BaseFunction
 			Result.MultipleErrors("Not Implemented","$langs = Get-WinUserLanguageList"),
 			Result.MultipleErrors("Not Implemented","Set-WinUserLanguageList ($langs | Where-Object {$_.LanguageTag -ne \"en-US\"}) -Force"),
 		};
-		return list.ToSingleResult("RemoveENKeyboard");
+		return list.Combine(true,"RemoveENKeyboard");
 	}
 }

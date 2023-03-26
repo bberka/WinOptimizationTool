@@ -8,7 +8,7 @@ public class UWPEmail : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessEmail",2),
 		};
-		return list.ToSingleResult("DisableUWPEmail");
+		return list.Combine(true,"DisableUWPEmail");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPEmail : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessEmail"),
 		};
-		return list.ToSingleResult("EnableUWPEmail");
+		return list.Combine(true,"EnableUWPEmail");
 	}
 }

@@ -54,7 +54,7 @@ public class FileParser
 		//		}
 
 		//		b.AppendLine("		};");
-		//		b.AppendLine($"		return list.ToSingleResult(\"{item.FuncName}\");");
+		//		b.AppendLine($"		return list.Combine(\"{item.FuncName}\");");
 		//		b.AppendLine("	}");
 		//	}
 		//	const string line4 = "}";
@@ -103,7 +103,7 @@ public class FileParser
                     }
 
                     b.AppendLine("		};");
-                    b.AppendLine($"		return list.ToSingleResult(\"{item.FuncName}\");");
+                    b.AppendLine($"		return list.Combine(\"{item.FuncName}\");");
                     b.AppendLine("	}");
                 }
                 const string line5 = "}";

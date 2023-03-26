@@ -11,7 +11,7 @@ public class PhotoViewerAssociation : BaseFunction
 			
 			
 		};
-		return list.ToSingleResult("SetPhotoViewerAssociation");
+		return list.Combine(true,"SetPhotoViewerAssociation");
 	}
     [NotImplemented]
     public static Result Unset()
@@ -27,6 +27,6 @@ public class PhotoViewerAssociation : BaseFunction
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"jpegfile\shell\open"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"pngfile\shell\open"),
 		};
-		return list.ToSingleResult("UnsetPhotoViewerAssociation");
+		return list.Combine(true,"UnsetPhotoViewerAssociation");
 	}
 }

@@ -8,7 +8,7 @@ public class KnownExtensions : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","HideFileExt",0),
 		};
-		return list.ToSingleResult("ShowKnownExtensions");
+		return list.Combine(true,"ShowKnownExtensions");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class KnownExtensions : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","HideFileExt",1),
 		};
-		return list.ToSingleResult("HideKnownExtensions");
+		return list.Combine(true,"HideKnownExtensions");
 	}
 }

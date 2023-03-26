@@ -10,7 +10,7 @@ public class ActivityHistory : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\System","PublishUserActivities",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\System","UploadUserActivities",0),
 		};
-		return list.ToSingleResult("DisableActivityHistory");
+		return list.Combine(true,"DisableActivityHistory");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class ActivityHistory : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "PublishUserActivities"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "UploadUserActivities"),
 		};
-		return list.ToSingleResult("EnableActivityHistory");
+		return list.Combine(true,"EnableActivityHistory");
 	}
 }

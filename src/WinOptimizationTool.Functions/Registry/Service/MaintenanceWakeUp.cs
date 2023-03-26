@@ -9,7 +9,7 @@ public class MaintenanceWakeUp : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU","AUPowerManagement",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance","WakeUp",0),
 		};
-		return list.ToSingleResult("DisableMaintenanceWakeUp");
+		return list.Combine(true,"DisableMaintenanceWakeUp");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class MaintenanceWakeUp : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "AUPowerManagement"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance", "WakeUp"),
 		};
-		return list.ToSingleResult("EnableMaintenanceWakeUp");
+		return list.Combine(true,"EnableMaintenanceWakeUp");
 	}
 }

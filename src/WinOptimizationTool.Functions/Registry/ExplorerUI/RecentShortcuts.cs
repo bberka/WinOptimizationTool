@@ -9,7 +9,7 @@ public class RecentShortcuts : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer","ShowRecent",0),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer","ShowFrequent",0),
 		};
-		return list.ToSingleResult("HideRecentShortcuts");
+		return list.Combine(true,"HideRecentShortcuts");
 	}
 	public static Result Show()
 	{
@@ -18,6 +18,6 @@ public class RecentShortcuts : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "ShowRecent"),
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "ShowFrequent"),
 		};
-		return list.ToSingleResult("ShowRecentShortcuts");
+		return list.Combine(true,"ShowRecentShortcuts");
 	}
 }

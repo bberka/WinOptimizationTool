@@ -9,7 +9,7 @@ public class PDFPrinter : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallPDFPrinter");
+		return list.Combine(true,"UninstallPDFPrinter");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class PDFPrinter : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("InstallPDFPrinter");
+		return list.Combine(true,"InstallPDFPrinter");
 	}
 }

@@ -8,7 +8,7 @@ public class ShutdownTracker : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows NT\Reliability","ShutdownReasonOn",0),
 		};
-		return list.ToSingleResult("DisableShutdownTracker");
+		return list.Combine(true,"DisableShutdownTracker");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ShutdownTracker : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "ShutdownReasonOn"),
 		};
-		return list.ToSingleResult("EnableShutdownTracker");
+		return list.Combine(true,"EnableShutdownTracker");
 	}
 }

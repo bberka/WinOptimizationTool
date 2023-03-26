@@ -9,7 +9,7 @@ public class XPSPrinter : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-XPSServices-Features\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallXPSPrinter");
+		return list.Combine(true,"UninstallXPSPrinter");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class XPSPrinter : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-XPSServices-Features\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("InstallXPSPrinter");
+		return list.Combine(true,"InstallXPSPrinter");
 	}
 }

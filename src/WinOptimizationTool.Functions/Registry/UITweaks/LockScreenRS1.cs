@@ -18,7 +18,7 @@ public class LockScreenRS1 : BaseFunction
 			Result.MultipleErrors("Not Implemented","$action.Arguments = \"add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\SessionData /t REG_DWORD /v AllowLockScreen /d 0 /f\""),
 			Result.MultipleErrors("Not Implemented","$service.GetFolder(\"\\\").RegisterTaskDefinition(\"Disable LockScreen\", $task, 6, \"NT AUTHORITY\\SYSTEM\", $null, 4) | Out-Null"),
 		};
-		return list.ToSingleResult("DisableLockScreenRS1");
+		return list.Combine(true,"DisableLockScreenRS1");
 	}
 	public static Result Enable()
 	{
@@ -26,6 +26,6 @@ public class LockScreenRS1 : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Unregister-ScheduledTask -TaskName \"Disable LockScreen\" -Confirm:$false -ErrorAction SilentlyContinue"),
 		};
-		return list.ToSingleResult("EnableLockScreenRS1");
+		return list.Combine(true,"EnableLockScreenRS1");
 	}
 }

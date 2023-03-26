@@ -8,7 +8,7 @@ public class Microphone : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessMicrophone",2),
 		};
-		return list.ToSingleResult("DisableMicrophone");
+		return list.Combine(true,"DisableMicrophone");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Microphone : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessMicrophone"),
 		};
-		return list.ToSingleResult("EnableMicrophone");
+		return list.Combine(true,"EnableMicrophone");
 	}
 }

@@ -8,7 +8,7 @@ public class NetworkOnExplorer : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\NonEnum","{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}",1),
 		};
-		return list.ToSingleResult("HideNetworkFromExplorer");
+		return list.Combine(true,"HideNetworkFromExplorer");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class NetworkOnExplorer : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\NonEnum", "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"),
 		};
-		return list.ToSingleResult("ShowNetworkInExplorer");
+		return list.Combine(true,"ShowNetworkInExplorer");
 	}
 }

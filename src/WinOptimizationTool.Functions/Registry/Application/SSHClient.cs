@@ -9,7 +9,7 @@ public class SSHClient : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Client*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallSSHClient");
+		return list.Combine(true,"UninstallSSHClient");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class SSHClient : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Client*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallSSHClient");
+		return list.Combine(true,"InstallSSHClient");
 	}
 }

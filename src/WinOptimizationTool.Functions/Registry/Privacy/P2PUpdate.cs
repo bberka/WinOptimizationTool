@@ -9,7 +9,7 @@ public class P2PUpdate : BaseFunction
 			Result.MultipleErrors("Not Implemented","# Method used in 1507"),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config","DODownloadMode",1),
 		};
-		return list.ToSingleResult("SetP2PUpdateLocal");
+		return list.Combine(true,"SetP2PUpdateLocal");
 	}
 	public static Result SetDisable()
 	{
@@ -18,7 +18,7 @@ public class P2PUpdate : BaseFunction
 			Result.MultipleErrors("Not Implemented","# Method used in 1507"),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config","DODownloadMode",0),
 		};
-		return list.ToSingleResult("SetP2PUpdateDisable");
+		return list.Combine(true,"SetP2PUpdateDisable");
 	}
     public static Result SetInternet()
     {
@@ -27,6 +27,6 @@ public class P2PUpdate : BaseFunction
             Result.MultipleErrors("Not Implemented","# Method used in 1507"),
             RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config","DODownloadMode",3),
         };
-        return list.ToSingleResult("SetP2PUpdateInternet");
+        return list.Combine(true,"SetP2PUpdateInternet");
     }
 }

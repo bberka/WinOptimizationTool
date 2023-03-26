@@ -9,7 +9,7 @@ public class WorkFolders : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallWorkFolders");
+		return list.Combine(true,"UninstallWorkFolders");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class WorkFolders : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.ToSingleResult("InstallWorkFolders");
+		return list.Combine(true,"InstallWorkFolders");
 	}
 }

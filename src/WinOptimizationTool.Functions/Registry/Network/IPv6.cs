@@ -10,7 +10,7 @@ public class IPv6 : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
 		};
-		return list.ToSingleResult("DisableIPv6");
+		return list.Combine(true,"DisableIPv6");
 	}
     [NotImplemented]
 
@@ -20,6 +20,6 @@ public class IPv6 : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
 		};
-		return list.ToSingleResult("EnableIPv6");
+		return list.Combine(true,"EnableIPv6");
 	}
 }

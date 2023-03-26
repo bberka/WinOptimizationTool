@@ -51,6 +51,6 @@ public class ThirdPartyBloat : BaseFunction
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"WinZipComputing.WinZipUniversal\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"XINGAG.XING\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 		};
-		return list.ToSingleResult("InstallThirdPartyBloat");
+		return list.Combine(true,"InstallThirdPartyBloat");
 	}
 }

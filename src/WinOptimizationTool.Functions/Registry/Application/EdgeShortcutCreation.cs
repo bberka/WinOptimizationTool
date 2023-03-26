@@ -8,7 +8,7 @@ public class EdgeShortcutCreation : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer","DisableEdgeDesktopShortcutCreation",1),
 		};
-		return list.ToSingleResult("DisableEdgeShortcutCreation");
+		return list.Combine(true,"DisableEdgeShortcutCreation");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class EdgeShortcutCreation : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "DisableEdgeDesktopShortcutCreation"),
 		};
-		return list.ToSingleResult("EnableEdgeShortcutCreation");
+		return list.Combine(true,"EnableEdgeShortcutCreation");
 	}
 }

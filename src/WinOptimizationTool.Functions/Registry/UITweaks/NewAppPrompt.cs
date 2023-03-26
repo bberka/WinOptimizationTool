@@ -8,7 +8,7 @@ public class NewAppPrompt : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Explorer","NoNewAppAlert",1),
 		};
-		return list.ToSingleResult("DisableNewAppPrompt");
+		return list.Combine(true,"DisableNewAppPrompt");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class NewAppPrompt : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "NoNewAppAlert"),
 		};
-		return list.ToSingleResult("EnableNewAppPrompt");
+		return list.Combine(true,"EnableNewAppPrompt");
 	}
 }

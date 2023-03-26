@@ -8,7 +8,7 @@ public class FolderSeparateProcess : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","SeparateProcess",1),
 		};
-		return list.ToSingleResult("EnableFolderSeparateProcess");
+		return list.Combine(true,"EnableFolderSeparateProcess");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class FolderSeparateProcess : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","SeparateProcess",0),
 		};
-		return list.ToSingleResult("DisableFolderSeparateProcess");
+		return list.Combine(true,"DisableFolderSeparateProcess");
 	}
 }

@@ -11,7 +11,7 @@ public class LLTD : BaseFunction
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lltdio\""),
 			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_rspndr\""),
 		};
-		return list.ToSingleResult("DisableLLTD");
+		return list.Combine(true,"DisableLLTD");
 	}
     [NotImplemented]
 
@@ -22,6 +22,6 @@ public class LLTD : BaseFunction
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lltdio\""),
 			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_rspndr\""),
 		};
-		return list.ToSingleResult("EnableLLTD");
+		return list.Combine(true,"EnableLLTD");
 	}
 }

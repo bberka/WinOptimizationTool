@@ -8,7 +8,7 @@ public class NCSIProbe : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator","NoActiveProbe",1),
 		};
-		return list.ToSingleResult("DisableNCSIProbe");
+		return list.Combine(true,"DisableNCSIProbe");
 	}
 
 	public static Result Enable()
@@ -17,6 +17,6 @@ public class NCSIProbe : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe"),
 		};
-		return list.ToSingleResult("EnableNCSIProbe");
+		return list.Combine(true,"EnableNCSIProbe");
 	}
 }

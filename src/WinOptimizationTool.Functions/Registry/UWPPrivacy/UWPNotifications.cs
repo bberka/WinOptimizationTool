@@ -8,7 +8,7 @@ public class UWPNotifications : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessNotifications",2),
 		};
-		return list.ToSingleResult("DisableUWPNotifications");
+		return list.Combine(true,"DisableUWPNotifications");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPNotifications : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessNotifications"),
 		};
-		return list.ToSingleResult("EnableUWPNotifications");
+		return list.Combine(true,"EnableUWPNotifications");
 	}
 }

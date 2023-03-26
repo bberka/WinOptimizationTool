@@ -12,7 +12,7 @@ public class Numlock : BaseFunction
 			Result.MultipleErrors("Not Implemented","$wsh = New-Object -ComObject WScript.Shell"),
 			Result.MultipleErrors("Not Implemented","$wsh.SendKeys('{NUMLOCK}')"),
 		};
-		return list.ToSingleResult("EnableNumlock");
+		return list.Combine(true,"EnableNumlock");
 	}
 	public static Result Disable()
 	{
@@ -24,6 +24,6 @@ public class Numlock : BaseFunction
 			Result.MultipleErrors("Not Implemented","$wsh = New-Object -ComObject WScript.Shell"),
 			Result.MultipleErrors("Not Implemented","$wsh.SendKeys('{NUMLOCK}')"),
 		};
-		return list.ToSingleResult("DisableNumlock");
+		return list.Combine(true,"DisableNumlock");
 	}
 }

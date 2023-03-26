@@ -8,7 +8,7 @@ public class EncCompFilesColor : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","ShowEncryptCompressedColor",1),
 		};
-		return list.ToSingleResult("ShowEncCompFilesColor");
+		return list.Combine(true,"ShowEncCompFilesColor");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class EncCompFilesColor : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowEncryptCompressedColor"),
 		};
-		return list.ToSingleResult("HideEncCompFilesColor");
+		return list.Combine(true,"HideEncCompFilesColor");
 	}
 }

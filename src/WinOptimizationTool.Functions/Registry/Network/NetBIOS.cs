@@ -8,7 +8,7 @@ public class NetBIOS : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\Tcpip*","NetbiosOptions",2),
 		};
-		return list.ToSingleResult("DisableNetBIOS");
+		return list.Combine(true,"DisableNetBIOS");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class NetBIOS : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces\Tcpip*","NetbiosOptions",0),
 		};
-		return list.ToSingleResult("EnableNetBIOS");
+		return list.Combine(true,"EnableNetBIOS");
 	}
 }

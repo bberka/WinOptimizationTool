@@ -8,7 +8,7 @@ public class FirstLogonAnimation : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","EnableFirstLogonAnimation",0),
 		};
-		return list.ToSingleResult("DisableFirstLogonAnimation");
+		return list.Combine(true,"DisableFirstLogonAnimation");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class FirstLogonAnimation : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableFirstLogonAnimation"),
 		};
-		return list.ToSingleResult("EnableFirstLogonAnimation");
+		return list.Combine(true,"EnableFirstLogonAnimation");
 	}
 }

@@ -9,7 +9,7 @@ public class HelloFace : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("UninstallHelloFace");
+		return list.Combine(true,"UninstallHelloFace");
 	}
     [NotImplemented]
     public static Result Install()
@@ -18,6 +18,6 @@ public class HelloFace : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.ToSingleResult("InstallHelloFace");
+		return list.Combine(true,"InstallHelloFace");
 	}
 }

@@ -8,7 +8,7 @@ public class NavPanelAllFolders : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","NavPaneShowAllFolders",1),
 		};
-		return list.ToSingleResult("ShowNavPaneAllFolders");
+		return list.Combine(true,"ShowNavPaneAllFolders");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class NavPanelAllFolders : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "NavPaneShowAllFolders"),
 		};
-		return list.ToSingleResult("HideNavPaneAllFolders");
+		return list.Combine(true,"HideNavPaneAllFolders");
 	}
 }

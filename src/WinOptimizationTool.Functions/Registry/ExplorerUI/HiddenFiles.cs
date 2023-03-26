@@ -8,7 +8,7 @@ public class HiddenFiles : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","Hidden",1),
 		};
-		return list.ToSingleResult("ShowHiddenFiles");
+		return list.Combine(true,"ShowHiddenFiles");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class HiddenFiles : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","Hidden",2),
 		};
-		return list.ToSingleResult("HideHiddenFiles");
+		return list.Combine(true,"HideHiddenFiles");
 	}
 }

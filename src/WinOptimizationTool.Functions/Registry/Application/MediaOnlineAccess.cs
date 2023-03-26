@@ -11,7 +11,7 @@ public class MediaOnlineAccess : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"SOFTWARE\Policies\Microsoft\WindowsMediaPlayer","PreventRadioPresetsRetrieval",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\WMDRM","DisableOnline",1),
 		};
-		return list.ToSingleResult("DisableMediaOnlineAccess");
+		return list.Combine(true,"DisableMediaOnlineAccess");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class MediaOnlineAccess : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"SOFTWARE\Policies\Microsoft\WindowsMediaPlayer", "PreventRadioPresetsRetrieval"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WMDRM", "DisableOnline"),
 		};
-		return list.ToSingleResult("EnableMediaOnlineAccess");
+		return list.Combine(true,"EnableMediaOnlineAccess");
 	}
 }

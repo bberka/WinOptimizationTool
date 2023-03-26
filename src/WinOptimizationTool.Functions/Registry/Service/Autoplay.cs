@@ -8,7 +8,7 @@ public class Autoplay : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers","DisableAutoplay",1),
 		};
-		return list.ToSingleResult("DisableAutoplay");
+		return list.Combine(true,"DisableAutoplay");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Autoplay : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers","DisableAutoplay",0),
 		};
-		return list.ToSingleResult("EnableAutoplay");
+		return list.Combine(true,"EnableAutoplay");
 	}
 }

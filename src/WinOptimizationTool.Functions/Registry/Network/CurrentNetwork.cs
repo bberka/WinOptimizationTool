@@ -9,7 +9,7 @@ public class CurrentNetwork : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-NetConnectionProfile -NetworkCategory Private"),
 		};
-		return list.ToSingleResult("SetCurrentNetworkPrivate");
+		return list.Combine(true,"SetCurrentNetworkPrivate");
 	}
     [NotImplemented]
     public static Result SetPublic()
@@ -18,6 +18,6 @@ public class CurrentNetwork : BaseFunction
 		{
 			Result.MultipleErrors("Not Implemented","Set-NetConnectionProfile -NetworkCategory Public"),
 		};
-		return list.ToSingleResult("SetCurrentNetworkPublic");
+		return list.Combine(true,"SetCurrentNetworkPublic");
 	}
 }

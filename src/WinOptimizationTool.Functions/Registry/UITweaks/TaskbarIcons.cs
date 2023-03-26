@@ -8,7 +8,7 @@ public class TaskbarIcons : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","TaskbarSmallIcons",1),
 		};
-		return list.ToSingleResult("ShowSmallTaskbarIcons");
+		return list.Combine(true,"ShowSmallTaskbarIcons");
 	}
     public static Result ShowLarge()
     {
@@ -16,6 +16,6 @@ public class TaskbarIcons : BaseFunction
         {
             RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarSmallIcons"),
         };
-        return list.ToSingleResult("ShowLargeTaskbarIcons");
+        return list.Combine(true,"ShowLargeTaskbarIcons");
     }
 }
