@@ -9,7 +9,7 @@ public class TaskbarCombine : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarGlomLevel"),
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "MMTaskbarGlomLevel"),
 		};
-		return list.Combine(true,"SetTaskbarCombineAlways");
+		return list.CombineAll("SetTaskbarCombineAlways");
 	}
     public static Result Never()
     {
@@ -18,7 +18,7 @@ public class TaskbarCombine : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","TaskbarGlomLevel",2),
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","MMTaskbarGlomLevel",2),
         };
-        return list.Combine(true,"SetTaskbarCombineNever");
+        return list.CombineAll("SetTaskbarCombineNever");
     }
     public static Result WhenFull()
     {
@@ -27,6 +27,6 @@ public class TaskbarCombine : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","TaskbarGlomLevel",1),
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","MMTaskbarGlomLevel",1),
         };
-        return list.Combine(true,"SetTaskbarCombineWhenFull");
+        return list.CombineAll("SetTaskbarCombineWhenFull");
     }
 }

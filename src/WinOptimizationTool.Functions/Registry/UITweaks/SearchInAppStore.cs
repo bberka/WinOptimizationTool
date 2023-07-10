@@ -8,7 +8,7 @@ public class SearchInAppStore : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Explorer","NoUseStoreOpenWith",1),
 		};
-		return list.Combine(true,"DisableSearchAppInStore");
+		return list.CombineAll("DisableSearchAppInStore");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class SearchInAppStore : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "NoUseStoreOpenWith"),
 		};
-		return list.Combine(true,"EnableSearchAppInStore");
+		return list.CombineAll("EnableSearchAppInStore");
 	}
 }

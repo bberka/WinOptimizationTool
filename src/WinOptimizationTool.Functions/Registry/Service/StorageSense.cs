@@ -9,7 +9,7 @@ public class StorageSense : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy","01",1),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy","StoragePoliciesNotified",1),
 		};
-		return list.Combine(true,"EnableStorageSense");
+		return list.CombineAll("EnableStorageSense");
 	}
 	public static Result Disable()
 	{
@@ -17,6 +17,6 @@ public class StorageSense : BaseFunction
 		{
 			RegHelper.DeletePath(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy"),
 		};
-		return list.Combine(true,"DisableStorageSense");
+		return list.CombineAll("DisableStorageSense");
 	}
 }

@@ -8,7 +8,7 @@ public class TrayIcons : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer","NoAutoTrayNotify",1),
 		};
-		return list.Combine(true,"ShowTrayIcons");
+		return list.CombineAll("ShowTrayIcons");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class TrayIcons : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoAutoTrayNotify"),
 		};
-		return list.Combine(true,"HideTrayIcons");
+		return list.CombineAll("HideTrayIcons");
 	}
 }

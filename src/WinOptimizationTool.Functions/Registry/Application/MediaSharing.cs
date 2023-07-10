@@ -8,7 +8,7 @@ public class MediaSharing : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\WindowsMediaPlayer","PreventLibrarySharing",1),
 		};
-		return list.Combine(true,"DisableMediaSharing");
+		return list.CombineAll("DisableMediaSharing");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class MediaSharing : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsMediaPlayer", "PreventLibrarySharing"),
 		};
-		return list.Combine(true,"EnableMediaSharing");
+		return list.CombineAll("EnableMediaSharing");
 	}
 }

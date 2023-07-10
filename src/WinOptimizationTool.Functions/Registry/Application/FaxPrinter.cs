@@ -7,17 +7,17 @@ public class FaxPrinter : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Remove-Printer -Name \"Fax\" -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Remove-Printer -Name \"Fax\" -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"RemoveFaxPrinter");
+		return list.CombineAll("RemoveFaxPrinter");
 	}
     [NotImplemented]
     public static Result Add()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Add-Printer -Name \"Fax\" -DriverName \"Microsoft Shared Fax Driver\" -PortName \"SHRFAX:\" -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Add-Printer -Name \"Fax\" -DriverName \"Microsoft Shared Fax Driver\" -PortName \"SHRFAX:\" -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"AddFaxPrinter");
+		return list.CombineAll("AddFaxPrinter");
 	}
 }

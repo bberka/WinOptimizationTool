@@ -8,7 +8,7 @@ public class AdvertisingID : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo","DisabledByGroupPolicy",1),
 		};
-		return list.Combine(true,"DisableAdvertisingID");
+		return list.CombineAll("DisableAdvertisingID");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class AdvertisingID : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo", "DisabledByGroupPolicy"),
 		};
-		return list.Combine(true,"EnableAdvertisingID");
+		return list.CombineAll("EnableAdvertisingID");
 	}
 }

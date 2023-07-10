@@ -9,7 +9,7 @@ public class WAPPush : BaseFunction
 			ServiceHelper.StopService("dmwappushservice"),
 			ServiceHelper.SetService("dmwappushservice","Disabled"),
 		};
-		return list.Combine(true,"DisableWAPPush");
+		return list.CombineAll("DisableWAPPush");
 	}
 	public static Result Enable()
 	{
@@ -19,6 +19,6 @@ public class WAPPush : BaseFunction
 			ServiceHelper.StartService("dmwappushservice"),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Services\dmwappushservice","DelayedAutoStart",1),
 		};
-		return list.Combine(true,"EnableWAPPush");
+		return list.CombineAll("EnableWAPPush");
 	}
 }

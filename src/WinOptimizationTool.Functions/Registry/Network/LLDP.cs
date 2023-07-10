@@ -8,9 +8,9 @@ public class LLDP : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
+			Result.Error("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
 		};
-		return list.Combine(true,"DisableLLDP");
+		return list.CombineAll("DisableLLDP");
 	}
     [NotImplemented]
 
@@ -18,8 +18,8 @@ public class LLDP : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
+			Result.Error("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_lldp\""),
 		};
-		return list.Combine(true,"EnableLLDP");
+		return list.CombineAll("EnableLLDP");
 	}
 }

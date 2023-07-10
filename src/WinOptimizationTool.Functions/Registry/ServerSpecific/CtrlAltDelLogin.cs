@@ -8,7 +8,7 @@ public class CtrlAltDelLogin : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","DisableCAD",1),
 		};
-		return list.Combine(true,"DisableCtrlAltDelLogin");
+		return list.CombineAll("DisableCtrlAltDelLogin");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class CtrlAltDelLogin : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","DisableCAD",0),
 		};
-		return list.Combine(true,"EnableCtrlAltDelLogin");
+		return list.CombineAll("EnableCtrlAltDelLogin");
 	}
 }

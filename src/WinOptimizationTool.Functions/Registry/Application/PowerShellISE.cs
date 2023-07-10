@@ -7,17 +7,17 @@ public class PowerShellISE : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Microsoft.Windows.PowerShell.ISE*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Microsoft.Windows.PowerShell.ISE*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"UninstallPowerShellISE");
+		return list.CombineAll("UninstallPowerShellISE");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Microsoft.Windows.PowerShell.ISE*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Microsoft.Windows.PowerShell.ISE*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"InstallPowerShellISE");
+		return list.CombineAll("InstallPowerShellISE");
 	}
 }

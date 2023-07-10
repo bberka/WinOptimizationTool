@@ -9,7 +9,7 @@ public class UAC : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","ConsentPromptBehaviorAdmin",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","PromptOnSecureDesktop",0),
 		};
-		return list.Combine(true,"SetUACLow");
+		return list.CombineAll("SetUACLow");
 	}
 	public static Result SetHigh()
 	{
@@ -18,6 +18,6 @@ public class UAC : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","ConsentPromptBehaviorAdmin",5),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","PromptOnSecureDesktop",1),
 		};
-		return list.Combine(true,"SetUACHigh");
+		return list.CombineAll("SetUACHigh");
 	}
 }

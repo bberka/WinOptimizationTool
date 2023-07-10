@@ -8,7 +8,7 @@ public class Camera : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessCamera",2),
 		};
-		return list.Combine(true,"DisableCamera");
+		return list.CombineAll("DisableCamera");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Camera : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCamera"),
 		};
-		return list.Combine(true,"EnableCamera");
+		return list.CombineAll("EnableCamera");
 	}
 }

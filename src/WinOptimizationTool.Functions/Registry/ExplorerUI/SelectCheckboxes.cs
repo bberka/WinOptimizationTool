@@ -8,7 +8,7 @@ public class SelectCheckboxes : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","AutoCheckSelect",0),
 		};
-		return list.Combine(true,"HideSelectCheckboxes");
+		return list.CombineAll("HideSelectCheckboxes");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class SelectCheckboxes : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","AutoCheckSelect",1),
 		};
-		return list.Combine(true,"ShowSelectCheckboxes");
+		return list.CombineAll("ShowSelectCheckboxes");
 	}
 }

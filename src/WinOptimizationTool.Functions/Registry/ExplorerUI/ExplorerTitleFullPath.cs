@@ -8,7 +8,7 @@ public class ExplorerTitleFullPath : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState","FullPath",1),
 		};
-		return list.Combine(true,"ShowExplorerTitleFullPath");
+		return list.CombineAll("ShowExplorerTitleFullPath");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class ExplorerTitleFullPath : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState", "FullPath"),
 		};
-		return list.Combine(true,"HideExplorerTitleFullPath");
+		return list.CombineAll("HideExplorerTitleFullPath");
 	}
 }

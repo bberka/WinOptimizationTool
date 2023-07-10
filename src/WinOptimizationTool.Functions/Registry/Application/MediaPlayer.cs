@@ -7,19 +7,19 @@ public class MediaPlayer : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"UninstallMediaPlayer");
+		return list.CombineAll("UninstallMediaPlayer");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WindowsMediaPlayer\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Media.WindowsMediaPlayer*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"InstallMediaPlayer");
+		return list.CombineAll("InstallMediaPlayer");
 	}
 }

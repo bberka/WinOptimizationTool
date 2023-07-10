@@ -8,9 +8,9 @@ public class RemoteAssistance : BaseFunction
 		var list = new List<Result>()
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Remote Assistance","fAllowToGetHelp",0),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"App.Support.QuickAssist*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"App.Support.QuickAssist*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"DisableRemoteAssistance");
+		return list.CombineAll("DisableRemoteAssistance");
 	}
     [NotImplemented]
     public static Result Enable()
@@ -18,8 +18,8 @@ public class RemoteAssistance : BaseFunction
 		var list = new List<Result>()
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Remote Assistance","fAllowToGetHelp",1),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"App.Support.QuickAssist*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"App.Support.QuickAssist*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"EnableRemoteAssistance");
+		return list.CombineAll("EnableRemoteAssistance");
 	}
 }

@@ -6,16 +6,16 @@ public class RestorePoints : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
+			Result.Error("Not Implemented","Disable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
 		};
-		return list.Combine(true,"DisableRestorePoints");
+		return list.CombineAll("DisableRestorePoints");
 	}
 	public static Result Enable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
+			Result.Error("Not Implemented","Enable-ComputerRestore -Drive \"$env:SYSTEMDRIVE\""),
 		};
-		return list.Combine(true,"EnableRestorePoints");
+		return list.CombineAll("EnableRestorePoints");
 	}
 }

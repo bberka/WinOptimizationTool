@@ -8,7 +8,7 @@ public class TaskView : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","ShowTaskViewButton",0),
 		};
-		return list.Combine(true,"HideTaskView");
+		return list.CombineAll("HideTaskView");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class TaskView : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton"),
 		};
-		return list.Combine(true,"ShowTaskView");
+		return list.CombineAll("ShowTaskView");
 	}
 }

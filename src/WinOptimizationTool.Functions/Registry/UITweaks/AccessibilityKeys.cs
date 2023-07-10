@@ -10,7 +10,7 @@ public class AccessibilityKeys : BaseFunction
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Accessibility\ToggleKeys","Flags",@"58"),
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Accessibility\Keyboard Response","Flags",@"122"),
 		};
-		return list.Combine(true,"DisableAccessibilityKeys");
+		return list.CombineAll("DisableAccessibilityKeys");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class AccessibilityKeys : BaseFunction
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Accessibility\ToggleKeys","Flags",@"62"),
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Accessibility\Keyboard Response","Flags",@"126"),
 		};
-		return list.Combine(true,"EnableAccessibilityKeys");
+		return list.CombineAll("EnableAccessibilityKeys");
 	}
 }

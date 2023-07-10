@@ -8,7 +8,7 @@ public class CIMemorytegrity : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity","Enabled",1),
 		};
-		return list.Combine(true,"EnableCIMemoryIntegrity");
+		return list.CombineAll("EnableCIMemoryIntegrity");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class CIMemorytegrity : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", "Enabled"),
 		};
-		return list.Combine(true,"DisableCIMemoryIntegrity");
+		return list.CombineAll("DisableCIMemoryIntegrity");
 	}
 }

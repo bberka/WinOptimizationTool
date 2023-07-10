@@ -7,17 +7,17 @@ public class PDFPrinter : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"UninstallPDFPrinter");
+		return list.CombineAll("UninstallPDFPrinter");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"Printing-PrintToPDFServices-Features\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"InstallPDFPrinter");
+		return list.CombineAll("InstallPDFPrinter");
 	}
 }

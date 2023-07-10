@@ -8,7 +8,7 @@ public class MapUpdates : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\Maps","AutoUpdateEnabled",0),
 		};
-		return list.Combine(true,"DisableMapUpdates");
+		return list.CombineAll("DisableMapUpdates");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class MapUpdates : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled"),
 		};
-		return list.Combine(true,"EnableMapUpdates");
+		return list.CombineAll("EnableMapUpdates");
 	}
 }

@@ -8,7 +8,7 @@ public class ClipboardHistory : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Clipboard","EnableClipboardHistory",1),
 		};
-		return list.Combine(true,"EnableClipboardHistory");
+		return list.CombineAll("EnableClipboardHistory");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class ClipboardHistory : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Clipboard", "EnableClipboardHistory"),
 		};
-		return list.Combine(true,"DisableClipboardHistory");
+		return list.CombineAll("DisableClipboardHistory");
 	}
 }

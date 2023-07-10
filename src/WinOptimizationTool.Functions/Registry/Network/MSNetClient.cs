@@ -8,9 +8,9 @@ public class MSNetClient : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
+			Result.Error("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
 		};
-		return list.Combine(true,"DisableMSNetClient");
+		return list.CombineAll("DisableMSNetClient");
 	}
     [NotImplemented]
 
@@ -18,8 +18,8 @@ public class MSNetClient : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
+			Result.Error("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_msclient\""),
 		};
-		return list.Combine(true,"EnableMSNetClient");
+		return list.CombineAll("EnableMSNetClient");
 	}
 }

@@ -8,9 +8,9 @@ public class IPv4 : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip\""),
+			Result.Error("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip\""),
 		};
-		return list.Combine(true,"DisableIPv4");
+		return list.CombineAll("DisableIPv4");
 	}
     [NotImplemented]
 
@@ -18,8 +18,8 @@ public class IPv4 : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip\""),
+			Result.Error("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip\""),
 		};
-		return list.Combine(true,"EnableIPv4");
+		return list.CombineAll("EnableIPv4");
 	}
 }

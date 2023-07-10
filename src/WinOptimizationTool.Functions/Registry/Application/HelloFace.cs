@@ -7,17 +7,17 @@ public class HelloFace : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"UninstallHelloFace");
+		return list.CombineAll("UninstallHelloFace");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Hello.Face*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"InstallHelloFace");
+		return list.CombineAll("InstallHelloFace");
 	}
 }

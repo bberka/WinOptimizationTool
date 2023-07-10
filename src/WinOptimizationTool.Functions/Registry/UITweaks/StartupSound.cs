@@ -8,7 +8,7 @@ public class StartupSound : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation","DisableStartupSound",1),
 		};
-		return list.Combine(true,"DisableStartupSound");
+		return list.CombineAll("DisableStartupSound");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class StartupSound : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation","DisableStartupSound",0),
 		};
-		return list.Combine(true,"EnableStartupSound");
+		return list.CombineAll("EnableStartupSound");
 	}
 }

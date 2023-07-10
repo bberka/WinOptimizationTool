@@ -15,7 +15,7 @@ public static class MBoxHelper
 
 	public static string ShowError(string message, params object[] args)
 	{
-		var msg = message.FormatString(args);
+		var msg = message.Format(args);
 		MessageBox.Show(msg, Resource.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		return msg;
 	}
@@ -27,7 +27,7 @@ public static class MBoxHelper
 
 	public static string ShowWarn(string message, params object[] args)
 	{
-		var msg = message.FormatString(args);
+		var msg = message.Format(args);
 		MessageBox.Show(msg, Resource.Warn, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		return msg;
 	}
@@ -37,7 +37,7 @@ public static class MBoxHelper
 	}
 	public static string ShowInfo(string message,params object[] args)
 	{
-		var msg = message.FormatString(args);
+		var msg = message.Format(args);
 		MessageBox.Show(msg, Resource.Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		return msg;
 	}

@@ -8,7 +8,7 @@ public class AeroShake : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","DisallowShaking",1),
 		};
-		return list.Combine(true,"DisableAeroShake");
+		return list.CombineAll("DisableAeroShake");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class AeroShake : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DisallowShaking"),
 		};
-		return list.Combine(true,"EnableAeroShake");
+		return list.CombineAll("EnableAeroShake");
 	}
 }

@@ -18,7 +18,7 @@ public class VisualFX : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects","VisualFXSetting",3),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\DWM","EnableAeroPeek",1),
 		};
-		return list.Combine(true,"SetVisualFXAppearance");
+		return list.CombineAll("SetVisualFXAppearance");
 	}
     [ForeColor(MethodForeColor.Orange)]
     public static Result Performance()
@@ -36,7 +36,7 @@ public class VisualFX : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects","VisualFXSetting",3),
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\DWM","EnableAeroPeek",0),
         };
-        return list.Combine(true,"SetVisualFXPerformance");
+        return list.CombineAll("SetVisualFXPerformance");
     }
 }
 

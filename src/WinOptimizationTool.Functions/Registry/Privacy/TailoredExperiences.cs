@@ -8,7 +8,7 @@ public class TailoredExperiences : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Policies\Microsoft\Windows\CloudContent","DisableTailoredExperiencesWithDiagnosticData",1),
 		};
-		return list.Combine(true,"DisableTailoredExperiences");
+		return list.CombineAll("DisableTailoredExperiences");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class TailoredExperiences : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Policies\Microsoft\Windows\CloudContent", "DisableTailoredExperiencesWithDiagnosticData"),
 		};
-		return list.Combine(true,"EnableTailoredExperiences");
+		return list.CombineAll("EnableTailoredExperiences");
 	}
 }

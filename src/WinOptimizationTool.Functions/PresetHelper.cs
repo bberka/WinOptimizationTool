@@ -44,7 +44,7 @@ public static class PresetHelper
         }
         var filePath = Path.Combine(directory, preset.Name + ".json");
         File.WriteAllText(filePath, preset.ToJsonString());
-        return Result.Success();
+        return Result.Success("Preset saved");
     }
     public static Result LoadPreset(string filePath)
     {
@@ -54,7 +54,7 @@ public static class PresetHelper
         if (preset is null) return Result.Warn("Failed to parse preset file");
         if (preset.Functions.Count == 0) return Result.Warn("Preset does not contain any functions");
         _preset = preset;
-        return Result.Success();
+        return Result.Success("Preset laoded");
     }
     public static void LoadRecommendedPreset()
     {

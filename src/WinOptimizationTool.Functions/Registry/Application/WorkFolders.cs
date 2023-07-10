@@ -7,17 +7,17 @@ public class WorkFolders : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"UninstallWorkFolders");
+		return list.CombineAll("UninstallWorkFolders");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"WorkFolders-Client\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"InstallWorkFolders");
+		return list.CombineAll("InstallWorkFolders");
 	}
 }

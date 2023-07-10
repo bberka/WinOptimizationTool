@@ -9,7 +9,7 @@ public class PicturesOnExplorer : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag","ThisPCPolicy",@"Hide"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag","ThisPCPolicy",@"Hide"),
 		};
-		return list.Combine(true,"HidePicturesFromExplorer");
+		return list.CombineAll("HidePicturesFromExplorer");
 	}
 	public static Result Show()
 	{
@@ -18,6 +18,6 @@ public class PicturesOnExplorer : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag","ThisPCPolicy",@"Show"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag","ThisPCPolicy",@"Show"),
 		};
-		return list.Combine(true,"ShowPicturesInExplorer");
+		return list.CombineAll("ShowPicturesInExplorer");
 	}
 }

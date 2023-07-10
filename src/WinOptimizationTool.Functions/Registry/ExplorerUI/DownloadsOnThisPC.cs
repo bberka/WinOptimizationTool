@@ -9,7 +9,7 @@ public class DownloadsOnThisPC : BaseFunction
 			RegHelper.DeletePath(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}"),
 			RegHelper.DeletePath(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{374DE290-123F-4565-9164-39C4925E467B}"),
 		};
-		return list.Combine(true,"HideDownloadsFromThisPC");
+		return list.CombineAll("HideDownloadsFromThisPC");
 	}
     [NotImplemented]
     public static Result Show()

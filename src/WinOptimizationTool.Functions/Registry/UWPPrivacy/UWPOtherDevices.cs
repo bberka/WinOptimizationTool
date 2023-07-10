@@ -8,7 +8,7 @@ public class UWPOtherDevices : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsSyncWithDevices",2),
 		};
-		return list.Combine(true,"DisableUWPOtherDevices");
+		return list.CombineAll("DisableUWPOtherDevices");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPOtherDevices : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsSyncWithDevices"),
 		};
-		return list.Combine(true,"EnableUWPOtherDevices");
+		return list.CombineAll("EnableUWPOtherDevices");
 	}
 }

@@ -6,16 +6,16 @@ public class DefenderAppGuard : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Enable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"EnableDefenderAppGuard");
+		return list.CombineAll("EnableDefenderAppGuard");
 	}
 	public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Disable-WindowsOptionalFeature -online -FeatureName \"Windows-Defender-ApplicationGuard\" -NoRestart -WarningAction SilentlyContinue | Out-Null"),
 		};
-		return list.Combine(true,"DisableDefenderAppGuard");
+		return list.CombineAll("DisableDefenderAppGuard");
 	}
 }

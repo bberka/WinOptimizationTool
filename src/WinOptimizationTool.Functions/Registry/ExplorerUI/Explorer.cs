@@ -8,7 +8,7 @@ public class Explorer : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo"),
 		};
-		return list.Combine(true,"SetExplorerQuickAccess");
+		return list.CombineAll("SetExplorerQuickAccess");
 	}
     public static Result SetThisPC()
     {
@@ -16,7 +16,7 @@ public class Explorer : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","LaunchTo",1),
         };
-        return list.Combine(true,"SetExplorerThisPC");
+        return list.CombineAll("SetExplorerThisPC");
     }
 }
 

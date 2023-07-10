@@ -8,7 +8,7 @@ public class OneDrive : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\OneDrive","DisableFileSyncNGSC",1),
 		};
-		return list.Combine(true,"DisableOneDrive");
+		return list.CombineAll("DisableOneDrive");
 	}
 	public static Result Enable()
 	{
@@ -16,7 +16,7 @@ public class OneDrive : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\OneDrive", "DisableFileSyncNGSC"),
 		};
-		return list.Combine(true,"EnableOneDrive");
+		return list.CombineAll("EnableOneDrive");
 	}
 	[NotImplemented]
 
@@ -24,33 +24,33 @@ public class OneDrive : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Stop-Process -Name \"OneDrive\" -Force -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","Start-Sleep -s 2"),
-			Result.MultipleErrors("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\SysWOW64\\OneDriveSetup.exe\""),
-			Result.MultipleErrors("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\System32\\OneDriveSetup.exe\""),
-			Result.MultipleErrors("Not Implemented","Start-Process $onedrive \"/uninstall\" -NoNewWindow -Wait"),
-			Result.MultipleErrors("Not Implemented","Start-Sleep -s 2"),
-			Result.MultipleErrors("Not Implemented","Stop-Process -Name \"explorer\" -Force -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","Start-Sleep -s 2"),
-			Result.MultipleErrors("Not Implemented","Remove-Item -Path \"$env:USERPROFILE\\OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","Remove-Item -Path \"$env:LOCALAPPDATA\\Microsoft\\OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","Remove-Item -Path \"$env:PROGRAMDATA\\Microsoft OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","Remove-Item -Path \"$env:SYSTEMDRIVE\\OneDriveTemp\" -Force -Recurse -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
+			Result.Error("Not Implemented","Stop-Process -Name \"OneDrive\" -Force -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Start-Sleep -s 2"),
+			Result.Error("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\SysWOW64\\OneDriveSetup.exe\""),
+			Result.Error("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\System32\\OneDriveSetup.exe\""),
+			Result.Error("Not Implemented","Start-Process $onedrive \"/uninstall\" -NoNewWindow -Wait"),
+			Result.Error("Not Implemented","Start-Sleep -s 2"),
+			Result.Error("Not Implemented","Stop-Process -Name \"explorer\" -Force -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Start-Sleep -s 2"),
+			Result.Error("Not Implemented","Remove-Item -Path \"$env:USERPROFILE\\OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Remove-Item -Path \"$env:LOCALAPPDATA\\Microsoft\\OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Remove-Item -Path \"$env:PROGRAMDATA\\Microsoft OneDrive\" -Force -Recurse -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Remove-Item -Path \"$env:SYSTEMDRIVE\\OneDriveTemp\" -Force -Recurse -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"),
 		};
-		return list.Combine(true,"UninstallOneDrive");
+		return list.CombineAll("UninstallOneDrive");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\SysWOW64\\OneDriveSetup.exe\""),
-			Result.MultipleErrors("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\System32\\OneDriveSetup.exe\""),
-			Result.MultipleErrors("Not Implemented","Start-Process $onedrive -NoNewWindow"),
+			Result.Error("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\SysWOW64\\OneDriveSetup.exe\""),
+			Result.Error("Not Implemented","$onedrive = \"$env:SYSTEMROOT\\System32\\OneDriveSetup.exe\""),
+			Result.Error("Not Implemented","Start-Process $onedrive -NoNewWindow"),
 		};
-		return list.Combine(true,"InstallOneDrive");
+		return list.CombineAll("InstallOneDrive");
 	}
 }

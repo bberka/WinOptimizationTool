@@ -8,7 +8,7 @@ public class NavPanelLibraries : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}","System.IsPinnedToNameSpaceTree",1),
 		};
-		return list.Combine(true,"ShowNavPaneLibraries");
+		return list.CombineAll("ShowNavPaneLibraries");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class NavPanelLibraries : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}", "System.IsPinnedToNameSpaceTree"),
 		};
-		return list.Combine(true,"HideNavPaneLibraries");
+		return list.CombineAll("HideNavPaneLibraries");
 	}
 }

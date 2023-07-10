@@ -7,19 +7,19 @@ public class FaxAndScan : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Disable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"UninstallFaxAndScan");
+		return list.CombineAll("UninstallFaxAndScan");
 	}
     [NotImplemented]
     public static Result Install()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq \"FaxServicesClientPackage\" } | Enable-WindowsOptionalFeature -Online -NoRestart -WarningAction SilentlyContinue | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"Print.Fax.Scan*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"InstallFaxAndScan");
+		return list.CombineAll("InstallFaxAndScan");
 	}
 }

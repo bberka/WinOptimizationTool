@@ -9,7 +9,7 @@ public class VerboseStatus : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"Software\Microsoft\Windows\CurrentVersion\Policies\System","VerboseStatus",1),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus"),
 		};
-		return list.Combine(true,"EnableVerboseStatus");
+		return list.CombineAll("EnableVerboseStatus");
 	}
 	public static Result Disable()
 	{
@@ -18,6 +18,6 @@ public class VerboseStatus : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus"),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"Software\Microsoft\Windows\CurrentVersion\Policies\System","VerboseStatus",0),
 		};
-		return list.Combine(true,"DisableVerboseStatus");
+		return list.CombineAll("DisableVerboseStatus");
 	}
 }

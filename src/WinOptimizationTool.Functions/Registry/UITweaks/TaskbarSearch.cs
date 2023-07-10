@@ -8,7 +8,7 @@ public class TaskbarSearch : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Search","SearchboxTaskbarMode",0),
 		};
-		return list.Combine(true,"HideTaskbarSearch");
+		return list.CombineAll("HideTaskbarSearch");
 	}
     public static Result ShowBox()
     {
@@ -16,7 +16,7 @@ public class TaskbarSearch : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Search","SearchboxTaskbarMode",2),
         };
-        return list.Combine(true,"ShowTaskbarSearchBox");
+        return list.CombineAll("ShowTaskbarSearchBox");
     }
     public static Result ShowIcon()
     {
@@ -24,6 +24,6 @@ public class TaskbarSearch : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Search","SearchboxTaskbarMode",1),
         };
-        return list.Combine(true,"ShowTaskbarSearchIcon");
+        return list.CombineAll("ShowTaskbarSearchIcon");
     }
 }

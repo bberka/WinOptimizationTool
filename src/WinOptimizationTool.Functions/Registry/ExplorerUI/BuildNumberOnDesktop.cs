@@ -8,7 +8,7 @@ public class BuildNumberOnDesktop : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Control Panel\Desktop","PaintDesktopVersion",1),
 		};
-		return list.Combine(true,"ShowBuildNumberOnDesktop");
+		return list.CombineAll("ShowBuildNumberOnDesktop");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class BuildNumberOnDesktop : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Control Panel\Desktop","PaintDesktopVersion",0),
 		};
-		return list.Combine(true,"HideBuildNumberFromDesktop");
+		return list.CombineAll("HideBuildNumberFromDesktop");
 	}
 }

@@ -8,9 +8,9 @@ public class RemoteDesktop : BaseFunction
 		var list = new List<Result>()
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Terminal Server","fDenyTSConnections",0),
-			Result.MultipleErrors("Not Implemented","Enable-NetFirewallRule -Name \"RemoteDesktop*\""),
+			Result.Error("Not Implemented","Enable-NetFirewallRule -Name \"RemoteDesktop*\""),
 		};
-		return list.Combine(true,"EnableRemoteDesktop");
+		return list.CombineAll("EnableRemoteDesktop");
 	}
     [NotImplemented]
     public static Result Disable()
@@ -18,8 +18,8 @@ public class RemoteDesktop : BaseFunction
 		var list = new List<Result>()
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\Terminal Server","fDenyTSConnections",1),
-			Result.MultipleErrors("Not Implemented","Disable-NetFirewallRule -Name \"RemoteDesktop*\""),
+			Result.Error("Not Implemented","Disable-NetFirewallRule -Name \"RemoteDesktop*\""),
 		};
-		return list.Combine(true,"DisableRemoteDesktop");
+		return list.CombineAll("DisableRemoteDesktop");
 	}
 }

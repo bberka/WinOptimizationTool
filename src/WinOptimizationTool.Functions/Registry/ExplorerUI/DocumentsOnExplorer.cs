@@ -9,7 +9,7 @@ public class DocumentsOnExplorer : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag","ThisPCPolicy",@"Hide"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag","ThisPCPolicy",@"Hide"),
 		};
-		return list.Combine(true,"HideDocumentsFromExplorer");
+		return list.CombineAll("HideDocumentsFromExplorer");
 	}
 	public static Result Show()
 	{
@@ -18,6 +18,6 @@ public class DocumentsOnExplorer : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag","ThisPCPolicy",@"Show"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag","ThisPCPolicy",@"Show"),
 		};
-		return list.Combine(true,"ShowDocumentsInExplorer");
+		return list.CombineAll("ShowDocumentsInExplorer");
 	}
 }

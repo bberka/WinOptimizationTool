@@ -25,7 +25,7 @@ public static class LoggerConfigureManager
             x.ConsoleAppender = false;
             x.WebInfoLogging = false;
             x.ExceptionHideSensitiveInfo = false;
-            x.MinimumLogLevel = LogLevel.Debug;
+            x.MinimumLogLevel = EasLogLevel.Debug;
             x.LogFileName = "WinOptimizationTool_";
         });
     }
@@ -37,7 +37,7 @@ public static class LoggerConfigureManager
             x.ConsoleAppender = false;
             x.WebInfoLogging = false;
             x.ExceptionHideSensitiveInfo = false;
-            x.MinimumLogLevel = LogLevel.Information;//TODO: Change to INFO
+            x.MinimumLogLevel = EasLogLevel.Information;//TODO: Change to INFO
             x.LogFileName = "WinOptimizationTool_";
         });
     }

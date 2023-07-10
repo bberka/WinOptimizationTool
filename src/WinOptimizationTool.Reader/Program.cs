@@ -7,7 +7,7 @@ using WinOptimizationTool.Reader;
 EasLogFactory.Configure(x =>
 {
     x.ExceptionHideSensitiveInfo = false;
-	x.MinimumLogLevel = LogLevel.Debug;
+	x.MinimumLogLevel = EasLogLevel.Debug;
     x.ConsoleAppender = true;
 });
 _ = new FileParser(

@@ -8,7 +8,7 @@ public class AccountProtectionWarn : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows Security Health\State","AccountProtection_MicrosoftAccount_Disconnected",1),
 		};
-		return list.Combine(true,"HideAccountProtectionWarn");
+		return list.CombineAll("HideAccountProtectionWarn");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class AccountProtectionWarn : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows Security Health\State", "AccountProtection_MicrosoftAccount_Disconnected"),
 		};
-		return list.Combine(true,"ShowAccountProtectionWarn");
+		return list.CombineAll("ShowAccountProtectionWarn");
 	}
 }

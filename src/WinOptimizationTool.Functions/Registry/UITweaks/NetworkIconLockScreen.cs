@@ -8,7 +8,7 @@ public class NetworkIconLockScreen : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\System","DontDisplayNetworkSelectionUI",1),
 		};
-		return list.Combine(true,"HideNetworkFromLockScreen");
+		return list.CombineAll("HideNetworkFromLockScreen");
 	}
     public static Result Show()
     {
@@ -16,6 +16,6 @@ public class NetworkIconLockScreen : BaseFunction
         {
             RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "DontDisplayNetworkSelectionUI"),
         };
-        return list.Combine(true,"ShowNetworkOnLockScreen");
+        return list.CombineAll("ShowNetworkOnLockScreen");
     }
 }

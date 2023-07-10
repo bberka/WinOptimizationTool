@@ -10,7 +10,7 @@ public class EnhPointerPrecision : BaseFunction
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Mouse","MouseThreshold1",@"0"),
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Mouse","MouseThreshold2",@"0"),
 		};
-		return list.Combine(true,"DisableEnhPointerPrecision");
+		return list.CombineAll("DisableEnhPointerPrecision");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class EnhPointerPrecision : BaseFunction
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Mouse","MouseThreshold1",@"6"),
 			RegHelper.SetString(RegistryHive.CurrentUser,@"Control Panel\Mouse","MouseThreshold2",@"10"),
 		};
-		return list.Combine(true,"EnableEnhPointerPrecision");
+		return list.CombineAll("EnableEnhPointerPrecision");
 	}
 }

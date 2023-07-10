@@ -8,7 +8,7 @@ public class SharedExperiences : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\CDP","RomeSdkChannelUserAuthzPolicy",0),
 		};
-		return list.Combine(true,"DisableSharedExperiences");
+		return list.CombineAll("DisableSharedExperiences");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class SharedExperiences : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\CDP","RomeSdkChannelUserAuthzPolicy",1),
 		};
-		return list.Combine(true,"EnableSharedExperiences");
+		return list.CombineAll("EnableSharedExperiences");
 	}
 }

@@ -8,7 +8,7 @@ public class LockScreen : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Personalization","NoLockScreen",1),
 		};
-		return list.Combine(true,"DisableLockScreen");
+		return list.CombineAll("DisableLockScreen");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class LockScreen : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreen"),
 		};
-		return list.Combine(true,"EnableLockScreen");
+		return list.CombineAll("EnableLockScreen");
 	}
 }

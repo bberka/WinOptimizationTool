@@ -8,7 +8,7 @@ public class FileDeleteConfirm : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer","ConfirmFileDelete",1),
 		};
-		return list.Combine(true,"EnableFileDeleteConfirm");
+		return list.CombineAll("EnableFileDeleteConfirm");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class FileDeleteConfirm : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "ConfirmFileDelete"),
 		};
-		return list.Combine(true,"DisableFileDeleteConfirm");
+		return list.CombineAll("DisableFileDeleteConfirm");
 	}
 }

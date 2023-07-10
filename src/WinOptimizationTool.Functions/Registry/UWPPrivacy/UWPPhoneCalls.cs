@@ -8,7 +8,7 @@ public class UWPPhoneCalls : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessPhone",2),
 		};
-		return list.Combine(true,"DisableUWPPhoneCalls");
+		return list.CombineAll("DisableUWPPhoneCalls");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPPhoneCalls : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessPhone"),
 		};
-		return list.Combine(true,"EnableUWPPhoneCalls");
+		return list.CombineAll("EnableUWPPhoneCalls");
 	}
 }

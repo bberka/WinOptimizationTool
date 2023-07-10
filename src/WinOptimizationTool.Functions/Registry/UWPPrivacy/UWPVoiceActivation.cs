@@ -9,7 +9,7 @@ public class UWPVoiceActivation : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsActivateWithVoice",2),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsActivateWithVoiceAboveLock",2),
 		};
-		return list.Combine(true,"DisableUWPVoiceActivation");
+		return list.CombineAll("DisableUWPVoiceActivation");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class UWPVoiceActivation : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsActivateWithVoice"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsActivateWithVoiceAboveLock"),
 		};
-		return list.Combine(true,"EnableUWPVoiceActivation");
+		return list.CombineAll("EnableUWPVoiceActivation");
 	}
 }

@@ -6,24 +6,24 @@ public class TaskManagerDetails : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","$taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru"),
-			Result.MultipleErrors("Not Implemented","$timeout = 30000"),
-			Result.MultipleErrors("Not Implemented","$sleep = 100"),
-			Result.MultipleErrors("Not Implemented","Do {"),
-			Result.MultipleErrors("Not Implemented","Start-Sleep -Milliseconds $sleep"),
-			Result.MultipleErrors("Not Implemented","$timeout -= $sleep"),
-			Result.MultipleErrors("Not Implemented","$preferences = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\TaskManager\" -Name \"Preferences\" -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","$taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru"),
+			Result.Error("Not Implemented","$timeout = 30000"),
+			Result.Error("Not Implemented","$sleep = 100"),
+			Result.Error("Not Implemented","Do {"),
+			Result.Error("Not Implemented","Start-Sleep -Milliseconds $sleep"),
+			Result.Error("Not Implemented","$timeout -= $sleep"),
+			Result.Error("Not Implemented","$preferences = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\TaskManager\" -Name \"Preferences\" -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"ShowTaskManagerDetails");
+		return list.CombineAll("ShowTaskManagerDetails");
 	}
 	public static Result Hide()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","$preferences = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\TaskManager\" -Name \"Preferences\" -ErrorAction SilentlyContinue"),
-			Result.MultipleErrors("Not Implemented","$preferences.Preferences[28] = 1"),
+			Result.Error("Not Implemented","$preferences = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\TaskManager\" -Name \"Preferences\" -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","$preferences.Preferences[28] = 1"),
 			
 		};
-		return list.Combine(true,"HideTaskManagerDetails");
+		return list.CombineAll("HideTaskManagerDetails");
 	}
 }

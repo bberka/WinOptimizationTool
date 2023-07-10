@@ -8,7 +8,7 @@ public class UpdateRestart : BaseFunction
 		{
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.exe","Debugger",@"cmd.exe"),
 		};
-		return list.Combine(true,"DisableUpdateRestart");
+		return list.CombineAll("DisableUpdateRestart");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UpdateRestart : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.exe", "Debugger"),
 		};
-		return list.Combine(true,"EnableUpdateRestart");
+		return list.CombineAll("EnableUpdateRestart");
 	}
 }

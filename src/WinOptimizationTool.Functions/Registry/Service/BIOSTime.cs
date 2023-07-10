@@ -8,7 +8,7 @@ public class BIOSTime : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\TimeZoneInformation", "RealTimeIsUniversal"),
 		};
-		return list.Combine(true,"SetBIOSTimeLocal");
+		return list.CombineAll("SetBIOSTimeLocal");
 	}
     public static Result SetUTC()
     {
@@ -16,6 +16,6 @@ public class BIOSTime : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\TimeZoneInformation","RealTimeIsUniversal",1),
         };
-        return list.Combine(true,"SetBIOSTimeUTC");
+        return list.CombineAll("SetBIOSTimeUTC");
     }
 }

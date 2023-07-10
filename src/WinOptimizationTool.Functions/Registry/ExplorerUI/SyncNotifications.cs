@@ -8,7 +8,7 @@ public class SyncNotifications : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","ShowSyncProviderNotifications",0),
 		};
-		return list.Combine(true,"HideSyncNotifications");
+		return list.CombineAll("HideSyncNotifications");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class SyncNotifications : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","ShowSyncProviderNotifications",1),
 		};
-		return list.Combine(true,"ShowSyncNotifications");
+		return list.CombineAll("ShowSyncNotifications");
 	}
 }

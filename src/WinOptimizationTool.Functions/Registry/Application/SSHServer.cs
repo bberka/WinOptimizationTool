@@ -7,17 +7,17 @@ public class SSHServer : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Add-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Add-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"InstallSSHServer");
+		return list.CombineAll("InstallSSHServer");
 	}
     [NotImplemented]
     public static Result Uninstall()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Remove-WindowsCapability -Online | Out-Null"),
+			Result.Error("Not Implemented","Get-WindowsCapability -Online | Where-Object { $_.Name -like \"OpenSSH.Server*\" } | Remove-WindowsCapability -Online | Out-Null"),
 		};
-		return list.Combine(true,"UninstallSSHServer");
+		return list.CombineAll("UninstallSSHServer");
 	}
 }

@@ -8,7 +8,7 @@ public class ShortcutInName : BaseFunction
 		{
 			
 		};
-		return list.Combine(true,"DisableShortcutInName");
+		return list.CombineAll("DisableShortcutInName");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ShortcutInName : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link"),
 		};
-		return list.Combine(true,"EnableShortcutInName");
+		return list.CombineAll("EnableShortcutInName");
 	}
 }

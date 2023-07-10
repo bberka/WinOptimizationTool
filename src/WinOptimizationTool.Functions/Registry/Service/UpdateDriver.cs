@@ -10,7 +10,7 @@ public class UpdateDriver : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\DriverSearching","SearchOrderConfig",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate","ExcludeWUDriversInQualityUpdate",1),
 		};
-		return list.Combine(true,"DisableUpdateDriver");
+		return list.CombineAll("DisableUpdateDriver");
 	}
 	public static Result Enable()
 	{
@@ -20,6 +20,6 @@ public class UpdateDriver : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "SearchOrderConfig"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate"),
 		};
-		return list.Combine(true,"EnableUpdateDriver");
+		return list.CombineAll("EnableUpdateDriver");
 	}
 }

@@ -10,7 +10,7 @@ public class DefenderTrayIcon : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "WindowsDefender"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth"),
 		};
-		return list.Combine(true,"HideDefenderTrayIcon");
+		return list.CombineAll("HideDefenderTrayIcon");
 	}
 	public static Result Show()
 	{
@@ -20,6 +20,6 @@ public class DefenderTrayIcon : BaseFunction
 			
 			
 		};
-		return list.Combine(true,"ShowDefenderTrayIcon");
+		return list.CombineAll("ShowDefenderTrayIcon");
 	}
 }

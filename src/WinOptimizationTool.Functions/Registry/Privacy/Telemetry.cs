@@ -23,12 +23,12 @@ public class Telemetry : BaseFunction
 			TaskHelper.DisableTask(@"Microsoft\Windows\Customer Experience Improvement Program\Consolidator"),
 			TaskHelper.DisableTask(@"Microsoft\Windows\Customer Experience Improvement Program\UsbCeip"),
 			TaskHelper.DisableTask(@"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"),
-			Result.MultipleErrors("Not Implemented","# Office 2016 / 2019"),
+			Result.Error("Not Implemented","# Office 2016 / 2019"),
 			TaskHelper.DisableTask(@"Microsoft\Office\Office ClickToRun Service Monitor"),
 			TaskHelper.DisableTask(@"Microsoft\Office\OfficeTelemetryAgentFallBack2016"),
 			TaskHelper.DisableTask(@"Microsoft\Office\OfficeTelemetryAgentLogOn2016"),
 		};
-		return list.Combine(true,"DisableTelemetry");
+		return list.CombineAll("DisableTelemetry");
 	}
 	public static Result Enable()
 	{
@@ -51,11 +51,11 @@ public class Telemetry : BaseFunction
 			TaskHelper.EnableTask(@"Microsoft\Windows\Customer Experience Improvement Program\Consolidator"),
 			TaskHelper.EnableTask(@"Microsoft\Windows\Customer Experience Improvement Program\UsbCeip"),
 			TaskHelper.EnableTask(@"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"),
-			Result.MultipleErrors("Not Implemented","# Office 2016 / 2019"),
+			Result.Error("Not Implemented","# Office 2016 / 2019"),
 			TaskHelper.EnableTask(@"Microsoft\Office\Office ClickToRun Service Monitor"),
 			TaskHelper.EnableTask(@"Microsoft\Office\OfficeTelemetryAgentFallBack2016"),
 			TaskHelper.EnableTask(@"Microsoft\Office\OfficeTelemetryAgentLogOn2016"),
 		};
-		return list.Combine(true,"EnableTelemetry");
+		return list.CombineAll("EnableTelemetry");
 	}
 }

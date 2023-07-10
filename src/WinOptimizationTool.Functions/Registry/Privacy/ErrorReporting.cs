@@ -9,7 +9,7 @@ public class ErrorReporting : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\Windows Error Reporting","Disabled",1),
 			TaskHelper.DisableTask(@"Microsoft\Windows\Windows Error Reporting\QueueReporting"),
 		};
-		return list.Combine(true,"DisableErrorReporting");
+		return list.CombineAll("DisableErrorReporting");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class ErrorReporting : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\Windows Error Reporting", "Disabled"),
 			TaskHelper.EnableTask(@"Microsoft\Windows\Windows Error Reporting\QueueReporting"),
 		};
-		return list.Combine(true,"EnableErrorReporting");
+		return list.CombineAll("EnableErrorReporting");
 	}
 }

@@ -9,7 +9,7 @@ public class ThisPCOnDesktop : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu","{20D04FE0-3AEA-1069-A2D8-08002B30309D}",0),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel","{20D04FE0-3AEA-1069-A2D8-08002B30309D}",0),
 		};
-		return list.Combine(true,"ShowThisPCOnDesktop");
+		return list.CombineAll("ShowThisPCOnDesktop");
 	}
 	public static Result Hide()
 	{
@@ -18,6 +18,6 @@ public class ThisPCOnDesktop : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"),
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"),
 		};
-		return list.Combine(true,"HideThisPCFromDesktop");
+		return list.CombineAll("HideThisPCFromDesktop");
 	}
 }

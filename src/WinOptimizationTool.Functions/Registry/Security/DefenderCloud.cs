@@ -9,7 +9,7 @@ public class DefenderCloud : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows Defender\Spynet","SpynetReporting",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows Defender\Spynet","SubmitSamplesConsent",2),
 		};
-		return list.Combine(true,"DisableDefenderCloud");
+		return list.CombineAll("DisableDefenderCloud");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class DefenderCloud : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SpynetReporting"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SubmitSamplesConsent"),
 		};
-		return list.Combine(true,"EnableDefenderCloud");
+		return list.CombineAll("EnableDefenderCloud");
 	}
 }

@@ -8,7 +8,7 @@ public class UWPContacts : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy","LetAppsAccessContacts",2),
 		};
-		return list.Combine(true,"DisableUWPContacts");
+		return list.CombineAll("DisableUWPContacts");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPContacts : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessContacts"),
 		};
-		return list.Combine(true,"EnableUWPContacts");
+		return list.CombineAll("EnableUWPContacts");
 	}
 }

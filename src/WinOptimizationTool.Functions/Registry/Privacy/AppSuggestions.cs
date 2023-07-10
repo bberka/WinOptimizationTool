@@ -23,11 +23,11 @@ public class AppSuggestions : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager","SystemPaneSuggestionsEnabled",0),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement","ScoobeSystemSettingEnabled",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\WindowsInkWorkspace","AllowSuggestedAppsInWindowsInkWorkspace",0),
-			Result.MultipleErrors("Not Implemented","# Empty placeholder tile collection in registry cache and restart Start Menu process to reload the cache"),
-			Result.MultipleErrors("Not Implemented","$key = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\CloudStore\\Store\\Cache\\DefaultAccount\\*windows.data.placeholdertilecollection\\Current\""),
-			Result.MultipleErrors("Not Implemented","Stop-Process -Name \"ShellExperienceHost\" -Force -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","# Empty placeholder tile collection in registry cache and restart Start Menu process to reload the cache"),
+			Result.Error("Not Implemented","$key = Get-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\CloudStore\\Store\\Cache\\DefaultAccount\\*windows.data.placeholdertilecollection\\Current\""),
+			Result.Error("Not Implemented","Stop-Process -Name \"ShellExperienceHost\" -Force -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"DisableAppSuggestions");
+		return list.CombineAll("DisableAppSuggestions");
 	}
 	public static Result Enable()
 	{
@@ -51,6 +51,6 @@ public class AppSuggestions : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsInkWorkspace", "AllowSuggestedAppsInWindowsInkWorkspace"),
 		};
-		return list.Combine(true,"EnableAppSuggestions");
+		return list.CombineAll("EnableAppSuggestions");
 	}
 }

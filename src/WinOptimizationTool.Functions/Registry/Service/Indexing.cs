@@ -9,7 +9,7 @@ public class Indexing : BaseFunction
 			ServiceHelper.StopService("WSearch"),
 			ServiceHelper.SetService("WSearch","Disabled"),
 		};
-		return list.Combine(true,"DisableIndexing");
+		return list.CombineAll("DisableIndexing");
 	}
 	public static Result Enable()
 	{
@@ -19,6 +19,6 @@ public class Indexing : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Services\WSearch","DelayedAutoStart",1),
 			ServiceHelper.StartService("WSearch"),
 		};
-		return list.Combine(true,"EnableIndexing");
+		return list.CombineAll("EnableIndexing");
 	}
 }

@@ -8,9 +8,9 @@ public class IPv6 : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
+			Result.Error("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
 		};
-		return list.Combine(true,"DisableIPv6");
+		return list.CombineAll("DisableIPv6");
 	}
     [NotImplemented]
 
@@ -18,8 +18,8 @@ public class IPv6 : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
+			Result.Error("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_tcpip6\""),
 		};
-		return list.Combine(true,"EnableIPv6");
+		return list.CombineAll("EnableIPv6");
 	}
 }

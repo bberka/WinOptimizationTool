@@ -9,7 +9,7 @@ public class AdminShares : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters","AutoShareServer",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters","AutoShareWks",0),
 		};
-		return list.Combine(true,"DisableAdminShares");
+		return list.CombineAll("DisableAdminShares");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class AdminShares : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareServer"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks"),
 		};
-		return list.Combine(true,"EnableAdminShares");
+		return list.CombineAll("EnableAdminShares");
 	}
 }

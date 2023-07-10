@@ -8,7 +8,7 @@ public class NTFSLongPaths : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\FileSystem","LongPathsEnabled",1),
 		};
-		return list.Combine(true,"EnableNTFSLongPaths");
+		return list.CombineAll("EnableNTFSLongPaths");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class NTFSLongPaths : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\FileSystem","LongPathsEnabled",0),
 		};
-		return list.Combine(true,"DisableNTFSLongPaths");
+		return list.CombineAll("DisableNTFSLongPaths");
 	}
 }

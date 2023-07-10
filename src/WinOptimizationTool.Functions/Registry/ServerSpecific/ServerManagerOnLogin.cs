@@ -8,7 +8,7 @@ public class ServerManagerOnLogin : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Server\ServerManager","DoNotOpenAtLogon",1),
 		};
-		return list.Combine(true,"HideServerManagerOnLogin");
+		return list.CombineAll("HideServerManagerOnLogin");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class ServerManagerOnLogin : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Server\ServerManager", "DoNotOpenAtLogon"),
 		};
-		return list.Combine(true,"ShowServerManagerOnLogin");
+		return list.CombineAll("ShowServerManagerOnLogin");
 	}
 }

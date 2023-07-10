@@ -8,7 +8,7 @@ public class UWPSwapFile : BaseFunction
 		{
 			
 		};
-		return list.Combine(true,"DisableUWPSwapFile");
+		return list.CombineAll("DisableUWPSwapFile");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UWPSwapFile : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SwapfileControl"),
 		};
-		return list.Combine(true,"EnableUWPSwapFile");
+		return list.CombineAll("EnableUWPSwapFile");
 	}
 }

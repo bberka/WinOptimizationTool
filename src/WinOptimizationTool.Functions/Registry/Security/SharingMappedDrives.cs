@@ -8,7 +8,7 @@ public class SharingMappedDrives : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","EnableLinkedConnections",1),
 		};
-		return list.Combine(true,"EnableSharingMappedDrives");
+		return list.CombineAll("EnableSharingMappedDrives");
 	}
 	public static Result Disable()
 	{
@@ -16,6 +16,6 @@ public class SharingMappedDrives : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLinkedConnections"),
 		};
-		return list.Combine(true,"DisableSharingMappedDrives");
+		return list.CombineAll("DisableSharingMappedDrives");
 	}
 }

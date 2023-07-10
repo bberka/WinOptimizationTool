@@ -10,7 +10,7 @@ public class ControlPanel : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel", "StartupPage"),
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel", "AllItemsIconView"),
 		};
-		return list.Combine(true,"SetControlPanelCategories");
+		return list.CombineAll("SetControlPanelCategories");
 	}
 
     [DisplayName("Control Panel Set Large Icons")]
@@ -21,7 +21,7 @@ public class ControlPanel : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel","StartupPage",1),
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel","AllItemsIconView",0),
         };
-        return list.Combine(true,"SetControlPanelLargeIcons");
+        return list.CombineAll("SetControlPanelLargeIcons");
     }
 
     [DisplayName("Control Panel Set Small Icons")]
@@ -32,6 +32,6 @@ public class ControlPanel : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel","StartupPage",1),
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel","AllItemsIconView",1),
         };
-        return list.Combine(true,"SetControlPanelSmallIcons");
+        return list.CombineAll("SetControlPanelSmallIcons");
     }
 }

@@ -6,16 +6,16 @@ public class BootRecovery : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} BootStatusPolicy IgnoreAllFailures | Out-Null"),
+			Result.Error("Not Implemented","bcdedit /set `{current`} BootStatusPolicy IgnoreAllFailures | Out-Null"),
 		};
-		return list.Combine(true,"DisableBootRecovery");
+		return list.CombineAll("DisableBootRecovery");
 	}
 	public static Result Enable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","bcdedit /deletevalue `{current`} BootStatusPolicy | Out-Null"),
+			Result.Error("Not Implemented","bcdedit /deletevalue `{current`} BootStatusPolicy | Out-Null"),
 		};
-		return list.Combine(true,"EnableBootRecovery");
+		return list.CombineAll("EnableBootRecovery");
 	}
 }

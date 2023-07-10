@@ -8,7 +8,7 @@ public class FolderMergeConflicts : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","HideMergeConflicts",0),
 		};
-		return list.Combine(true,"ShowFolderMergeConflicts");
+		return list.CombineAll("ShowFolderMergeConflicts");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class FolderMergeConflicts : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideMergeConflicts"),
 		};
-		return list.Combine(true,"HideFolderMergeConflicts");
+		return list.CombineAll("HideFolderMergeConflicts");
 	}
 }

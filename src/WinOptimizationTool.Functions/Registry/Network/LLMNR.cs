@@ -8,7 +8,7 @@ public class LLMNR : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows NT\DNSClient","EnableMulticast",0),
 		};
-		return list.Combine(true,"DisableLLMNR");
+		return list.CombineAll("DisableLLMNR");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class LLMNR : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "EnableMulticast"),
 		};
-		return list.Combine(true,"EnableLLMNR");
+		return list.CombineAll("EnableLLMNR");
 	}
 }

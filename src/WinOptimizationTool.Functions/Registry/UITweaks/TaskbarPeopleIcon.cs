@@ -8,7 +8,7 @@ public class TaskbarPeopleIcon : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People","PeopleBand",0),
 		};
-		return list.Combine(true,"HideTaskbarPeopleIcon");
+		return list.CombineAll("HideTaskbarPeopleIcon");
 	}
 	public static Result Show()
 	{
@@ -16,6 +16,6 @@ public class TaskbarPeopleIcon : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People", "PeopleBand"),
 		};
-		return list.Combine(true,"ShowTaskbarPeopleIcon");
+		return list.CombineAll("ShowTaskbarPeopleIcon");
 	}
 }

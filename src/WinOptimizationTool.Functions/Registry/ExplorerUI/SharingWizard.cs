@@ -8,7 +8,7 @@ public class SharingWizard : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","SharingWizardOn",0),
 		};
-		return list.Combine(true,"DisableSharingWizard");
+		return list.CombineAll("DisableSharingWizard");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class SharingWizard : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "SharingWizardOn"),
 		};
-		return list.Combine(true,"EnableSharingWizard");
+		return list.CombineAll("EnableSharingWizard");
 	}
 }

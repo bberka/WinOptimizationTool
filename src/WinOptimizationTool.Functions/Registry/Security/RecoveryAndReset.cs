@@ -6,16 +6,16 @@ public class RecoveryAndReset : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","reagentc /disable 2>&1 | Out-Null"),
+			Result.Error("Not Implemented","reagentc /disable 2>&1 | Out-Null"),
 		};
-		return list.Combine(true,"DisableRecoveryAndReset");
+		return list.CombineAll("DisableRecoveryAndReset");
 	}
 	public static Result Enable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","reagentc /enable 2>&1 | Out-Null"),
+			Result.Error("Not Implemented","reagentc /enable 2>&1 | Out-Null"),
 		};
-		return list.Combine(true,"EnableRecoveryAndReset");
+		return list.CombineAll("EnableRecoveryAndReset");
 	}
 }

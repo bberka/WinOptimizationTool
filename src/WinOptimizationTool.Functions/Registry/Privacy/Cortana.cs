@@ -14,9 +14,9 @@ public class Cortana : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana","Value",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Windows Search","AllowCortana",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\InputPersonalization","AllowInputPersonalization",0),
-			Result.MultipleErrors("Not Implemented","Get-AppxPackage \"Microsoft.549981C3F5F10\" | Remove-AppxPackage"),
+			Result.Error("Not Implemented","Get-AppxPackage \"Microsoft.549981C3F5F10\" | Remove-AppxPackage"),
 		};
-		return list.Combine(true,"DisableCortana");
+		return list.CombineAll("DisableCortana");
 	}
 	public static Result Enable()
 	{
@@ -30,8 +30,8 @@ public class Cortana : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana","Value",1),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\InputPersonalization", "AllowInputPersonalization"),
-			Result.MultipleErrors("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.549981C3F5F10\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
+			Result.Error("Not Implemented","Get-AppxPackage -AllUsers \"Microsoft.549981C3F5F10\" | ForEach-Object {Add-AppxPackage -DisableDevelopmentMode -Register \"$($_.InstallLocation)\\AppXManifest.xml\"}"),
 		};
-		return list.Combine(true,"EnableCortana");
+		return list.CombineAll("EnableCortana");
 	}
 }

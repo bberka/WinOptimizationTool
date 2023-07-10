@@ -9,7 +9,7 @@ public class ActionCenter : BaseFunction
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Policies\Microsoft\Windows\Explorer","DisableNotificationCenter",1),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\PushNotifications","ToastEnabled",0),
 		};
-		return list.Combine(true,"DisableActionCenter");
+		return list.CombineAll("DisableActionCenter");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class ActionCenter : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter"),
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled"),
 		};
-		return list.Combine(true,"EnableActionCenter");
+		return list.CombineAll("EnableActionCenter");
 	}
 }

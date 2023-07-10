@@ -8,7 +8,7 @@ public class ConnectionSharing : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\Network Connections","NC_ShowSharedAccessUI",0),
 		};
-		return list.Combine(true,"DisableConnectionSharing");
+		return list.CombineAll("DisableConnectionSharing");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class ConnectionSharing : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Network Connections", "NC_ShowSharedAccessUI"),
 		};
-		return list.Combine(true,"EnableConnectionSharing");
+		return list.CombineAll("EnableConnectionSharing");
 	}
 }

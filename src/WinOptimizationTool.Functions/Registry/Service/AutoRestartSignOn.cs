@@ -8,7 +8,7 @@ public class AutoRestartSignOn : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System","DisableAutomaticRestartSignOn",1),
 		};
-		return list.Combine(true,"DisableAutoRestartSignOn");
+		return list.CombineAll("DisableAutoRestartSignOn");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class AutoRestartSignOn : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "DisableAutomaticRestartSignOn"),
 		};
-		return list.Combine(true,"EnableAutoRestartSignOn");
+		return list.CombineAll("EnableAutoRestartSignOn");
 	}
 }

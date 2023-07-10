@@ -8,7 +8,7 @@ public class AutoRebootOnCrash : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\CrashControl","AutoReboot",0),
 		};
-		return list.Combine(true,"DisableAutoRebootOnCrash");
+		return list.CombineAll("DisableAutoRebootOnCrash");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class AutoRebootOnCrash : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SYSTEM\CurrentControlSet\Control\CrashControl","AutoReboot",1),
 		};
-		return list.Combine(true,"EnableAutoRebootOnCrash");
+		return list.CombineAll("EnableAutoRebootOnCrash");
 	}
 }

@@ -11,7 +11,7 @@ public class UWPFileSystem : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary","Value",@"Deny"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess","Value",@"Deny"),
 		};
-		return list.Combine(true,"DisableUWPFileSystem");
+		return list.CombineAll("DisableUWPFileSystem");
 	}
 	public static Result Enable()
 	{
@@ -22,6 +22,6 @@ public class UWPFileSystem : BaseFunction
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary","Value",@"Allow"),
 			RegHelper.SetString(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess","Value",@"Allow"),
 		};
-		return list.Combine(true,"EnableUWPFileSystem");
+		return list.CombineAll("EnableUWPFileSystem");
 	}
 }

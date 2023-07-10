@@ -8,7 +8,7 @@ public class Firewall : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile","EnableFirewall",0),
 		};
-		return list.Combine(true,"DisableFirewall");
+		return list.CombineAll("DisableFirewall");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Firewall : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "EnableFirewall"),
 		};
-		return list.Combine(true,"EnableFirewall");
+		return list.CombineAll("EnableFirewall");
 	}
 }

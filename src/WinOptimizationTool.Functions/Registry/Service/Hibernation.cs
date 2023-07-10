@@ -8,9 +8,9 @@ public class Hibernation : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"System\CurrentControlSet\Control\Session Manager\Power","HibernateEnabled",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings","ShowHibernateOption",1),
-			Result.MultipleErrors("Not Implemented","powercfg /HIBERNATE ON 2>&1 | Out-Null"),
+			Result.Error("Not Implemented","powercfg /HIBERNATE ON 2>&1 | Out-Null"),
 		};
-		return list.Combine(true,"EnableHibernation");
+		return list.CombineAll("EnableHibernation");
 	}
 	public static Result Disable()
 	{
@@ -18,8 +18,8 @@ public class Hibernation : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"System\CurrentControlSet\Control\Session Manager\Power","HibernateEnabled",0),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings","ShowHibernateOption",0),
-			Result.MultipleErrors("Not Implemented","powercfg /HIBERNATE OFF 2>&1 | Out-Null"),
+			Result.Error("Not Implemented","powercfg /HIBERNATE OFF 2>&1 | Out-Null"),
 		};
-		return list.Combine(true,"DisableHibernation");
+		return list.CombineAll("DisableHibernation");
 	}
 }

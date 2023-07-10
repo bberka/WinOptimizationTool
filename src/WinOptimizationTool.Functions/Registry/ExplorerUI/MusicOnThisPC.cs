@@ -9,7 +9,7 @@ public class MusicOnThisPC : BaseFunction
 			RegHelper.DeletePath(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}"),
 			RegHelper.DeletePath(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{1CF1260C-4DD0-4ebb-811F-33C572699FDE}"),
 		};
-		return list.Combine(true,"HideMusicFromThisPC");
+		return list.CombineAll("HideMusicFromThisPC");
 	}
     [NotImplemented]
     public static Result Show()

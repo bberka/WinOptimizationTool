@@ -9,7 +9,7 @@ public class WinXMenu : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DontUsePowerShellOnWinX"),
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","DontUsePowerShellOnWinX",1),
 		};
-		return list.Combine(true,"SetWinXMenuCmd");
+		return list.CombineAll("SetWinXMenuCmd");
 	}
     public static Result SetPowerShell()
     {
@@ -18,6 +18,6 @@ public class WinXMenu : BaseFunction
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","DontUsePowerShellOnWinX",0),
             RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "DontUsePowerShellOnWinX"),
         };
-        return list.Combine(true,"SetWinXMenuPowerShell");
+        return list.CombineAll("SetWinXMenuPowerShell");
     }
 }

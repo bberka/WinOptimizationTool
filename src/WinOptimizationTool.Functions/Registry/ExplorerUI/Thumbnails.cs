@@ -8,7 +8,7 @@ public class Thumbnails : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","IconsOnly",1),
 		};
-		return list.Combine(true,"DisableThumbnails");
+		return list.CombineAll("DisableThumbnails");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class Thumbnails : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced","IconsOnly",0),
 		};
-		return list.Combine(true,"EnableThumbnails");
+		return list.CombineAll("EnableThumbnails");
 	}
 }

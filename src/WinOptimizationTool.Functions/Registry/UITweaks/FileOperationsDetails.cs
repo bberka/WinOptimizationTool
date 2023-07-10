@@ -8,7 +8,7 @@ public class FileOperationsDetails : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager","EnthusiastMode",1),
 		};
-		return list.Combine(true,"ShowFileOperationsDetails");
+		return list.CombineAll("ShowFileOperationsDetails");
 	}
 	public static Result Hide()
 	{
@@ -16,6 +16,6 @@ public class FileOperationsDetails : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager", "EnthusiastMode"),
 		};
-		return list.Combine(true,"HideFileOperationsDetails");
+		return list.CombineAll("HideFileOperationsDetails");
 	}
 }

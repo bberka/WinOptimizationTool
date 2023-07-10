@@ -6,16 +6,16 @@ public class CtrldFolderAccess : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Enabled -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Enabled -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"EnableCtrldFolderAccess");
+		return list.CombineAll("EnableCtrldFolderAccess");
 	}
 	public static Result Disable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue"),
+			Result.Error("Not Implemented","Set-MpPreference -EnableControlledFolderAccess Disabled -ErrorAction SilentlyContinue"),
 		};
-		return list.Combine(true,"DisableCtrldFolderAccess");
+		return list.CombineAll("DisableCtrldFolderAccess");
 	}
 }

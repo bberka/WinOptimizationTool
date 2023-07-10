@@ -8,7 +8,7 @@ public class UpdateAutoDownload : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU","AUOptions",2),
 		};
-		return list.Combine(true,"DisableUpdateAutoDownload");
+		return list.CombineAll("DisableUpdateAutoDownload");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class UpdateAutoDownload : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "AUOptions"),
 		};
-		return list.Combine(true,"EnableUpdateAutoDownload");
+		return list.CombineAll("EnableUpdateAutoDownload");
 	}
 }

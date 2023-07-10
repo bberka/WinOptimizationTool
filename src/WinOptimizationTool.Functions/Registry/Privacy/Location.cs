@@ -9,7 +9,7 @@ public class Location : BaseFunction
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors","DisableLocation",1),
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors","DisableLocationScripting",1),
 		};
-		return list.Combine(true,"DisableLocation");
+		return list.CombineAll("DisableLocation");
 	}
 	public static Result Enable()
 	{
@@ -18,6 +18,6 @@ public class Location : BaseFunction
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation"),
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting"),
 		};
-		return list.Combine(true,"EnableLocation");
+		return list.CombineAll("EnableLocation");
 	}
 }

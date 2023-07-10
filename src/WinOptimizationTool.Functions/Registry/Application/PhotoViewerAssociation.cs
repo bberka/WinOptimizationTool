@@ -6,19 +6,19 @@ public class PhotoViewerAssociation : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
-			Result.MultipleErrors("Not Implemented","ForEach ($type in @(\"Paint.Picture\", \"giffile\", \"jpegfile\", \"pngfile\")) {"),
+			Result.Error("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
+			Result.Error("Not Implemented","ForEach ($type in @(\"Paint.Picture\", \"giffile\", \"jpegfile\", \"pngfile\")) {"),
 			
 			
 		};
-		return list.Combine(true,"SetPhotoViewerAssociation");
+		return list.CombineAll("SetPhotoViewerAssociation");
 	}
     [NotImplemented]
     public static Result Unset()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
+			Result.Error("Not Implemented","New-PSDrive -Name \"HKCR\" -PSProvider \"Registry\" -Root \"HKEY_CLASSES_ROOT\" | Out-Null"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"Paint.Picture\shell\open"),
 			RegHelper.DeleteValue(RegistryHive.ClassesRoot, @"giffile\shell\open", "MuiVerb"),
 			RegHelper.SetString(RegistryHive.ClassesRoot,@"giffile\shell\open","CommandId",@"IE.File"),
@@ -27,6 +27,6 @@ public class PhotoViewerAssociation : BaseFunction
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"jpegfile\shell\open"),
 			RegHelper.DeletePath(RegistryHive.ClassesRoot, @"pngfile\shell\open"),
 		};
-		return list.Combine(true,"UnsetPhotoViewerAssociation");
+		return list.CombineAll("UnsetPhotoViewerAssociation");
 	}
 }

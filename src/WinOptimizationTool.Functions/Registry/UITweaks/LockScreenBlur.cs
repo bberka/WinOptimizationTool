@@ -8,7 +8,7 @@ public class LockScreenBlur : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.LocalMachine,@"SOFTWARE\Policies\Microsoft\Windows\System","DisableAcrylicBackgroundOnLogon",1),
 		};
-		return list.Combine(true,"DisableLockScreenBlur");
+		return list.CombineAll("DisableLockScreenBlur");
 	}
 	public static Result Enable()
 	{
@@ -16,6 +16,6 @@ public class LockScreenBlur : BaseFunction
 		{
 			RegHelper.DeleteValue(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "DisableAcrylicBackgroundOnLogon"),
 		};
-		return list.Combine(true,"EnableLockScreenBlur");
+		return list.CombineAll("EnableLockScreenBlur");
 	}
 }

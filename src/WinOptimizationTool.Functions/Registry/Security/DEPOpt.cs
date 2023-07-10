@@ -6,16 +6,16 @@ public class DEPOpt : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} nx OptOut | Out-Null"),
+			Result.Error("Not Implemented","bcdedit /set `{current`} nx OptOut | Out-Null"),
 		};
-		return list.Combine(true,"SetDEPOptOut");
+		return list.CombineAll("SetDEPOptOut");
 	}
 	public static Result SetIn()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","bcdedit /set `{current`} nx OptIn | Out-Null"),
+			Result.Error("Not Implemented","bcdedit /set `{current`} nx OptIn | Out-Null"),
 		};
-		return list.Combine(true,"SetDEPOptIn");
+		return list.CombineAll("SetDEPOptIn");
 	}
 }

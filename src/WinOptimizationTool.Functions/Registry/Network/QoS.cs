@@ -7,17 +7,17 @@ public class QoS : BaseFunction
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_pacer\""),
+			Result.Error("Not Implemented","Disable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_pacer\""),
 		};
-		return list.Combine(true,"DisableQoS");
+		return list.CombineAll("DisableQoS");
 	}
     [NotImplemented]
     public static Result Enable()
 	{
 		var list = new List<Result>()
 		{
-			Result.MultipleErrors("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_pacer\""),
+			Result.Error("Not Implemented","Enable-NetAdapterBinding -Name \"*\" -ComponentID \"ms_pacer\""),
 		};
-		return list.Combine(true,"EnableQoS");
+		return list.CombineAll("EnableQoS");
 	}
 }

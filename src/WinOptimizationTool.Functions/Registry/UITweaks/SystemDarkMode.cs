@@ -8,7 +8,7 @@ public class SystemDarkMode : BaseFunction
 		{
 			RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize","SystemUsesLightTheme",0),
 		};
-		return list.Combine(true,"SetSystemDarkMode");
+		return list.CombineAll("SetSystemDarkMode");
 	}
     public static Result Disable()
     {
@@ -16,6 +16,6 @@ public class SystemDarkMode : BaseFunction
         {
             RegHelper.SetDword(RegistryHive.CurrentUser,@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize","SystemUsesLightTheme",1),
         };
-        return list.Combine(true,"SetSystemLightMode");
+        return list.CombineAll("SetSystemLightMode");
     }
 }
